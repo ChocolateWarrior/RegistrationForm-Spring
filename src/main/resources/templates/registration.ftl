@@ -1,3 +1,5 @@
+<#import "/spring.ftl" as spring/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +10,12 @@
 </head>
 <body ng-app="registrationApp" ng-controller="RegistrationCtrl">
 
-<h1>Registration Form</h1>
 
 <div class="container" style="margin-top: 60px">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h2 class="page-header">Registration Demo</h2>
-            <h3 id="registrationMessage" style="margin-left: 30px">{{message}}</h3>
+            <h2 class="page-header">Registration Form</h2>
+            <h3 id="registrationMessage">{{message}}</h3>
             <form style="margin-bottom: 30px" name="form" autocomplete="off" novalidate ng-submit="form.$valid && sendForm(auth)">
                 <div class="form-group">
                     <label id="firsNameInputLabel" for="firstNameExampleElement">First name</label>

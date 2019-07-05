@@ -13,20 +13,20 @@ public class Application {
     }
 
     @GetMapping("/main")
-    public String showMain(){return "index.html";}
-
+    public String showMain(){return "index";}
+//
     @GetMapping("/display")
     public String showUsers() {
-        return "userDisplay.html";
+        return "display";
     }
 
-    @GetMapping("/registration")
-    public String showRegistrationForm() {
-        return "registration.html";
-    }
+//    @GetMapping("/registration")
+//    public String showRegistrationForm() {
+//        return "registration";
+//    }
 
-    @GetMapping("/logging")
-    public String showLogin() {
-        return "logging.html";
-    }
+//    @GetMapping("/login")
+//    public String showLogin() {
+//        return "login";
+//    }
 }

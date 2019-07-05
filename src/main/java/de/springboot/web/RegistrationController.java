@@ -1,40 +1,33 @@
 package de.springboot.web;
 
-import de.springboot.dto.DTO;
-import de.springboot.model.User;
-import de.springboot.service.UserService;
+import de.springboot.dto.RegistrationDTO;
+import de.springboot.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/registration")
+@Controller
+@RequestMapping("/registration")
 public class RegistrationController  {
 
-    private UserService userService;
+    private RegistrationService registrationService;
 
     @Autowired
-    public RegistrationController(UserService userService) {
-        this.userService = userService;
+    public RegistrationController(RegistrationService registrationService) {
+        this.registrationService = registrationService;
+    }
+
+    @GetMapping
+    public String getRegistrationForm(){
+        return "registration";
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(method = RequestMethod.POST)
-    public void executeRegistration(DTO dto){
-        User userToAdd = new User(dto.getFirstName(),
-                dto.getLastName(),
-                dto.getLogin(),
-                dto.getPassword());
-        userService.pushUser(userToAdd);
+//    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    @PostMapping
+    public void executeRegistration(RegistrationDTO dto){
+        registrationService.pushUser(dto);
     }
-
-//    @ExceptionHandler(RuntimeException.class)
-//    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
-////        log.warn(ex.getMessage());
-//        return ResponseEntity
-//                .status(HttpStatus.BAD_REQUEST)
-//                .body("{\"message\": \"" + ex.getMessage() + "\"}");
-//    }
 
 }

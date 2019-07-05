@@ -37,7 +37,7 @@ registrationApp.controller("RegistrationCtrl", function ($scope, $http) {
     $scope.sendForm = function (auth) {
         $http({
             method: 'POST',
-            url: '/api/registration',
+            url: '/registration',
             data: $.param(auth),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(
@@ -77,15 +77,16 @@ loginApp.controller("LoggingCtrl", function ($scope, $http){
         $scope.message = '';
     });
     $scope.sendForm = function (auth) {
+        console.log(auth);
         $http({
             method: 'POST',
-            url: '/api/logging',
+            url: '/login',
             data: $.param(auth),
             headers: {'Content-Type' : 'application/x-www-form-urlencoded'}
         }).then(
             (data) => {
-                loggingMessage.style.color = 'green';
                 $scope.message = 'Logged in';
+                loggingMessage.style.color = 'green';
                 exampleLogin.value = '';
                 examplePassword.value = '';
                 inputLoginLabel.style.color = 'black';
