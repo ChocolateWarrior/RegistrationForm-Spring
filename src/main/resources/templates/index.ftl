@@ -12,7 +12,7 @@
 <body>
 <div class="container" style="margin-top: 50px">
     <div class = "navigation">
-        <h2 class="h2">REGISTRATION FORM</h2>
+        <h2 class="h2">Easy Repairs</h2>
         <ul class="nav nav-tabs nav-fill bg-light">
             <li class="nav-item">
              <a class="nav-link disabled" href="/main">Main page</a>
@@ -21,12 +21,20 @@
                <a class="nav-link" href="/registration">Sign up</a>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="/logging">Sign in</a>
+               <a class="nav-link" href="/login">Sign in</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/display">Display users</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Sign out</a>
+            </li>
         </ul>
+<#--        <div>-->
+<#--            <form action="/logout" method = "post">-->
+<#--                <button type="submit" class="btn btn-primary">Sign Out</button>-->
+<#--            </form>-->
+<#--        </div>-->
     </div>
     <div class = "userInfo">
         <h2>You are logged in as: ${username} and with roles ${roles}</h2>

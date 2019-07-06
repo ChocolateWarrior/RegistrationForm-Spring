@@ -31,6 +31,5 @@ public class RegistrationService {
 
 
         userRepository.save(userToAdd);
-//        userRepository.flush();
     }
 }

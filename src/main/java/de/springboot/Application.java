@@ -14,6 +14,9 @@ public class Application {
 
     @GetMapping("/main")
     public String showMain(){return "index";}
+
+    @GetMapping("/")
+    public String showDefault(){return "index";}
 //
     @GetMapping("/display")
     public String showUsers() {

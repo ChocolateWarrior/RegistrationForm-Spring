@@ -20,11 +20,11 @@
 <#--        <h3 id="loggingMessageElement" style="margin-left: 20px">{{message}}</h3>-->
         <div class="card-body">
 
-            <#if logout??>
-                <div class = "alert alert-info" role = "alert">Logout successful!</div>
+            <#if logout>
+                <div class = "alert alert-info" role = "alert">You've logged out!</div>
             </#if>
 
-            <#if error??>
+            <#if error>
                 <div class = "alert alert-danger" role = "alert">Wrong authentication parameters!</div>
             </#if>
 
@@ -33,6 +33,7 @@
             </#if>
 
             <form action="/login" method="post">
+                <input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden">
                 <div class="form-group">
                     <label id="exampleLoginLabel" for="exampleLoginElement">Login</label>
                     <input type="text"
@@ -55,14 +56,19 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Sign in</button>
             </form>
-            <a href="/registration">Register here</a>
         </div>
+    </div>
+    <div class = "navigation">
+        <ul class="nav nav-tabs nav-fill bg-light">
+            <li class="nav-item">
+                <a class="nav-link" href="/registration">Register here</a>
+            </li>
+        </ul>
     </div>
 </div>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-<#--<script type="text/javascript" src="<@spring.url '/js/main.js'/>"></script>-->
+<#--<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>-->
+<#--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>-->
 
 </body>
 </html>

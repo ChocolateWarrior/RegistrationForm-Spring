@@ -21,7 +21,7 @@ public class LoginService {
 
 
     public User getUser(LoginDTO dto){
-        User user = userRepository.findByLogin(dto.getLogin());
+        User user = userRepository.findByLoginAndPassword(dto.getLogin(), dto.getPassword());
 
         if(user == null) {
             log.warn(dto + " there is no such user record in database");

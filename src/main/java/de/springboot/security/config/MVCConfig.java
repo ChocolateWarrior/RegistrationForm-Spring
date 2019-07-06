@@ -1,19 +1,28 @@
-//package de.springboot.security.config;
-//
-//import org.springframework.context.MessageSource;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-//import org.springframework.web.servlet.LocaleResolver;
-//import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-//import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-//import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-//import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-//import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-//
-//import java.util.Locale;
-//
+package de.springboot.security.config;
+
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
+import java.util.Locale;
+
+//@Configuration
 //public class MVCConfig implements WebMvcConfigurer {
 //
+//public void addViewControllers(ViewControllerRegistry registry) {
+//    registry.addViewController("/index").setViewName("index");
+//    registry.addViewController("/").setViewName("index");
+//    registry.addViewController("/registration").setViewName("registration");
+//    registry.addViewController("/login").setViewName("login");
+//    registry.addViewController("/display").setViewName("display");
+//}
 //    @Bean
 //    public LocaleResolver localeResolver() {
 //        SessionLocaleResolver slr = new SessionLocaleResolver();
@@ -42,11 +51,4 @@
 //        return messageSource;
 //    }
 //
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/index").setViewName("index");
-//        registry.addViewController("/").setViewName("index");
-//        registry.addViewController("/registration").setViewName("registration");
-//        registry.addViewController("/logging").setViewName("logging");
-//        registry.addViewController("/display").setViewName("display");
-//    }
 //}

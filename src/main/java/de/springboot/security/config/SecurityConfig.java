@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -34,16 +35,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable();
+//        http.csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/display")
+                .antMatchers("/display", "/main", "/")
                 .authenticated()
 //                .permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .usernameParameter("login");
+                .permitAll()
+                .usernameParameter("login")
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll();
+
 
     }
 
