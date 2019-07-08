@@ -54,7 +54,7 @@ registrationApp.controller("RegistrationCtrl", function ($scope, $http) {
                 console.log(error.data);
                 resMessage.style.color = 'red';
                 inputLoginLabel.style.color = 'red';
-                $scope.message = error.data.message;
+                $scope.message = error.data.messages;
             }
         );
     }
@@ -100,7 +100,7 @@ loginApp.controller("LoggingCtrl", function ($scope, $http){
                 inputPasswordLabel.style.color = 'red';
 
                 examplePassword.value = '';
-                $scope.message = error.data.message;
+                $scope.message = error.data.messages;
             }
         );
     };

@@ -23,13 +23,4 @@ public class Application {
         return "display";
     }
 
-//    @GetMapping("/registration")
-//    public String showRegistrationForm() {
-//        return "registration";
-//    }
-
-//    @GetMapping("/login")
-//    public String showLogin() {
-//        return "login";
-//    }
 }

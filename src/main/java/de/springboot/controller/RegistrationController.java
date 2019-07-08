@@ -1,4 +1,4 @@
-package de.springboot.web;
+package de.springboot.controller;
 
 import de.springboot.dto.RegistrationDTO;
 import de.springboot.service.RegistrationService;
@@ -24,7 +24,6 @@ public class RegistrationController  {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-//    @RequestMapping(value = "/registration", method = RequestMethod.POST)
     @PostMapping
     public void executeRegistration(RegistrationDTO dto){
         registrationService.pushUser(dto);

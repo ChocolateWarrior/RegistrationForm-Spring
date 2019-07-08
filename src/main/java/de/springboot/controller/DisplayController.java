@@ -1,4 +1,4 @@
-package de.springboot.web;
+package de.springboot.controller;
 
 import de.springboot.model.User;
 import de.springboot.service.UserDisplayService;

@@ -1,8 +1,9 @@
-package de.springboot.web;
+package de.springboot.controller;
 
 import de.springboot.dto.LoginDTO;
-import de.springboot.exceptions.UserNotFoundException;
+import de.springboot.exceptions.CredentialsException;
 import de.springboot.service.LoginService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@Log4j2
 @RequestMapping("/login")
 public class LoginController {
 
@@ -31,8 +33,8 @@ public class LoginController {
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping
-    public void loginUser(LoginDTO dto) throws UserNotFoundException {
-        loginService.getUser(dto);
+    public void loginUser(LoginDTO dto)throws CredentialsException{
+            loginService.getUser(dto);
     }
 
 }
