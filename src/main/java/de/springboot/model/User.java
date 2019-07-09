@@ -18,10 +18,10 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "active")
+    @Column(name = "active", nullable = false)
     private boolean active;
 
     @Column(name = "first_name", nullable = false)
@@ -40,6 +40,12 @@ public class User {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+//    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @OneToMany(mappedBy = "user")
+    private Set<RepairRequest> requests;
+
 
 
 }

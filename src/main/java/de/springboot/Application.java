@@ -23,4 +23,9 @@ public class Application {
         return "display";
     }
 
+    @GetMapping("/request-display")
+    public String showRequests() {
+        return "requestDisplay";
+    }
+
 }

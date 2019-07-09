@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang = "en" xmlns:th="http://www.thymeleaf.org"
+<html lang = "en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
@@ -24,20 +26,28 @@
             <li class="nav-item">
                 <a class="nav-link" href="/login" th:text = "#{index.nav_bar.log_in}">sign in</a>
             </li>
-            <li class="nav-item" sec:authorize ="hasRole('ROLE_ADMIN')">
+            <li class="nav-item" sec:authorize ="hasAuthority('ADMIN')">
                 <a class="nav-link" href="/display" th:text = "#{index.nav_bar.display}">display</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout" th:text = "#{index.nav_bar.log_out}">sign out</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/request" th:text = "#{index.nav_bar.request}">leave request</a>
+            </li>
         </ul>
 
     </div>
 
-<!--    <div class = "userInfo" sec:authorize ="hasRole('ROLE_USER')">-->
-<!--        Logged user: <span sec:authentication="name">Bob</span>-->
-<!--        Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>-->
-<!--    </div>-->
+    <div sec:authorize="hasRole('ROLE_ADMIN')" >
+        <p>diccccc</p>
+    </div>
+
+
+    <div class = "userInfo" sec:authorize ="hasAuthority('ADMIN')">
+        Logged user: <span sec:authentication="name">Bob</span>
+        Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+    </div>
 
     <div class = "footer" style="margin-top: 20px">
         <span th:text="#{lang.change}"></span>:

@@ -15,6 +15,22 @@ displayApp.controller("DisplayAppCtrl", function($scope, $http){
     });
 });
 
+let requestDisplayApp = angular.module("requestDisplayApp", []);
+requestDisplayApp.controller("RequestDisplayAppCtrl", function($scope, $http){
+
+    $scope.requests = [];
+
+    $http.get('/api/request-display').then(function(resp){
+        $scope.requests = resp.data;
+    }, function () {
+        $scope.requests = [{
+            type: 'Undefined',
+            description: 'Undefined',
+            request_time: 'Undefined'
+        }];
+    });
+});
+
 let registrationApp = angular.module("registrationApp", []);
 registrationApp.controller("RegistrationCtrl", function ($scope, $http) {
     $scope.auth = {};
@@ -54,6 +70,42 @@ registrationApp.controller("RegistrationCtrl", function ($scope, $http) {
                 console.log(error.data);
                 resMessage.style.color = 'red';
                 inputLoginLabel.style.color = 'red';
+                $scope.message = error.data.messages;
+            }
+        );
+    }
+});
+
+let requestApp = angular.module("requestApp", []);
+requestApp.controller("RequestCtrl", function ($scope, $http) {
+    $scope.auth = {};
+    let resMessage = document.getElementById('requestMessage');
+    let TypeExample = document.getElementById('TypeElement');
+    let DescriptionExample = document.getElementById('DescriptionElement');
+
+    let TypeLabel = document.getElementById('TypeLabel');
+    let DescriptionLabel = document.getElementById('DescriptionLabel');
+
+    $scope.sendForm = function (auth) {
+        $http({
+            method: 'POST',
+            url: '/request',
+            data: $.param(auth),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(
+            (data) => {
+                resMessage.style.color = 'green';
+                $scope.message = 'Request successful!';
+                TypeExample.value = '';
+                DescriptionExample.value = '';
+                TypeLabel.style.color = 'black';
+                DescriptionLabel.style.color = 'black';
+            },
+            (error) => {
+                console.log(error.data);
+                resMessage.style.color = 'red';
+                TypeLabel.style.color = 'red';
+                DescriptionLabel.style.color = 'red';
                 $scope.message = error.data.messages;
             }
         );

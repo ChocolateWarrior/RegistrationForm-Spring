@@ -5,6 +5,7 @@ import de.springboot.model.Role;
 import de.springboot.model.User;
 import de.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -25,7 +26,7 @@ public class RegistrationService {
                 .lastName(dto.getLastName())
                 .active(true)
                 .login(dto.getLogin())
-                .password(dto.getPassword())
+                .password(new BCryptPasswordEncoder().encode(dto.getPassword()))
                 .roles(Collections.singleton(Role.USER))
                 .build();
 
