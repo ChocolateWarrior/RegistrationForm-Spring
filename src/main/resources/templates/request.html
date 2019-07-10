@@ -15,16 +15,19 @@
             <h2 class="page-header" th:text="#{req.header}">Request Form</h2>
 
             <h3 id="requestMessage">{{message}}</h3>
+
             <form style="margin-bottom: 30px" name="form" autocomplete="off" novalidate ng-submit="form.$valid && sendForm(auth)">
                 <div class="form-group">
-                    <label id="TypeLabel" for="TypeElement" th:text="#{req.type}">type</label>
-                    <input type="text"
-                           class="form-control"
-                           id="TypeElement"
-                           th:placeholder="#{req.enter.type}"
-                           required
-                           ng-model="auth.type">
+                    <label id="TypeLabel" for="TypeElement">Select type</label>
+                    <select class="form-control" id="TypeElement" required ng-model="auth.type">
+                        <option value="clothes">clothes</option>
+                        <option value="electronics">electronics</option>
+                        <option value="furniture">furniture</option>
+                        <option value="sanitary engineering">sanitary engineering</option>
+                        <option value="mechanics">mechanics</option>
+                    </select>
                 </div>
+
                 <div class="form-group">
                     <label id="DescriptionLabel" for="DescriptionElement" th:text="#{req.desc}">last name</label>
                     <input type="text"
@@ -56,7 +59,7 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/requestApp.js"></script>
 
 </body>
 </html>

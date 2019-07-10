@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang = "en"
-      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Easy Repairs</title>
@@ -26,7 +25,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/login" th:text = "#{index.nav_bar.log_in}">sign in</a>
             </li>
-            <li class="nav-item" sec:authorize ="hasAuthority('ADMIN')">
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                 <a class="nav-link" href="/display" th:text = "#{index.nav_bar.display}">display</a>
             </li>
             <li class="nav-item">
@@ -39,12 +38,8 @@
 
     </div>
 
-    <div sec:authorize="hasRole('ROLE_ADMIN')" >
-        <p>diccccc</p>
-    </div>
+    <div class = "userInfo" sec:authorize="hasAuthority('USER')">
 
-
-    <div class = "userInfo" sec:authorize ="hasAuthority('ADMIN')">
         Logged user: <span sec:authentication="name">Bob</span>
         Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
     </div>
