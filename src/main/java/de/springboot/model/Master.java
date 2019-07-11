@@ -1,6 +1,5 @@
 package de.springboot.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,15 +13,14 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"login"})})
-public class User {
-
+@Table(name = "masters", uniqueConstraints = {@UniqueConstraint(columnNames = {"login"})})
+public class Master {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "active", nullable = false)
+    @Column(name = "active")
     private boolean active;
 
     @Column(name = "first_name", nullable = false)
@@ -37,15 +35,10 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @ElementCollection(targetClass = Specification.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "master_specification",
+            joinColumns = @JoinColumn(name = "master_id"))
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<RepairRequest> requests;
-
-
+    private Set<Specification> specifications;
 
 }

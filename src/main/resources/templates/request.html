@@ -20,11 +20,11 @@
                 <div class="form-group">
                     <label id="TypeLabel" for="TypeElement">Select type</label>
                     <select class="form-control" id="TypeElement" required ng-model="auth.type">
-                        <option value="clothes">clothes</option>
-                        <option value="electronics">electronics</option>
-                        <option value="furniture">furniture</option>
-                        <option value="sanitary engineering">sanitary engineering</option>
-                        <option value="mechanics">mechanics</option>
+                        <option value="clothes" th:text="#{spec.clothes}">clothes</option>
+                        <option value="electronics" th:text="#{spec.electronics}">electronics</option>
+                        <option value="furniture" th:text="#{spec.furniture}">furniture</option>
+                        <option value="sanitary engineering" th:text="#{spec.sanitary}">sanitary engineering</option>
+                        <option value="mechanics" th:text="#{spec.mechanics}">mechanics</option>
                     </select>
                 </div>
 

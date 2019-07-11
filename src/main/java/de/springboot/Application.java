@@ -17,7 +17,7 @@ public class Application {
 
     @GetMapping("/")
     public String showDefault(){return "index";}
-//
+
     @GetMapping("/display")
     public String showUsers() {
         return "display";
@@ -25,7 +25,7 @@ public class Application {
 
     @GetMapping("/request-display")
     public String showRequests() {
-        return "requestDisplay";
+        return "display_request";
     }
 
 }
