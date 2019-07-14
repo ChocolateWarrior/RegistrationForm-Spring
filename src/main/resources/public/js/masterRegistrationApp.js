@@ -9,10 +9,12 @@ masterRegistrationApp.controller("MasterRegistrationCtrl", function ($scope, $ht
 
     let inputNameLabel = document.getElementById('firstNameInputLabel');
     let inputLoginLabel = document.getElementById('loginInputLabel');
+    let SecondTypeLabel = document.getElementById('SecondTypeLabel');
 
     loginExample.addEventListener('input', () => {
         inputNameLabel.style.color = 'black';
         inputLoginLabel.style.color = 'black';
+        SecondTypeLabel.style.color = 'green';
         $scope.message = 'msg';
     });
 

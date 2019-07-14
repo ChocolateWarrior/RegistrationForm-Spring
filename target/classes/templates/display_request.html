@@ -27,6 +27,7 @@
                             <!--                            <th th:text="#{req.display.finish_time}">finish time</th>-->
                             <!--                            <th th:text="#{req.display.price}">price</th>-->
 
+                            <th th:text="#{req.display.status}">status</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -35,6 +36,8 @@
                             <td>{{item.type}}</td>
                             <td>{{item.description}}</td>
                             <td>{{item.user.id}}</td>
+                            <td>{{item.active}}</td>
+
 
                         </tr>
                         </tbody>

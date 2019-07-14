@@ -44,8 +44,18 @@
 
     </div>
 
-    <div class="">
+    <div class="jumbotron">
         <h3>My requests</h3>
+        <form action="#" th:action="@{/main}" method="get">
+            <ul class="list-group" th:field="${user_requests}">
+                <li class="list-group-item "
+                    th:each="request : ${user_requests} " required
+                    th:text="${request.description}"
+                    th:value="${request.description}"></li>
+
+            </ul>
+
+        </form>
     </div>
 
     <div class = "userInfo" sec:authorize="hasAuthority('USER')">

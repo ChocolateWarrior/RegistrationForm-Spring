@@ -45,7 +45,10 @@ public class User implements UserDetails {
     private Set<Role> authorities;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinTable(name = "user_requests",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "request_id"))
     private Set<RepairRequest> requests;
 
     @Override

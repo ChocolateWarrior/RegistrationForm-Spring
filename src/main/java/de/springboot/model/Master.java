@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Entity
-@SequenceGenerator(name="seq_master", allocationSize = 100)
+@SequenceGenerator(name="seq_master", initialValue = 1, allocationSize = 100)
 @Table(name = "masters", uniqueConstraints = {@UniqueConstraint(columnNames = {"login"})})
 public class Master {
     @Id

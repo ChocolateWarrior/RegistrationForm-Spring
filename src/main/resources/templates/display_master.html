@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body ng-app="displayApp" ng-controller="DisplayAppCtrl">
+<body ng-app="masterDisplayApp" ng-controller="MasterDisplayAppCtrl">
 <div class = "container" style="margin-top: 60px">
     <div class = "row">
         <div class = "col-md-12">
@@ -26,11 +26,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="item in users">
+                        <tr ng-repeat="item in masters">
                             <td>{{item.id}}</td>
                             <td>{{item.firstName}}</td>
                             <td>{{item.lastName}}</td>
-                            <td>{{item.username}}</td>
+                            <td>{{item.login}}</td>
                             <td>{{item.password}}</td>
                         </tr>
                         </tbody>
@@ -54,7 +54,7 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-<script type="text/javascript" src="js/displayApp.js"></script>
+<script type="text/javascript" src="js/masterDisplayApp.js"></script>
 
 </body>
 </html>

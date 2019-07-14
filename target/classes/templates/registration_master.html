@@ -14,58 +14,57 @@
         <div class="col-md-8 col-md-offset-2">
             <h2 class="page-header" th:text="#{reg.master.header}">Registration Form</h2>
 
-            <h3 id="registrationMessage">{{message}}</h3>
-            <form style="margin-bottom: 30px" name="form" autocomplete="off" novalidate ng-submit="form.$valid && sendForm(auth)" th:object="${master}">
+            <h5 class="text-success" th:text="${message}"></h5>
+            <form style="margin-bottom: 30px" action="#" th:action="@{/master-registration}" name="form" autocomplete="off" th:object="${master}" method="post">
                 <div class="form-group">
                     <label id="firsNameInputLabel" for="firstNameExampleElement" th:text="#{reg.first_name}">first name</label>
                     <input type="text"
                            class="form-control"
                            id="firstNameExampleElement"
+                           th:field="*{firstName}"
                            th:placeholder="#{reg.enter.first_name}"
-                           required
-                           ng-model="auth.firstName">
+                           required>
                 </div>
                 <div class="form-group">
                     <label id="lastNameInputLabel" for="lastNameExampleElement" th:text="#{reg.last_name}">last name</label>
                     <input type="text"
                            class="form-control"
                            id="lastNameExampleElement"
+                           th:field="*{lastName}"
                            th:placeholder="#{reg.enter.last_name}"
-                           required
-                           ng-model="auth.lastName">
+                           required>
                 </div>
                 <div class="form-group">
                     <label id="loginInputLabel" for="loginExampleElement" th:text="#{reg.login}">login</label>
                     <input type="text"
                            class="form-control"
                            id="loginExampleElement"
+                           th:field="*{login}"
                            th:placeholder="#{reg.enter.login}"
-                           required
-                           ng-model="auth.login">
+                           required>
                 </div>
                 <div class="form-group">
                     <label id="passwordInputLabel" for="passwordExampleElement" th:text="#{reg.password}">password</label>
                     <input type="text"
                            class="form-control"
                            id="passwordExampleElement"
+                           th:field="*{password}"
                            th:placeholder="#{reg.enter.password}"
-                           required
-                           ng-model="auth.password">
+                           required>
                 </div>
 
                 <div class="form-group">
-                    <label id="TypeLabel" for="TypeElement">Select type</label>
-<!--                    required ng-model="auth.specifications"-->
-                    <select multiple class="form-control" id="TypeElement" th:field="*{authorities}" th:value="${@Master.getSpecifications()}">
-                        <option value="CLOTHES" th:text="#{spec.clothes}">clothes</option>
-                        <option value="ELECTRONICS" th:text="#{spec.electronics}">electronics</option>
-                        <option value="FURNITURE" th:text="#{spec.furniture}">furniture</option>
-                        <option value="SANITARY_ENGINEERING" th:text="#{spec.sanitary}">sanitary engineering</option>
-                        <option value="MECHANICS" th:text="#{spec.mechanics}">mechanics</option>
+
+                    <label id="SecondTypeLabel" for="specification" class="col-form-label" >Select specification</label>
+                    <select multiple class="form-control" id="specification" th:field="*{specifications}" required>
+                        <option value="" th:each="specifications : ${all_specifications} " required
+                        th:text="${specifications}"
+                        th:value="${specifications}">
+                        </option>
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-success" style="margin-top:30px" ng-disabled="form.$invalid" th:text="#{reg.register}">
+                <button type="submit" class="btn btn-success" style="margin-top:30px" th:text="#{reg.register}">
                     register
                 </button>
             </form>
@@ -83,10 +82,6 @@
     </div>
 
 </div>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-<script type="text/javascript" src="js/masterRegistrationApp.js"></script>
 
 </body>
 </html>
