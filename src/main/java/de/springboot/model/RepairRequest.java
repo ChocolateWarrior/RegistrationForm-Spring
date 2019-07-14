@@ -15,11 +15,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Entity
+@SequenceGenerator(name="seq_request", allocationSize = 100)
 @Table(name = "requests", uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
 public class RepairRequest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_request")
     @Column(name = "id", nullable = false, unique = true)
     private int id;
 

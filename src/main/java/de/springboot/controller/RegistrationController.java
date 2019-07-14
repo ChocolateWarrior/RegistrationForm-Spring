@@ -26,7 +26,7 @@ public class RegistrationController  {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void executeRegistration(RegistrationDTO dto){
-        registrationService.pushUser(dto);
+        registrationService.createUser(dto);
     }
 
 }

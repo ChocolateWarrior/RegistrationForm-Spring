@@ -28,7 +28,7 @@ public class RequestService {
 
     public void pushRequest(RequestDTO dto){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByLogin(authentication.getName());
+        User user = userRepository.findByUsername(authentication.getName());
         RepairRequest requestToAdd = RepairRequest.builder()
                 .user(user)
                 .type(dto.getType())
@@ -36,12 +36,6 @@ public class RequestService {
                 .requestTime(LocalDateTime.now())
                 .build();
 
-//        RepairRequest request = new RepairRequest(
-//                user,
-//                dto.getType(),
-//                dto.getDescription(),
-//                now
-//        );
 
         requestRepository.save(requestToAdd);
     }

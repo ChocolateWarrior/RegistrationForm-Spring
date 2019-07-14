@@ -21,7 +21,7 @@ public class LoginService {
 
 
     public User getUser(LoginDTO dto) throws CredentialsException{
-        User user = userRepository.findByLoginAndPassword(dto.getLogin(), dto.getPassword());
+        User user = userRepository.findByUsernameAndPassword(dto.getLogin(), dto.getPassword());
 
         if(user == null) {
             log.warn(dto + " there is no such user record in database");

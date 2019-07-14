@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,10 +14,11 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Entity
+@SequenceGenerator(name="seq_master", allocationSize = 100)
 @Table(name = "masters", uniqueConstraints = {@UniqueConstraint(columnNames = {"login"})})
 public class Master {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_master")
     @Column(name = "id")
     private int id;
 
