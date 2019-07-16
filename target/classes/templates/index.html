@@ -25,14 +25,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="/login" th:text = "#{index.nav_bar.log_in}">sign in</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAuthority('USER')">
-                <a class="nav-link" href="/display" th:text = "#{index.nav_bar.display}">display</a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout" th:text = "#{index.nav_bar.log_out}">sign out</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/request" th:text = "#{index.nav_bar.request}">leave request</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAuthority('USER')">
+                <a class="nav-link" href="/user-display" th:text = "#{index.nav_bar.display}">display</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/request-display" th:text = "#{index.nav_bar.request_display}">display requests</a>

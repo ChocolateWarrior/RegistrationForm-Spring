@@ -23,4 +23,8 @@ public class MasterDisplayService {
         masterRepository.findAll().forEach(res::add);
         return res;
     }
+
+    public Master getMasterById(int masterId){
+        return masterRepository.findById(masterId);
+    }
 }

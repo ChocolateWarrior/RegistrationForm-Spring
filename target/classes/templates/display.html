@@ -8,53 +8,104 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body ng-app="displayApp" ng-controller="DisplayAppCtrl">
-<div class = "container" style="margin-top: 60px">
-    <div class = "row">
-        <div class = "col-md-12">
-            <div class = "panel panel-default">
-                <div class = "panel-heading" th:text="#{display.users}">Users</div>
-                <div class = "panel-body">
-                    <table class = "table table-striped">
-                        <thead>
-                        <tr>
-                            <th th:text="#{display.id}">id</th>
-                            <th th:text="#{display.first_name}">first name</th>
-                            <th th:text="#{display.last_name}">last name</th>
-                            <th th:text="#{display.login}">login</th>
-                            <th th:text="#{display.password}">password</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="item in users">
-                            <td>{{item.id}}</td>
-                            <td>{{item.firstName}}</td>
-                            <td>{{item.lastName}}</td>
-                            <td>{{item.username}}</td>
-                            <td>{{item.password}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+
+<body>
+
+    <div class="container" style="margin-top: 60px">
+        <div class = "row">
+            <div class = "col-md-12">
+                <div class = "panel panel-default">
+                    <div class = "panel-heading" th:text="#{display.users}">Users</div>
+                    <div class = "panel-body">
+                        <form action="#" th:action="@{/display}" method="get">
+
+                        <table class = "table table-striped" th:field="${all_users}">
+                            <thead class ="thead-dark">
+                            <tr>
+                                <th th:text="#{display.id}">id</th>
+                                <th th:text="#{display.first_name}">first name</th>
+                                <th th:text="#{display.last_name}">last name</th>
+                                <th th:text="#{display.login}">login</th>
+<!--                                <th th:text="#{display.password}">password</th>-->
+                                <th>delete</th>
+                                <th>edit</th>
+                            </tr>
+                            </thead>
+                            <tbody >
+                            <tr th:each="u : ${all_users}">
+                                <td th:text="${u.id}"
+                                    th:value="${u.id}"></td>
+                                <td th:text="${u.firstName}"
+                                    th:value="${u.firstName}"></td>
+                                <td th:text="${u.lastName}"
+                                    th:value="${u.lastName}"></td>
+                                <td th:text="${u.username}"
+                                    th:value="${u.username}"></td>
+<!--                                <td th:text="${u.password}"-->
+<!--                                    th:value="${u.password}"></td>-->
+                                <td><form th:action="@{/user-display/remove/{id}(id=${u.id})}" method="post">
+                                    <button type="submit" class="btn btn-sm btn-secondary">Remove</button>
+                                </form></td>
+                                <td><form th:action="@{/user-display/edit/{id}(id=${u.id})}" th:object="${user_dto}" method="post">
+                                    <div class="form-group">
+                                        <label id="firsNameInputLabel" for="firstNameExampleElement" th:text="#{reg.first_name}">first name</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="firstNameExampleElement"
+                                               th:placeholder="#{reg.enter.first_name}">
+<!--                                               th:field="*{firstName}">-->
+<!--                                               required>-->
+                                    </div>
+                                    <div class="form-group">
+                                        <label id="lastNameInputLabel" for="lastNameExampleElement" th:text="#{reg.last_name}">last name</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="lastNameExampleElement"
+                                               th:placeholder="#{reg.enter.last_name}">
+<!--                                               th:field="*{lastName}"-->
+<!--                                               required>-->
+                                    </div>
+                                    <div class="form-group">
+                                        <label id="loginInputLabel" for="loginExampleElement" th:text="#{reg.login}">login</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="loginExampleElement"
+                                               th:placeholder="#{reg.enter.login}">
+<!--                                               th:field="*{login}"-->
+<!--                                               required>-->
+                                    </div>
+                                    <div class="form-group">
+                                        <label id="passwordInputLabel" for="passwordExampleElement" th:text="#{reg.password}">password</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="passwordExampleElement"
+                                               th:placeholder="#{reg.enter.password}">
+<!--                                               th:field="*{password}"-->
+<!--                                               required>-->
+                                    </div>
+                                    <button type="submit" class="btn btn-success" style="margin-top:30px" th:text="#{reg.register}">
+                                        register
+                                    </button>
+<!--                                    <div class="modal-footer">-->
+<!--                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                                        <button type="submit" class="btn btn-primary">Edit</button>-->
+<!--                                    </div>-->
+                                </form></td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+
+                        </form>
+
+
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <div class = "footer" style="margin-top: 20px">
-        <div class="aboutLanguage">
-            <span th:text="#{lang.change}"></span>:
-            <a href="?lang=en" th:text="#{lang.en}">english</a>
-            /
-            <a href="?lang=uk" th:text="#{lang.uk}">ukrainian</a>
-        </div>
-        <div class="footer_bar">
-            <a href="/main" th:text="#{main.return}">main</a>
-        </div>
-    </div>
-</div>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-<script type="text/javascript" src="js/displayApp.js"></script>
-
 </body>
+
+
 </html>

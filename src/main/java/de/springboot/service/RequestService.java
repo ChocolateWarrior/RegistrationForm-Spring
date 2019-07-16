@@ -12,6 +12,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Log4j2
 @Service
@@ -24,6 +26,20 @@ public class RequestService {
     public RequestService(RequestRepository requestRepository, UserRepository userRepository) {
         this.requestRepository = requestRepository;
         this.userRepository=userRepository;
+    }
+
+    public List<RepairRequest> getAll(){
+        List<RepairRequest> requests = new ArrayList<>();
+        requestRepository.findAll().forEach(requests::add);
+        return requests;
+    }
+
+    public void removeRequest(RepairRequest request){
+        requestRepository.delete(request);
+    }
+
+    public RepairRequest getRequestById(int id){
+        return requestRepository.findById(id);
     }
 
     public void pushRequest(RequestDTO dto){

@@ -1,5 +1,6 @@
 package de.springboot.service;
 
+import de.springboot.model.Master;
 import de.springboot.model.RepairRequest;
 import de.springboot.model.User;
 import de.springboot.repository.RequestRepository;
@@ -10,6 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,5 +32,33 @@ public class RequestDisplayService {
         requestRepository.findAll().forEach(res::add);
         return res;
     }
+
+    public void removeRequest(RepairRequest request){
+        requestRepository.delete(request);
+    }
+
+    public RepairRequest getRequestById(int requestId){
+        return requestRepository.findById(requestId);
+    }
+
+    public void setRequestMaster(int requestId, Master master){
+        RepairRequest request = getRequestById(requestId);
+        request.setMaster(master.getId());
+        requestRepository.save(request);
+    }
+
+    public void setRequestPrice(int requestId, BigDecimal price){
+        RepairRequest request = getRequestById(requestId);
+        request.setPrice(price);
+        requestRepository.save(request);
+    }
+
+    public void setRequestFinish(int requestId){
+        RepairRequest request = getRequestById(requestId);
+        request.setFinishTime(LocalDateTime.now());
+        request.setActive(true);
+        requestRepository.save(request);
+    }
+
 
 }

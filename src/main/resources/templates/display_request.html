@@ -15,33 +15,55 @@
             <div class = "panel panel-default">
                 <div class = "panel-heading" th:text="#{req.display.heading}">requests</div>
                 <div class = "panel-body">
-                    <table class = "table table-striped">
-                        <thead>
+                    <form action="#" th:action="@{/request-display}" method="get">
+
+                    <table class = "table table-bordered table-hover table-responsive" th:field="${all_requests}">
+                        <thead class ="thead-dark">
                         <tr>
                             <th th:text="#{req.display.id}">id</th>
                             <th th:text="#{req.display.type}">type</th>
                             <th th:text="#{req.display.description}">desc</th>
-                            <!--                            <th th:text="#{req.display.req_time}">request time</th>-->
+                            <th th:text="#{req.display.req_time}">request time</th>
                             <th th:text="#{req.display.user_id}">user id</th>
-                            <!--                            <th th:text="#{req.display.master_id}">master id</th>-->
-                            <!--                            <th th:text="#{req.display.finish_time}">finish time</th>-->
-                            <!--                            <th th:text="#{req.display.price}">price</th>-->
-
+                            <th th:text="#{req.display.master_id}">master id</th>
+                            <th th:text="#{req.display.finish_time}">finish time</th>
+                            <th th:text="#{req.display.price}">price</th>
                             <th th:text="#{req.display.status}">status</th>
+                            <th >Rejection</th>
+                            <th >Edit</th>
+
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="item in requests">
-                            <td>{{item.id}}</td>
-                            <td>{{item.type}}</td>
-                            <td>{{item.description}}</td>
-                            <td>{{item.user.id}}</td>
-                            <td>{{item.active}}</td>
+                        <tr th:each="r : ${all_requests}">
+                            <td th:text="${r.id}"
+                                th:value="${r.id}"></td>
+                            <td th:text="${r.type}"
+                                th:value="${r.type}"></td>
+                            <td th:text="${r.description}"
+                                th:value="${r.description}"></td>
+                            <td th:text="${r.requestTime}"
+                                th:value="${r.requestTime}"></td>
+                            <td th:text="${r.user.getId()}"
+                                th:value="${r.user.getId()}"></td>
+                            <td th:text="${r.master}"
+                                th:value="${r.master}"></td>
+                            <td th:text="${r.finishTime}"
+                                th:value="${r.finishTime}"></td>
+                            <td th:text="${r.price}"
+                                th:value="${r.price}"></td>
+                            <td th:text="${r.active}"
+                                th:value="${r.active}"></td>
+                            <td style="text-align: center"><form th:action="@{/request-display/remove/{id}(id=${r.id})}" method="post">
+                                <button type="submit" class="btn btn-sm btn-danger">Reject</button>
+                            </form></td>
+                            <td><form th:action="@{/request-display/set-master/{id}(id=${r.id})}" method="get">
+                                <button type="submit" class="btn btn-sm btn-info">Edit</button>
+                            </form></td>
 
-
-                        </tr>
                         </tbody>
                     </table>
+                    </form>
                 </div>
             </div>
         </div>

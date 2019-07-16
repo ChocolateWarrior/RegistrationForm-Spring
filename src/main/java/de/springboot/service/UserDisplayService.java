@@ -26,5 +26,12 @@ public class UserDisplayService {
         return res;
     }
 
+    public User getUserById(int id){
+        return userRepository.findById(id);
+    }
+
+    public void removeUser(User user){
+        userRepository.delete(user);
+    }
 
 }

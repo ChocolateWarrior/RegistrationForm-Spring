@@ -12,9 +12,6 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-//    @GetMapping("/main")
-//    public String showMain(){return "index";}
-
     @GetMapping("/")
     public String showDefault(){return "index";}
 
@@ -26,11 +23,6 @@ public class Application {
     @GetMapping("/master-display")
     public String showMasters() {
         return "display_master";
-    }
-
-    @GetMapping("/request-display")
-    public String showRequests() {
-        return "display_request";
     }
 
 }
