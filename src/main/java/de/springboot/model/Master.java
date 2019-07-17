@@ -37,10 +37,17 @@ public class Master {
     @Column(name = "password", nullable = false)
     private String password;
 
+    //TODO connect as ManyToMany
     @ElementCollection(targetClass = Specification.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "master_specification",
             joinColumns = @JoinColumn(name = "master_id"))
     @Enumerated(EnumType.STRING)
     private Set<Specification> specifications;
+
+//    @Column(name = "password", nullable = false)
+//    private RepairRequest request;
+
+
+    //TODO current request, OneToOne with requests
 
 }

@@ -41,7 +41,6 @@ public class MasterRegistrationController {
     @PostMapping
     public String executeRegistration(MasterRegistrationDTO dto, Model model){
         log.info(dto);
-        System.out.println(dto.toString());
         masterRegistrationService.pushMaster(dto);
         model.addAttribute("message", "Successfully registered");
         model.addAttribute("master", dto);

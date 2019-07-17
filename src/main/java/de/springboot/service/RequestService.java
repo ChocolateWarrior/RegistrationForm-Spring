@@ -47,7 +47,7 @@ public class RequestService {
         User user = userRepository.findByUsername(authentication.getName());
         RepairRequest requestToAdd = RepairRequest.builder()
                 .user(user)
-                .type(dto.getType())
+                .specification(dto.getSpecification())
                 .description(dto.getDescription())
                 .requestTime(LocalDateTime.now())
                 .build();

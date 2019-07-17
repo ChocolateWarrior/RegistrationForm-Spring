@@ -1,5 +1,6 @@
 package de.springboot.controller;
 
+import de.springboot.dto.RejectionDTO;
 import de.springboot.dto.RequestDTO;
 import de.springboot.dto.RequestEditDTO;
 import de.springboot.model.Master;
@@ -16,7 +17,6 @@ import java.util.List;
 
 @Log4j2
 @Controller
-@RequestMapping
 public class ReqDisplayController {
     private RequestDisplayService requestDisplayService;
     private MasterDisplayService masterDisplayService;
@@ -35,14 +35,17 @@ public class ReqDisplayController {
         return "display_request";
     }
 
+    //DELETION DOES NOT WORK FOR FIRST ID IN THE LIST
     @PostMapping("/request-display/remove/{id}")
     public String removeRequest(@PathVariable("id") int requestId,
-                                Model model) {
-        RepairRequest request = requestDisplayService.getRequestById(requestId);
-        requestDisplayService.removeRequest(request);
+                                Model model, RejectionDTO dto) {
+//        RepairRequest request = requestDisplayService.getRequestById(requestId);
+//        requestDisplayService.removeRequest(request);
+        requestDisplayService.setRequestRejection(requestId, dto.getRejectionMessage());
         model.addAttribute("all_requests", requestDisplayService.getAllRequests());
         return "display_request";
     }
+
 
     @PostMapping("/request-display/set-master/{id}")
     public String setRequestMaster(@PathVariable("id") int requestId,

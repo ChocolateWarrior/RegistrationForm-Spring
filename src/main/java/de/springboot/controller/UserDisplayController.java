@@ -33,7 +33,7 @@ public class UserDisplayController {
     }
 
     @PostMapping("/user-display/remove/{id}")
-    public String removeRequest(@PathVariable("id") int userId,
+    public String removeUser(@PathVariable("id") int userId,
                                  Model model) {
         User user = userDisplayService.getUserById(userId);
         userDisplayService.removeUser(user);
@@ -43,7 +43,7 @@ public class UserDisplayController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/user-display/edit/{id}")
-    public String editRequest(RegistrationDTO dto, @PathVariable("id") int userId,
+    public String editUser(RegistrationDTO dto, @PathVariable("id") int userId,
                                 Model model) {
         User user = userDisplayService.getUserById(userId);
 //        RegistrationDTO dto = new RegistrationDTO();

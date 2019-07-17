@@ -31,8 +31,9 @@ public class RepairRequest {
     @Column(name = "master_id")
     private int master;
 
-    @Column(name = "type", nullable = false)
-    private String type;
+    //TODO connect to specification(OneToMany)
+    @Column(name = "specification", nullable = false)
+    private String specification;
 
     @Column(name = "description", nullable = false)
     private String description;
@@ -46,7 +47,13 @@ public class RepairRequest {
     @Column(name = "price")
     private BigDecimal price;
 
-    @Column(name = "active")
-    private boolean active;
+    @Column(name = "rejection_message")
+    private String rejectionMessage;
+
+    @Column(name="comment")
+    private String comment;
+
+    @Column(name = "state")
+    private RequestState state;
 
 }

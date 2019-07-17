@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class RequestDTO {
 
-    private String type;
+    private String specification;
     private String description;
     private LocalDateTime requestTime = LocalDateTime.now();
 }
