@@ -1,9 +1,7 @@
 package de.springboot.controller;
 
 import de.springboot.dto.MasterRegistrationDTO;
-import de.springboot.model.Master;
 import de.springboot.model.Specification;
-import de.springboot.service.MasterDisplayService;
 import de.springboot.service.MasterRegistrationService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +19,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class MasterRegistrationController {
 
     private MasterRegistrationService masterRegistrationService;
-    private MasterDisplayService masterDisplayService;
 
     @Autowired
-    MasterRegistrationController(MasterRegistrationService masterRegistrationService,
-                                 MasterDisplayService masterDisplayService){
+    MasterRegistrationController(MasterRegistrationService masterRegistrationService){
         this.masterRegistrationService=masterRegistrationService;
-        this.masterDisplayService= masterDisplayService;
     }
 
     @GetMapping

@@ -17,7 +17,7 @@
                 <div class = "panel-body">
                     <form action="#" th:action="@{/request-display}" method="get">
 
-                    <table class = "table table-bordered table-hover table-sm" th:field="${all_requests}">
+                    <table class = "table table-bordered table-hover table-responsive" th:field="${all_requests}" style="text-align: center">
                         <thead class ="thead-dark">
                         <tr>
                             <th th:text="#{req.display.id}">id</th>
@@ -46,24 +46,28 @@
                                 th:value="${r.requestTime}"></td>
                             <td th:text="${r.user.getId()}"
                                 th:value="${r.user.getId()}"></td>
-                            <td th:text="${r.master}"
-                                th:value="${r.master}"></td>
+                            <td th:text="${r.master?.getId()}"
+                                th:value="${r.master?.getId()}"></td>
                             <td th:text="${r.finishTime}"
                                 th:value="${r.finishTime}"></td>
                             <td th:text="${r.price}"
                                 th:value="${r.price}"></td>
                             <td th:text="${r.state}"
                                 th:value="${r.state}"></td>
-                            <td><form th:action="@{/request-display/remove/{id}(id=${r.id})}" method="post">
-                                <label for="rejectionMessageElement"></label>
-                                <input type="text" id="rejectionMessageElement" name="rejectionMessage">
-                                <button type="submit" class="btn btn-sm btn-secondary">Reject</button>
-                            </form></td>
+                            <td >
+                                <form th:action="@{/request-display/reject/{id}(id=${r.id})}" method="post">
+                                    <label for="rejectionMessageElement"></label>
+                                    <input type="text" id="rejectionMessageElement" name="rejectionMessage">
+                                    <button style="margin-top: 10px" type="submit" class="btn btn-sm btn-secondary">Reject</button>
+                                </form>
+                            </td>
 
-                            <td><form th:action="@{/request-display/set-master/{id}(id=${r.id})}" method="get">
-                                <button type="submit" class="btn btn-sm btn-info">Edit</button>
-                            </form></td>
-
+                            <td>
+                                <form th:action="@{/request-display/edit/{id}(id=${r.id})}" method="get">
+                                    <button type="submit" class="btn btn-sm btn-info">Edit</button>
+                                </form>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                     </form>

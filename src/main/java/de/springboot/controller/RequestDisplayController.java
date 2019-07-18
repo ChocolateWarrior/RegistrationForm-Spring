@@ -1,36 +1,62 @@
 package de.springboot.controller;
 
+import de.springboot.dto.RejectionDTO;
+import de.springboot.dto.RequestEditDTO;
 import de.springboot.model.RepairRequest;
+import de.springboot.service.MasterDisplayService;
 import de.springboot.service.RequestDisplayService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/request-display")
+@Log4j2
+@Controller
 public class RequestDisplayController {
     private RequestDisplayService requestDisplayService;
+    private MasterDisplayService masterDisplayService;
 
     @Autowired
-    public RequestDisplayController(RequestDisplayService requestDisplayService) {
+    public RequestDisplayController(RequestDisplayService requestDisplayService, MasterDisplayService masterDisplayService) {
         this.requestDisplayService = requestDisplayService;
-    }
-    @GetMapping
-    public List<RepairRequest> getListOfRequests(){
-        return requestDisplayService.getAllRequests();
+        this.masterDisplayService=masterDisplayService;
     }
 
     @GetMapping("/request-display")
-    public String showUsers(Model model){
+    public String showRequests(Model model){
         List<RepairRequest> requests = requestDisplayService.getAllRequests();
-//        log.info(requests.toString());
         model.addAttribute("all_requests", requests);
         model.addAttribute("request", new RepairRequest());
         return "display_request";
     }
+
+    @PostMapping("/request-display/reject/{id}")
+    public String removeRequest(@PathVariable("id") int requestId,
+                                Model model, RejectionDTO dto) {
+        requestDisplayService.setRequestRejection(requestId, dto.getRejectionMessage());
+        model.addAttribute("all_requests", requestDisplayService.getAllRequests());
+        return "display_request";
+    }
+
+
+    @PostMapping("/request-display/edit/{id}")
+    public String editRequest(@PathVariable("id") int requestId, RequestEditDTO dto) {
+
+        masterDisplayService.setMasterRequest(masterDisplayService.getMasterById(dto.getMasterId()), requestDisplayService.getRequestById(requestId));
+        requestDisplayService.setRequestMaster(requestId, masterDisplayService.getMasterById(dto.getMasterId()));
+        requestDisplayService.setRequestPrice(requestId, dto.getPrice());
+        requestDisplayService.setRequestFinish(requestId);
+
+        return "request_edit";
+    }
+
+    @GetMapping("/request-display/edit/{id}")
+    public String getEditPage(@PathVariable("id") int requestId, Model model){
+        model.addAttribute("requestId", requestId);
+        return "request_edit";
+    }
+
 }

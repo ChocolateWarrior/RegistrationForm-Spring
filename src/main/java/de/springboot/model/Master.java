@@ -1,11 +1,6 @@
 package de.springboot.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
+import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
@@ -14,7 +9,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Entity
-@SequenceGenerator(name="seq_master", initialValue = 1, allocationSize = 100)
+@EqualsAndHashCode
+@SequenceGenerator(name="seq_master", initialValue = 1, allocationSize = 0)
 @Table(name = "masters", uniqueConstraints = {@UniqueConstraint(columnNames = {"login"})})
 public class Master {
     @Id
@@ -37,17 +33,19 @@ public class Master {
     @Column(name = "password", nullable = false)
     private String password;
 
-    //TODO connect as ManyToMany
-    @ElementCollection(targetClass = Specification.class, fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ElementCollection(targetClass = Specification.class, fetch = FetchType.LAZY)
     @CollectionTable(name = "master_specification",
             joinColumns = @JoinColumn(name = "master_id"))
     @Enumerated(EnumType.STRING)
     private Set<Specification> specifications;
 
-//    @Column(name = "password", nullable = false)
-//    private RepairRequest request;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "request_id")
+    private RepairRequest request;
 
-
-    //TODO current request, OneToOne with requests
 
 }

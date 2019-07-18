@@ -1,7 +1,6 @@
 package de.springboot.service;
 
 import de.springboot.dto.RegistrationDTO;
-import de.springboot.exceptions.CredentialsException;
 import de.springboot.exceptions.LoginMismatchException;
 import de.springboot.model.Role;
 import de.springboot.model.User;
@@ -14,7 +13,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +21,6 @@ import java.util.Collections;
 @Log4j2
 @Service
 public class RegistrationService implements UserDetailsService{
-
-//    private final UserRepository userRepository;
-//
-//    @Autowired
-//    public RegistrationService(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
 
     private final UserRepository userRepository;
     private final MessageSource messageSource;

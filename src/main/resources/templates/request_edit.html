@@ -14,7 +14,7 @@
         <div class="col-md-8 col-md-offset-2">
             <h2 class="page-header">Request Edit</h2>
 
-            <form th:action="@{/request-display/set-master/{id}(id=${requestId})}" method="post">
+            <form th:action="@{/request-display/edit/{id}(id=${requestId})}" method="post">
                 <div class="form-group">
                     <label id="priceLabel" for="priceElement">Price</label>
                     <input type="text"

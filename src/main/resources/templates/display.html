@@ -28,7 +28,7 @@
                                 <th th:text="#{display.login}">login</th>
 <!--                                <th th:text="#{display.password}">password</th>-->
                                 <th>delete</th>
-                                <th>edit</th>
+<!--                                <th>edit</th>-->
                             </tr>
                             </thead>
                             <tbody >
@@ -46,51 +46,51 @@
                                 <td><form th:action="@{/user-display/remove/{id}(id=${u.id})}" method="post">
                                     <button type="submit" class="btn btn-sm btn-secondary">Remove</button>
                                 </form></td>
-                                <td><form th:action="@{/user-display/edit/{id}(id=${u.id})}" th:object="${user_dto}" method="post">
-                                    <div class="form-group">
-                                        <label id="firsNameInputLabel" for="firstNameExampleElement" th:text="#{reg.first_name}">first name</label>
-                                        <input type="text"
-                                               class="form-control"
-                                               id="firstNameExampleElement"
-                                               th:placeholder="#{reg.enter.first_name}">
-<!--                                               th:field="*{firstName}">-->
-<!--                                               required>-->
-                                    </div>
-                                    <div class="form-group">
-                                        <label id="lastNameInputLabel" for="lastNameExampleElement" th:text="#{reg.last_name}">last name</label>
-                                        <input type="text"
-                                               class="form-control"
-                                               id="lastNameExampleElement"
-                                               th:placeholder="#{reg.enter.last_name}">
-<!--                                               th:field="*{lastName}"-->
-<!--                                               required>-->
-                                    </div>
-                                    <div class="form-group">
-                                        <label id="loginInputLabel" for="loginExampleElement" th:text="#{reg.login}">login</label>
-                                        <input type="text"
-                                               class="form-control"
-                                               id="loginExampleElement"
-                                               th:placeholder="#{reg.enter.login}">
-<!--                                               th:field="*{login}"-->
-<!--                                               required>-->
-                                    </div>
-                                    <div class="form-group">
-                                        <label id="passwordInputLabel" for="passwordExampleElement" th:text="#{reg.password}">password</label>
-                                        <input type="text"
-                                               class="form-control"
-                                               id="passwordExampleElement"
-                                               th:placeholder="#{reg.enter.password}">
-<!--                                               th:field="*{password}"-->
-<!--                                               required>-->
-                                    </div>
-                                    <button type="submit" class="btn btn-success" style="margin-top:30px" th:text="#{reg.register}">
-                                        register
-                                    </button>
-<!--                                    <div class="modal-footer">-->
-<!--                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--                                        <button type="submit" class="btn btn-primary">Edit</button>-->
+<!--                                <td><form th:action="@{/user-display/edit/{id}(id=${u.id})}" th:object="${user_dto}" method="post">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label id="firsNameInputLabel" for="firstNameExampleElement" th:text="#{reg.first_name}">first name</label>-->
+<!--                                        <input type="text"-->
+<!--                                               class="form-control"-->
+<!--                                               id="firstNameExampleElement"-->
+<!--                                               th:placeholder="#{reg.enter.first_name}">-->
+<!--&lt;!&ndash;                                               th:field="*{firstName}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                               required>&ndash;&gt;-->
 <!--                                    </div>-->
-                                </form></td>
+<!--                                    <div class="form-group">-->
+<!--                                        <label id="lastNameInputLabel" for="lastNameExampleElement" th:text="#{reg.last_name}">last name</label>-->
+<!--                                        <input type="text"-->
+<!--                                               class="form-control"-->
+<!--                                               id="lastNameExampleElement"-->
+<!--                                               th:placeholder="#{reg.enter.last_name}">-->
+<!--&lt;!&ndash;                                               th:field="*{lastName}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                               required>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label id="loginInputLabel" for="loginExampleElement" th:text="#{reg.login}">login</label>-->
+<!--                                        <input type="text"-->
+<!--                                               class="form-control"-->
+<!--                                               id="loginExampleElement"-->
+<!--                                               th:placeholder="#{reg.enter.login}">-->
+<!--&lt;!&ndash;                                               th:field="*{login}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                               required>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label id="passwordInputLabel" for="passwordExampleElement" th:text="#{reg.password}">password</label>-->
+<!--                                        <input type="text"-->
+<!--                                               class="form-control"-->
+<!--                                               id="passwordExampleElement"-->
+<!--                                               th:placeholder="#{reg.enter.password}">-->
+<!--&lt;!&ndash;                                               th:field="*{password}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                               required>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <button type="submit" class="btn btn-success" style="margin-top:30px" th:text="#{reg.register}">-->
+<!--                                        register-->
+<!--                                    </button>-->
+<!--&lt;!&ndash;                                    <div class="modal-footer">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <button type="submit" class="btn btn-primary">Edit</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+<!--                                </form></td>-->
                             </tr>
                             </tbody>
 

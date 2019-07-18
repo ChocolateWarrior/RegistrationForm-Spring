@@ -1,10 +1,6 @@
 package de.springboot.model;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,7 +11,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Entity
-@SequenceGenerator(name="seq_request", allocationSize = 100)
+@EqualsAndHashCode
+@ToString
+@SequenceGenerator(name="seq_request", initialValue = 1, allocationSize = 0)
 @Table(name = "requests", uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
 public class RepairRequest {
 
@@ -24,14 +22,18 @@ public class RepairRequest {
     @Column(name = "id", nullable = false, unique = true)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "master_id")
-    private int master;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToOne(mappedBy = "request", fetch = FetchType.LAZY)
+    private Master master;
 
-    //TODO connect to specification(OneToMany)
     @Column(name = "specification", nullable = false)
     private String specification;
 

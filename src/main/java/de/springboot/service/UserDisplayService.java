@@ -30,7 +30,8 @@ public class UserDisplayService {
         return userRepository.findById(id);
     }
 
-    public void removeUser(User user){
+    public void removeUser(int userId){
+        User user = getUserById(userId);
         userRepository.delete(user);
     }
 

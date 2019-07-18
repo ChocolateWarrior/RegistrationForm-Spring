@@ -20,9 +20,5 @@ public class Application {
         return "display";
     }
 
-    @GetMapping("/master-display")
-    public String showMasters() {
-        return "display_master";
-    }
 
 }

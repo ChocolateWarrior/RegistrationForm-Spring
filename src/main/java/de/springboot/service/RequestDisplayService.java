@@ -4,7 +4,6 @@ import de.springboot.model.Master;
 import de.springboot.model.RepairRequest;
 import de.springboot.model.RequestState;
 import de.springboot.repository.RequestRepository;
-import de.springboot.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,13 +34,13 @@ public class RequestDisplayService {
         requestRepository.delete(request);
     }
 
-    private RepairRequest getRequestById(int requestId){
+    public RepairRequest getRequestById(int requestId){
         return requestRepository.findById(requestId);
     }
 
     public void setRequestMaster(int requestId, Master master){
         RepairRequest request = getRequestById(requestId);
-        request.setMaster(master.getId());
+        request.setMaster(master);
         requestRepository.save(request);
     }
 

@@ -1,10 +1,7 @@
 package de.springboot.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -15,7 +12,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Entity
-@SequenceGenerator(name="seq_user", allocationSize = 100)
+@EqualsAndHashCode
+@SequenceGenerator(name="seq_user", initialValue = 1, allocationSize = 0)
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 public class User implements UserDetails {
 
@@ -39,16 +37,17 @@ public class User implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_authorities", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> authorities;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinTable(name = "user_requests",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "request_id"))
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<RepairRequest> requests;
 
     @Override

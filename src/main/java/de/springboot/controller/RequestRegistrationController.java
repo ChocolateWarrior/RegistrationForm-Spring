@@ -1,7 +1,6 @@
 package de.springboot.controller;
 
 import de.springboot.dto.RequestDTO;
-import de.springboot.model.RepairRequest;
 import de.springboot.model.Specification;
 import de.springboot.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/request")
-public class RequestController {
+public class RequestRegistrationController {
 
     private RequestService requestService;
 
     @Autowired
-    RequestController(RequestService requestService){
+    RequestRegistrationController(RequestService requestService){
         this.requestService = requestService;
     }
 

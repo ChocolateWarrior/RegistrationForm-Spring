@@ -31,13 +31,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="/request" th:text = "#{index.nav_bar.request}">leave request</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAuthority('USER')">
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                 <a class="nav-link" href="/user-display" th:text = "#{index.nav_bar.display}">display</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                 <a class="nav-link" href="/request-display" th:text = "#{index.nav_bar.request_display}">display requests</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                 <a class="nav-link" href="/master-display" th:text = "#{index.nav_bar.master_display}">display masters</a>
             </li>
         </ul>
@@ -46,16 +46,14 @@
 
     <div class="jumbotron">
         <h3>My requests</h3>
-        <form action="#" th:action="@{/main}" method="get">
             <ul class="list-group" th:field="${user_requests}">
                 <li class="list-group-item "
-                    th:each="request : ${user_requests} " required
-                    th:text="${request.description}"
-                    th:value="${request.description}"></li>
+                    th:each="request : ${user_requests} "
+                    th:text="${request}"
+                    th:value="${request}"></li>
 
             </ul>
 
-        </form>
     </div>
 
     <div class = "userInfo" sec:authorize="hasAuthority('USER')">

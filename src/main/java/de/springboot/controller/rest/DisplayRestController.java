@@ -1,4 +1,4 @@
-package de.springboot.controller;
+package de.springboot.controller.rest;
 
 import de.springboot.model.User;
 import de.springboot.service.UserDisplayService;
@@ -11,12 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/display")
-public class DisplayController {
+public class DisplayRestController {
 
     private UserDisplayService userDisplayService;
 
     @Autowired
-    public DisplayController(UserDisplayService userDisplayService) {
+    public DisplayRestController(UserDisplayService userDisplayService) {
             this.userDisplayService = userDisplayService;
         }
 

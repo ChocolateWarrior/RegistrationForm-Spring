@@ -17,7 +17,6 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//    private DataSource dataSource;
     private final RegistrationService registrationService;
     private final PasswordEncoder passwordEncoder;
 
@@ -26,29 +25,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.registrationService=registrationService;
         this.passwordEncoder=passwordEncoder;
     }
-//    public SecurityConfig(DataSource dataSource) {
-//        this.dataSource = dataSource;
-//    }
-
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .passwordEncoder(new BCryptPasswordEncoder())
-//                .usersByUsernameQuery("select login, password, active from users where login=?")
-//                .authoritiesByUsernameQuery("select u.login," +
-//                        " ur.roles from users u inner join user_role ur on" +
-//                        " u.id=ur.user_id where u.login=?");
-
-//    }
-
-
-//    @Bean
-//    public BCryptPasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -65,9 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/locale", "/registration","request-display")
                 .permitAll()
-                .antMatchers("/display")
-//                .hasAuthority("ADMIN")
-                .permitAll()
+                .antMatchers("/user-display", "/request-display", "/master-display")
+                .hasAuthority("ADMIN")
+//                .permitAll()
                 .antMatchers("/main", "/","/request")
                 .authenticated()
                 .and()

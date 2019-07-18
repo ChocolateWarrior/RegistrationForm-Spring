@@ -26,18 +26,14 @@ public class UserDisplayController {
     @GetMapping("/user-display")
     public String showUsers(Model model){
         List<User> users = userDisplayService.getAllUsers();
-//        log.info(requests.toString());
         model.addAttribute("all_users", users);
         model.addAttribute("user", new User());
         return "display";
     }
 
     @PostMapping("/user-display/remove/{id}")
-    public String removeUser(@PathVariable("id") int userId,
-                                 Model model) {
-        User user = userDisplayService.getUserById(userId);
-        userDisplayService.removeUser(user);
-        model.addAttribute("all_users", userDisplayService.getAllUsers());
+    public String removeUser(@PathVariable("id") int userId) {
+        userDisplayService.removeUser(userId);
         return "display";
     }
 
@@ -45,11 +41,8 @@ public class UserDisplayController {
     @PostMapping("/user-display/edit/{id}")
     public String editUser(RegistrationDTO dto, @PathVariable("id") int userId,
                                 Model model) {
-        User user = userDisplayService.getUserById(userId);
-//        RegistrationDTO dto = new RegistrationDTO();
         model.addAttribute("all_users", userDisplayService.getAllUsers());
         model.addAttribute("user_dto", dto);
-//        userDisplayService.editUser(user);
         return "display";
     }
 

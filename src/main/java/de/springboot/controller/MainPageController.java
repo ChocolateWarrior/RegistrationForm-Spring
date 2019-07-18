@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
@@ -26,9 +27,9 @@ public class MainPageController {
     @GetMapping
     public String showMain(Model model){
         List<RepairRequest> requests = mainPageService.getRequestsByUser();
-//        log.info(requests.toString());
-        model.addAttribute("user_requests", requests);
-        model.addAttribute("request", new RepairRequest());
+        List<String> desc = new ArrayList<>();
+        requests.forEach(el -> desc.add(el.getDescription()));
+        model.addAttribute("user_requests", desc);
         return "index";
     }
 }
