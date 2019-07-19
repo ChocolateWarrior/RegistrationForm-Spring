@@ -3,6 +3,7 @@ package de.springboot.controller;
 import de.springboot.dto.RejectionDTO;
 import de.springboot.dto.RequestEditDTO;
 import de.springboot.model.RepairRequest;
+import de.springboot.model.RequestState;
 import de.springboot.service.MasterDisplayService;
 import de.springboot.service.RequestDisplayService;
 import lombok.extern.log4j.Log4j2;
@@ -46,11 +47,14 @@ public class RequestDisplayController {
     public String editRequest(@PathVariable("id") int requestId, RequestEditDTO dto) {
 
         masterDisplayService.setMasterRequest(masterDisplayService.getMasterById(dto.getMasterId()), requestDisplayService.getRequestById(requestId));
-        requestDisplayService.setRequestMaster(requestId, masterDisplayService.getMasterById(dto.getMasterId()));
-        requestDisplayService.setRequestPrice(requestId, dto.getPrice());
-        requestDisplayService.setRequestFinish(requestId);
+        if(dto.getMasterId() != 0)
+            requestDisplayService.setRequestMaster(requestId, masterDisplayService.getMasterById(dto.getMasterId()));
+        if(dto.getPrice() != null)
+            requestDisplayService.setRequestPrice(requestId, dto.getPrice());
+        if(dto.getState() == RequestState.COMPLETED)
+            requestDisplayService.setRequestFinish(requestId);
 
-        return "request_edit";
+        return "display_request";
     }
 
     @GetMapping("/request-display/edit/{id}")

@@ -30,6 +30,33 @@ public class UserDisplayService {
         return userRepository.findById(id);
     }
 
+    public void setUserFirstName(int userId, String firstName){
+        User user = getUserById(userId);
+        user.setFirstName(firstName);
+        userRepository.save(user);
+    }
+
+
+    public void setUserLastName(int userId, String lastName){
+        User user = getUserById(userId);
+        user.setLastName(lastName);
+        userRepository.save(user);
+    }
+
+
+    public void setUserLogin(int userId, String login){
+        User user = getUserById(userId);
+        user.setUsername(login);
+        userRepository.save(user);
+    }
+
+    public void setUserPassword(int userId, String password){
+        User user = getUserById(userId);
+        user.setPassword(password);
+        userRepository.save(user);
+    }
+
+
     public void removeUser(int userId){
         User user = getUserById(userId);
         userRepository.delete(user);

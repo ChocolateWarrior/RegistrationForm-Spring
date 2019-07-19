@@ -28,7 +28,7 @@
                                 <th th:text="#{display.login}">login</th>
 <!--                                <th th:text="#{display.password}">password</th>-->
                                 <th>delete</th>
-<!--                                <th>edit</th>-->
+                                <th>edit</th>
                             </tr>
                             </thead>
                             <tbody >
@@ -43,9 +43,16 @@
                                     th:value="${u.username}"></td>
 <!--                                <td th:text="${u.password}"-->
 <!--                                    th:value="${u.password}"></td>-->
-                                <td><form th:action="@{/user-display/remove/{id}(id=${u.id})}" method="post">
-                                    <button type="submit" class="btn btn-sm btn-secondary">Remove</button>
-                                </form></td>
+                                <td>
+                                    <form th:action="@{/user-display/remove/{id}(id=${u.id})}" method="post">
+                                        <button type="submit" class="btn btn-sm btn-secondary">Remove</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form th:action="@{/user-display/edit/{id}(id=${u.id})}" method="get">
+                                        <button type="submit" class="btn btn-sm btn-info">Edit</button>
+                                    </form>
+                                </td>
 <!--                                <td><form th:action="@{/user-display/edit/{id}(id=${u.id})}" th:object="${user_dto}" method="post">-->
 <!--                                    <div class="form-group">-->
 <!--                                        <label id="firsNameInputLabel" for="firstNameExampleElement" th:text="#{reg.first_name}">first name</label>-->

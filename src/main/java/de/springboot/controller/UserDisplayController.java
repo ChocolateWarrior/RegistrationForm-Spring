@@ -6,6 +6,7 @@ import de.springboot.service.UserDisplayService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,13 +38,26 @@ public class UserDisplayController {
         return "display";
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/user-display/edit/{id}")
-    public String editUser(RegistrationDTO dto, @PathVariable("id") int userId,
-                                Model model) {
-        model.addAttribute("all_users", userDisplayService.getAllUsers());
-        model.addAttribute("user_dto", dto);
+    public String editUser(@PathVariable("id") int userId,
+                           RegistrationDTO dto) {
+
+        if(!dto.getFirstName().equals(""))
+            userDisplayService.setUserFirstName(userId, dto.getFirstName());
+        if(!dto.getLastName().equals(""))
+            userDisplayService.setUserLastName(userId, dto.getLastName());
+        if(!dto.getLogin().equals(""))
+            userDisplayService.setUserLogin(userId, dto.getLogin());
+        if(!dto.getPassword().equals(""))
+            userDisplayService.setUserPassword(userId, new BCryptPasswordEncoder().encode(dto.getPassword()));
         return "display";
     }
+
+    @GetMapping("/user-display/edit/{id}")
+    public String getEditPage(@PathVariable("id") int userId, Model model){
+        model.addAttribute("userId", userId);
+        return "user_edit";
+    }
+
 
 }
