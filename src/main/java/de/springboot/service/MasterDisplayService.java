@@ -52,7 +52,7 @@ public class MasterDisplayService {
 
     public void setMasterLogin(int masterId, String login){
         Master master = masterRepository.findById(masterId);
-        master.setLogin(login);
+        master.setUsername(login);
         masterRepository.save(master);
     }
 
