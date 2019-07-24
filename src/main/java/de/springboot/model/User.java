@@ -50,6 +50,20 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<RepairRequest> requests;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ElementCollection(targetClass = Specification.class, fetch = FetchType.LAZY)
+    @CollectionTable(name = "master_specification",
+            joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Specification> specifications;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "request_id")
+    private RepairRequest masterRequest;
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

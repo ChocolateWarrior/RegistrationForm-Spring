@@ -31,8 +31,8 @@ public class RepairRequest {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToOne(mappedBy = "request", fetch = FetchType.LAZY)
-    private Master master;
+    @OneToOne(mappedBy = "masterRequest", fetch = FetchType.LAZY)
+    private User master;
 
     @Column(name = "specification", nullable = false)
     private String specification;

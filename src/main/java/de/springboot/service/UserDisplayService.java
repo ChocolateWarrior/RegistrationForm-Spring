@@ -1,5 +1,6 @@
 package de.springboot.service;
 
+import de.springboot.model.RepairRequest;
 import de.springboot.model.User;
 import de.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,11 @@ public class UserDisplayService {
     public void removeUser(int userId){
         User user = getUserById(userId);
         userRepository.delete(user);
+    }
+
+    public void setMasterRequest(User master, RepairRequest request){
+        master.setMasterRequest(request);
+        userRepository.save(master);
     }
 
 }

@@ -29,5 +29,10 @@ public class MainPageService {
         return requestRepository.findByUser(user);
     }
 
+    public RepairRequest getRequestByMaster(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByUsername(authentication.getName());
+        return requestRepository.findById(user.getMasterRequest().getId());
+    }
 
 }

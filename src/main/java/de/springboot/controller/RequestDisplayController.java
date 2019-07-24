@@ -3,9 +3,8 @@ package de.springboot.controller;
 import de.springboot.dto.RejectionDTO;
 import de.springboot.dto.RequestEditDTO;
 import de.springboot.model.RepairRequest;
-import de.springboot.model.RequestState;
-import de.springboot.service.MasterDisplayService;
 import de.springboot.service.RequestDisplayService;
+import de.springboot.service.UserDisplayService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,12 +17,13 @@ import java.util.List;
 @Controller
 public class RequestDisplayController {
     private RequestDisplayService requestDisplayService;
-    private MasterDisplayService masterDisplayService;
+    private UserDisplayService userDisplayService;
 
     @Autowired
-    public RequestDisplayController(RequestDisplayService requestDisplayService, MasterDisplayService masterDisplayService) {
+    public RequestDisplayController(RequestDisplayService requestDisplayService,
+                                    UserDisplayService userDisplayService) {
         this.requestDisplayService = requestDisplayService;
-        this.masterDisplayService=masterDisplayService;
+        this.userDisplayService=userDisplayService;
     }
 
     @GetMapping("/request-display")
@@ -46,13 +46,10 @@ public class RequestDisplayController {
     @PostMapping("/request-display/edit/{id}")
     public String editRequest(@PathVariable("id") int requestId, RequestEditDTO dto) {
 
-        masterDisplayService.setMasterRequest(masterDisplayService.getMasterById(dto.getMasterId()), requestDisplayService.getRequestById(requestId));
+        userDisplayService.setMasterRequest(userDisplayService.getUserById(dto.getMasterId()), requestDisplayService.getRequestById(requestId));
         if(dto.getMasterId() != 0)
-            requestDisplayService.setRequestMaster(requestId, masterDisplayService.getMasterById(dto.getMasterId()));
-        if(dto.getPrice() != null)
-            requestDisplayService.setRequestPrice(requestId, dto.getPrice());
-        if(dto.getState() == RequestState.COMPLETED)
-            requestDisplayService.setRequestFinish(requestId);
+            requestDisplayService.setRequestMaster(requestId, userDisplayService.getUserById(dto.getMasterId()));
+
 
         return "display_request";
     }

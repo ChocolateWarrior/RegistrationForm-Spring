@@ -34,7 +34,7 @@ public class LoginController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping
     public void loginUser(LoginDTO dto)throws CredentialsException{
-            loginService.getUser(dto);
+        loginService.getUser(dto);
     }
 
 }

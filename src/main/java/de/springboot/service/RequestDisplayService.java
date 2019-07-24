@@ -1,8 +1,8 @@
 package de.springboot.service;
 
-import de.springboot.model.Master;
 import de.springboot.model.RepairRequest;
 import de.springboot.model.RequestState;
+import de.springboot.model.User;
 import de.springboot.repository.RequestRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class RequestDisplayService {
         return requestRepository.findById(requestId);
     }
 
-    public void setRequestMaster(int requestId, Master master){
+    public void setRequestMaster(int requestId, User master){
         RepairRequest request = getRequestById(requestId);
         request.setMaster(master);
         requestRepository.save(request);
@@ -57,7 +57,13 @@ public class RequestDisplayService {
         requestRepository.save(request);
     }
 
-    public void setRequestFinish(int requestId){
+    public void setRequestAccepted(int requestId){
+        RepairRequest request = getRequestById(requestId);
+        request.setState(RequestState.ACCEPTED);
+        requestRepository.save(request);
+    }
+
+    public void setRequestFinished(int requestId){
         RepairRequest request = getRequestById(requestId);
         request.setFinishTime(LocalDateTime.now());
         request.setState(RequestState.COMPLETED);

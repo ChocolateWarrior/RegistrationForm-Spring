@@ -45,7 +45,8 @@
     </div>
 
     <div class="jumbotron">
-        <h3>My requests</h3>
+        <div class="user_requests">
+            <h3>My requests</h3>
             <ul class="list-group" th:field="${user_requests}">
                 <li class="list-group-item "
                     th:each="request : ${user_requests} "
@@ -53,7 +54,52 @@
                     th:value="${request}"></li>
 
             </ul>
+        </div>
 
+        <div class = "master_request" sec:authorize="hasAuthority('MASTER')" style="margin-top: 30px">
+            <h3> My requests(Master) </h3>
+            <ul class="list-group">
+                <li class="list-group-item "
+                    th:text="${master_request}"
+                    th:value="${master_request}">
+                </li>
+
+
+            </ul>
+
+            <form action="#" th:action="@{/main/edit}" method="post" style="margin-top: 30px">
+                <div class="form-group">
+                    <label id="priceLabel" for="priceElement">Price</label>
+                    <input type="text"
+                           class="form-control"
+                           id="priceElement"
+                           name="price"
+                           placeholder="Set price">
+                </div>
+
+                <div class="form-group">
+
+                    <label id="SecondTypeLabel" for="state" class="col-form-label" >Select state</label>
+                    <select class="form-control" id="state" name="state" required>
+                        <option value="ACCEPTED">Accepted</option>
+                        <option value="COMPLETED">Completed</option>
+                        <option value="REJECTED">Rejected</option>
+                    </select>
+                </div>
+
+<!--                <div class="form-check">-->
+<!--                    <input type="checkbox"-->
+<!--                           class="form-check-input"-->
+<!--                           id="finishElement"-->
+<!--                           name="isFinished">-->
+<!--                    <label id="finishLabel" for="finishElement">Completed</label>-->
+<!--                </div>-->
+
+                <button type="submit" class="btn btn-success">
+                    Submit
+                </button>
+            </form>
+        </div>
     </div>
 
     <div class = "userInfo" sec:authorize="hasAuthority('USER')">

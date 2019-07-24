@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Log4j2
 @Service
@@ -49,6 +51,34 @@ public class RegistrationService implements UserDetailsService{
 
             userRepository.save(userToAdd);
             log.info("User saved successfully!");
+
+        } catch(DataIntegrityViolationException e){
+            log.error("Login not unique: " + dto.getLogin());
+            throw new LoginMismatchException(messageSource.getMessage(
+                    "users.registration.login.not_unique",
+                    null,
+                    LocaleContextHolder.getLocale()) + dto.getLogin(), e);
+        }
+    }
+
+    public void createMaster(RegistrationDTO dto){
+
+        Set<Role> roles = new HashSet<>();
+        roles.add(Role.MASTER);
+        roles.add(Role.USER);
+        try {
+            User userToAdd = User.builder()
+                    .firstName(dto.getFirstName())
+                    .lastName(dto.getLastName())
+                    .enabled(true)
+                    .username(dto.getLogin())
+                    .password(passwordEncoder.encode(dto.getPassword()))
+                    .authorities(roles)
+                    .specifications(dto.getSpecifications())
+                    .build();
+
+            userRepository.save(userToAdd);
+            log.info("Master saved successfully!");
 
         } catch(DataIntegrityViolationException e){
             log.error("Login not unique: " + dto.getLogin());
