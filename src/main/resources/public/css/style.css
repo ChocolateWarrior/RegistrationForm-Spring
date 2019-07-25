@@ -1,0 +1,38 @@
+
+h2, h3 {
+    color: #FFFF30;
+}
+
+body{
+
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+
+    /*font-weight: lighter;*/
+
+    background-size: cover;
+    background-image: url('../img/tools2.jpg');
+}
+
+.container {
+    opacity: 0.9;
+    width: 70%;
+
+}
+
+.nav{
+    border-radius: 10px;
+}
+
+.jumbotron {
+    margin-top: 30px;
+}
+
+
+.footer {
+    color: aliceblue;
+}
+
+.userInfo {
+    color: aliceblue;
+}

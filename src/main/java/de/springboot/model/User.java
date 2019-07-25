@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -63,6 +64,16 @@ public class User implements UserDetails {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "request_id")
     private RepairRequest masterRequest;
+
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
+//    @ManyToMany(cascade = {CascadeType.ALL})
+//    @JoinTable(
+//            name ="masters_requests",
+//            joinColumns = { @JoinColumn(name="master_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "request_id")}
+//    )
+//    Set<RepairRequest> masterRequests = new HashSet<>();
 
     @Override
     public boolean isAccountNonExpired() {

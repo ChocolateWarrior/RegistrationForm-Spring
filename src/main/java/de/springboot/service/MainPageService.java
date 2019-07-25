@@ -29,10 +29,24 @@ public class MainPageService {
         return requestRepository.findByUser(user);
     }
 
+    public boolean hasMasterRequest(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByUsername(authentication.getName());
+        return user.getMasterRequest() != null;
+    }
+
     public RepairRequest getRequestByMaster(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(authentication.getName());
         return requestRepository.findById(user.getMasterRequest().getId());
     }
+
+//    public List<RepairRequest> getRequestsByMaster(){
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User user = userRepository.findByUsername(authentication.getName());
+//        Set<RepairRequest> masterRequests= new HashSet<>()
+//
+//        return requestRepository.findById(user.getMasterRequests());
+//    }
 
 }

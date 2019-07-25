@@ -36,12 +36,15 @@ public class MainPageController {
         List<String> desc = new ArrayList<>();
         requests.forEach(el -> desc.add(el.getDescription()));
 
+
         String master_request = "";
 
-        if(mainPageService.getRequestByMaster() != null)
+        if(mainPageService.hasMasterRequest())
             master_request = mainPageService.getRequestByMaster().getDescription();
 
         model.addAttribute("master_request", master_request);
+
+//        List<RepairRequest> masterRequests = mainPageService.getRequestsByMaster();
         model.addAttribute("user_requests", desc);
 
         return "index";

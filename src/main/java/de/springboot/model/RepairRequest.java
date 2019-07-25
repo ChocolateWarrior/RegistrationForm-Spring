@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -33,6 +35,11 @@ public class RepairRequest {
     @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "masterRequest", fetch = FetchType.LAZY)
     private User master;
+
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
+//    @ManyToMany(mappedBy = "masterRequests")
+//    private Set<User> masters = new HashSet<>();
 
     @Column(name = "specification", nullable = false)
     private String specification;

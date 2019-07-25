@@ -4,16 +4,18 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <title>Easy Repairs</title>
+    <title>Repair It</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" >
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
 
 </head>
 <body>
-<div class="container" style="margin-top: 50px">
+<div class="container" style="margin-top: 50px;">
 
     <div class = "navigation">
-        <h2 class="h2">Easy Repairs</h2>
+        <h2 class="h2">Repair It</h2>
         <h3 th:text="#{index.greeting}"></h3>
         <ul class="nav nav-tabs nav-fill bg-light">
             <li class="nav-item">
@@ -37,27 +39,32 @@
             <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                 <a class="nav-link" href="/request-display" th:text = "#{index.nav_bar.request_display}">display requests</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <a class="nav-link" href="/master-display" th:text = "#{index.nav_bar.master_display}">display masters</a>
-            </li>
+
         </ul>
 
     </div>
 
+
+
     <div class="jumbotron">
         <div class="user_requests">
-            <h3>My requests</h3>
+            <h3 th:text="#{index.my_requests}">My requests</h3>
             <ul class="list-group" th:field="${user_requests}">
                 <li class="list-group-item "
                     th:each="request : ${user_requests} "
                     th:text="${request}"
                     th:value="${request}"></li>
 
+                <div th:if="${ #lists.isEmpty(user_requests)}">
+                    <span th:text="#{index.no_requests}">No requests yet. Leave request</span>
+                    <a href="/request" th:text="#{index.here}">here.</a>
+                </div>
+
             </ul>
         </div>
 
         <div class = "master_request" sec:authorize="hasAuthority('MASTER')" style="margin-top: 30px">
-            <h3> My requests(Master) </h3>
+            <h3 th:text="#{index.my_requests.master}"> My request (Master) </h3>
             <ul class="list-group">
                 <li class="list-group-item "
                     th:text="${master_request}"
@@ -69,7 +76,7 @@
 
             <form action="#" th:action="@{/main/edit}" method="post" style="margin-top: 30px">
                 <div class="form-group">
-                    <label id="priceLabel" for="priceElement">Price</label>
+                    <label id="priceLabel" for="priceElement" th:text="#{req.display.price}">Price</label>
                     <input type="text"
                            class="form-control"
                            id="priceElement"
@@ -79,23 +86,15 @@
 
                 <div class="form-group">
 
-                    <label id="SecondTypeLabel" for="state" class="col-form-label" >Select state</label>
+                    <label id="SecondTypeLabel" for="state" class="col-form-label" th:text="#{index.select_state}">Select state</label>
                     <select class="form-control" id="state" name="state" required>
-                        <option value="ACCEPTED">Accepted</option>
-                        <option value="COMPLETED">Completed</option>
-                        <option value="REJECTED">Rejected</option>
+                        <option value="ACCEPTED" th:text="#{state.accepted}">Accepted</option>
+                        <option value="COMPLETED" th:text="#{state.completed}">Completed</option>
+                        <option value="REJECTED" th:text="#{state.rejected}">Rejected</option>
                     </select>
                 </div>
 
-<!--                <div class="form-check">-->
-<!--                    <input type="checkbox"-->
-<!--                           class="form-check-input"-->
-<!--                           id="finishElement"-->
-<!--                           name="isFinished">-->
-<!--                    <label id="finishLabel" for="finishElement">Completed</label>-->
-<!--                </div>-->
-
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-success" th:text="#{global.submit}">
                     Submit
                 </button>
             </form>
@@ -104,8 +103,11 @@
 
     <div class = "userInfo" sec:authorize="hasAuthority('USER')">
 
-        Logged user: <span sec:authentication="name">Bob</span>
-        Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+        <span th:text="#{index.logged_user}">logged as:</span>
+        <span sec:authentication="name">Bob</span>
+        <span th:text="#{index.roles}">roles:</span>
+        <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+
     </div>
 
     <div class = "footer" style="margin-top: 20px">
@@ -115,7 +117,6 @@
         <a href="?lang=uk" th:text="#{lang.uk}">ukrainian</a>
     </div>
 </div>
-
 
 </body>
 </html>

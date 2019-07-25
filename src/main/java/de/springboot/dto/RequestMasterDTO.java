@@ -1,6 +1,5 @@
 package de.springboot.dto;
 
-import de.springboot.model.RequestState;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
