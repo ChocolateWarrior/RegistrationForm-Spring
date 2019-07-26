@@ -5,8 +5,11 @@
     <title>Registration Form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
 
+    <link rel="stylesheet" th:href="@{/css/style.css}" >
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+
+</head>
 
 <body>
 <div class = "container" style="margin-top: 60px">
@@ -29,8 +32,8 @@
                             <th th:text="#{req.display.finish_time}">finish time</th>
                             <th th:text="#{req.display.price}">price</th>
                             <th th:text="#{req.display.status}">status</th>
-                            <th >Rejection</th>
-                            <th >Edit</th>
+                            <th th:text="#{display.rejection}">Rejection</th>
+                            <th th:text="#{display.edit}">Edit</th>
 
                         </tr>
                         </thead>
@@ -58,13 +61,16 @@
                                 <form th:action="@{/request-display/reject/{id}(id=${r.id})}" method="post">
                                     <label for="rejectionMessageElement"></label>
                                     <input type="text" id="rejectionMessageElement" name="rejectionMessage">
-                                    <button style="margin-top: 10px" type="submit" class="btn btn-sm btn-secondary">Reject</button>
+                                    <button style="margin-top: 10px" type="submit"
+                                            class="btn btn-sm btn-secondary"
+                                            th:text="#{display.reject}">Reject</button>
                                 </form>
                             </td>
 
                             <td>
                                 <form th:action="@{/request-display/edit/{id}(id=${r.id})}" method="get">
-                                    <button type="submit" class="btn btn-sm btn-info">Edit</button>
+                                    <button type="submit" class="btn btn-sm btn-info"
+                                            th:text="#{display.edit}">Edit</button>
                                 </form>
                             </td>
                         </tr>

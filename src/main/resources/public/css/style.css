@@ -1,6 +1,8 @@
 
-h2, h3 {
+h1, h2, h3 {
     color: #FFFF30;
+    /*-webkit-text-stroke: 1px black;*/
+    /*font-weight: bolder;*/
 }
 
 body{
@@ -11,13 +13,21 @@ body{
     /*font-weight: lighter;*/
 
     background-size: cover;
-    background-image: url('../img/tools2.jpg');
+    background-image: url('../img/tools3.jpg');
 }
 
 .container {
     opacity: 0.9;
     width: 70%;
 
+}
+
+.form-group{
+    color: aliceblue;
+}
+
+.aboutLanguage{
+    color: aliceblue;
 }
 
 .nav{

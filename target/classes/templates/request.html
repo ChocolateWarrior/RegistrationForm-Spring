@@ -5,6 +5,9 @@
     <title>Request Form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" >
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
@@ -17,7 +20,7 @@
             <h5 class="text-success" th:text="${message}"></h5>
             <form style="margin-bottom: 30px" name="form" autocomplete="off" action="#" th:action="@{/request}" th:object="${request}" method="post">
                 <div class="form-group">
-                    <label id="TypeLabel" for="TypeElement">Select type</label>
+                    <label id="TypeLabel" for="TypeElement" th:text="#{req.select.type}">Select type</label>
                     <select class="form-control"
                             id="TypeElement"
                             th:field="*{specification}">

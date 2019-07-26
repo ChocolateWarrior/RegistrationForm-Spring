@@ -5,6 +5,8 @@
     <title>Registration Form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" >
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
 
 </head>
 
@@ -53,7 +55,7 @@
 
 </div>
 </div>
-<div class = "navigation">
+<div class = "navigation" style="margin-top: 20px">
     <ul class="nav nav-tabs nav-fill bg-light">
         <li class="nav-item">
             <a class="nav-link" href="/registration" th:text="#{login.reg_here}">register here</a>
