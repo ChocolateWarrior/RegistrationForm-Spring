@@ -14,11 +14,11 @@ import java.util.Set;
 @Builder
 @Entity
 @EqualsAndHashCode
-@SequenceGenerator(name="seq_user", initialValue = 1, allocationSize = 0)
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 public class User implements UserDetails {
 
     @Id
+    @SequenceGenerator(name="seq_user",  allocationSize = 0, sequenceName = "sequence_user_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_user")
     @Column(name = "id", nullable = false)
     private int id;

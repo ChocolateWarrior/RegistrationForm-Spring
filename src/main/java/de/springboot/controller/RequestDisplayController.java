@@ -41,7 +41,7 @@ public class RequestDisplayController {
                                 Model model, RejectionDTO dto) {
         requestDisplayService.setRequestRejection(requestId, dto.getRejectionMessage());
         model.addAttribute("all_requests", requestDisplayService.getAllRequests());
-        return "display_request";
+        return "redirect:/request-display";
     }
 
 
@@ -53,7 +53,7 @@ public class RequestDisplayController {
             requestDisplayService.setRequestMaster(requestId, userDisplayService.getUserById(dto.getMasterId()));
 
 
-        return "display_request";
+        return "redirect:/request-display";
     }
 
     @GetMapping("/request-display/edit/{id}")

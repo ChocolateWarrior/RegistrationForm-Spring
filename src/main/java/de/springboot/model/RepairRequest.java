@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,11 +17,11 @@ import java.util.Set;
 @Entity
 @EqualsAndHashCode
 @ToString
-@SequenceGenerator(name="seq_request", initialValue = 1, allocationSize = 0)
 @Table(name = "requests", uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
 public class RepairRequest {
 
     @Id
+    @SequenceGenerator(name="seq_request", allocationSize = 0, sequenceName = "sequence_request_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_request")
     @Column(name = "id", nullable = false, unique = true)
     private int id;

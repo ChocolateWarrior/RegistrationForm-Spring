@@ -36,7 +36,7 @@ public class UserDisplayController {
     @PostMapping("/user-display/remove/{id}")
     public String removeUser(@PathVariable("id") int userId) {
         userDisplayService.removeUser(userId);
-        return "display";
+        return "redirect:/user-display";
     }
 
     @PostMapping("/user-display/edit/{id}")
@@ -51,7 +51,7 @@ public class UserDisplayController {
             userDisplayService.setUserLogin(userId, dto.getLogin());
         if(!dto.getPassword().equals(""))
             userDisplayService.setUserPassword(userId, new BCryptPasswordEncoder().encode(dto.getPassword()));
-        return "display";
+        return "redirect:/user-display";
     }
 
     @GetMapping("/user-display/edit/{id}")
