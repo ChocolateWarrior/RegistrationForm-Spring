@@ -13,4 +13,5 @@ public class RequestMasterDTO {
 
     private BigDecimal price;
     private String state;
+    private int requestId;
 }

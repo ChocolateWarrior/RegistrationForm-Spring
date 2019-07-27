@@ -63,21 +63,21 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Specification> specifications;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "request_id")
-    private RepairRequest masterRequest;
-
 //    @ToString.Exclude
 //    @EqualsAndHashCode.Exclude
-//    @ManyToMany(cascade = {CascadeType.ALL})
-//    @JoinTable(
-//            name ="masters_requests",
-//            joinColumns = { @JoinColumn(name="master_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "request_id")}
-//    )
-//    Set<RepairRequest> masterRequests = new HashSet<>();
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "request_id")
+//    private RepairRequest masterRequest;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name ="masters_requests",
+            joinColumns = { @JoinColumn(name="master_id")},
+            inverseJoinColumns = {@JoinColumn(name = "request_id")}
+    )
+    Set<RepairRequest> masterRequests = new HashSet<>();
 
     @Override
     public boolean isAccountNonExpired() {
@@ -92,6 +92,10 @@ public class User implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
+    }
+
+    public void addMasterRequest(RepairRequest request){
+        masterRequests.add(request);
     }
 
 }

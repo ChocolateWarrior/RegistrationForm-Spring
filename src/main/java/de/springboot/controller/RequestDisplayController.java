@@ -48,9 +48,9 @@ public class RequestDisplayController {
     @PostMapping("/request-display/edit/{id}")
     public String editRequest(@PathVariable("id") int requestId, RequestEditDTO dto) {
 
-        userDisplayService.setMasterRequest(userDisplayService.getUserById(dto.getMasterId()), requestDisplayService.getRequestById(requestId));
+        userDisplayService.addMasterRequest(userDisplayService.getUserById(dto.getMasterId()), requestDisplayService.getRequestById(requestId));
         if(dto.getMasterId() != 0)
-            requestDisplayService.setRequestMaster(requestId, userDisplayService.getUserById(dto.getMasterId()));
+            requestDisplayService.addRequestMaster(requestId, userDisplayService.getUserById(dto.getMasterId()));
 
 
         return "redirect:/request-display";

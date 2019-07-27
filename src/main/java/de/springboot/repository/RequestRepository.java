@@ -12,6 +12,6 @@ import java.util.Set;
 public interface RequestRepository extends CrudRepository<RepairRequest, Long> {
     RepairRequest findById(int id);
     List<RepairRequest> findByUser(User user);
-    RepairRequest findByMaster(User master);
-//    List<RepairRequest> findByMasters
+//    RepairRequest findByMaster(User master);
+    List<RepairRequest> findByMasters(User master);
 }

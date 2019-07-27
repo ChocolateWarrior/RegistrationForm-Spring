@@ -32,16 +32,28 @@ public class MainPageService {
         return requestRepository.findByUser(user);
     }
 
-    public boolean hasMasterRequest(){
+//    public boolean hasMasterRequest(){
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User user = userRepository.findByUsername(authentication.getName());
+//        return user.getMasterRequest() != null;
+//    }
+
+    public boolean hasMasterRequests(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(authentication.getName());
-        return user.getMasterRequest() != null;
+        return user.getMasterRequests() != null;
     }
 
-    public RepairRequest getRequestByMaster(){
+//    public RepairRequest getRequestByMaster(){
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User user = userRepository.findByUsername(authentication.getName());
+//        return requestRepository.findById(user.getMasterRequest().getId());
+//    }
+
+    public List<RepairRequest> getRequestsByMaster(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(authentication.getName());
-        return requestRepository.findById(user.getMasterRequest().getId());
+        return requestRepository.findByMasters(user);
     }
 
     public BigDecimal getUserBalance(){

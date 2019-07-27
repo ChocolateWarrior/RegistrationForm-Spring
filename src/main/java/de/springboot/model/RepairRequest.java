@@ -33,15 +33,15 @@ public class RepairRequest {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToOne(mappedBy = "masterRequest", fetch = FetchType.LAZY)
-    private User master;
-
 //    @ToString.Exclude
 //    @EqualsAndHashCode.Exclude
-//    @ManyToMany(mappedBy = "masterRequests")
-//    private Set<User> masters = new HashSet<>();
+//    @OneToOne(mappedBy = "masterRequest", fetch = FetchType.LAZY)
+//    private User master;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(mappedBy = "masterRequests")
+    private Set<User> masters = new HashSet<>();
 
     @Column(name = "specification", nullable = false)
     private String specification;
@@ -66,5 +66,9 @@ public class RepairRequest {
 
     @Column(name = "state")
     private RequestState state;
+
+    public void addMaster(User master){
+        masters.add(master);
+    }
 
 }

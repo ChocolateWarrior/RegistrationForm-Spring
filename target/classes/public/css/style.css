@@ -16,6 +16,11 @@ body{
     background-image: url('../img/tools3.jpg');
 }
 
+table{
+
+    background-color: aliceblue;
+}
+
 .container {
     opacity: 0.9;
     width: 70%;

@@ -49,8 +49,15 @@
                                 th:value="${r.requestTime}"></td>
                             <td th:text="${r.user.getId()}"
                                 th:value="${r.user.getId()}"></td>
-                            <td th:text="${r.master?.getId()}"
-                                th:value="${r.master?.getId()}"></td>
+<!--                            <td th:text="${r.master?.getId()}"-->
+<!--                                th:value="${r.master?.getId()}"></td>-->
+                            <td th:each="m : ${r.masters}">
+<!--                                <span>NOW</span>-->
+                                <span th:text="${m.username}"
+                                      th:value="${m.username}">
+                                </span>
+                                EMPTY
+                            </td>
                             <td th:text="${r.finishTime}"
                                 th:value="${r.finishTime}"></td>
                             <td th:text="${r.price}"

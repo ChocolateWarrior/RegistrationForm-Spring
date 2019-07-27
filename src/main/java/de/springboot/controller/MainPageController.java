@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
@@ -35,17 +36,15 @@ public class MainPageController {
     @GetMapping("/main")
     public String showMain(Model model){
 
-        String master_request = "";
+        List<String> master_request_descriptions = new ArrayList<>();
+        List<RepairRequest> master_requests = mainPageService.getRequestsByMaster();
         List<RepairRequest> requests = mainPageService.getRequestsByUser();
-//        List<String> desc = new ArrayList<>();
-//        requests.forEach(el -> desc.add(el.getDescription()));
-
-        if(mainPageService.hasMasterRequest()) {
-            master_request = mainPageService.getRequestByMaster().getDescription();
+        if(mainPageService.hasMasterRequests()) {
+            master_requests.forEach(m-> master_request_descriptions.add(m.getDescription()));
         }
 
         model.addAttribute("balance", mainPageService.getUserBalance());
-        model.addAttribute("master_request", master_request);
+        model.addAttribute("master_requests", master_requests);
         model.addAttribute("user_requests", requests);
         model.addAttribute("paid", RequestState.PAID);
         model.addAttribute("completed", RequestState.COMPLETED);
@@ -70,13 +69,13 @@ public class MainPageController {
 
     @PostMapping("/main/edit")
     public String acceptRequest(RequestMasterDTO dto){
-        int requestId = mainPageService.getRequestByMaster().getId();
+//        int requestId = mainPageService.getRequestByMaster().getId();
         if(dto.getState().equals(RequestState.ACCEPTED.name()))
-            requestDisplayService.setRequestAccepted(requestId);
+            requestDisplayService.setRequestAccepted(dto.getRequestId());
         if(dto.getPrice() != null)
-            requestDisplayService.setRequestPrice(requestId, dto.getPrice());
+            requestDisplayService.setRequestPrice(dto.getRequestId(), dto.getPrice());
         if(dto.getState().equals(RequestState.COMPLETED.name()))
-            requestDisplayService.setRequestFinished(requestId);
+            requestDisplayService.setRequestFinished(dto.getRequestId());
 
         return "index";
     }

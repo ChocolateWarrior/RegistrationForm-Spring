@@ -63,8 +63,13 @@ public class UserDisplayService {
         userRepository.delete(user);
     }
 
-    public void setMasterRequest(User master, RepairRequest request){
-        master.setMasterRequest(request);
+//    public void setMasterRequest(User master, RepairRequest request){
+//        master.setMasterRequest(request);
+//        userRepository.save(master);
+//    }
+
+    public void addMasterRequest(User master, RepairRequest request){
+        master.addMasterRequest(request);
         userRepository.save(master);
     }
 
