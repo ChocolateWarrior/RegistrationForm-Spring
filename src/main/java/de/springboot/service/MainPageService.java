@@ -1,9 +1,11 @@
 package de.springboot.service;
 
 import de.springboot.model.RepairRequest;
+import de.springboot.model.RequestState;
 import de.springboot.model.User;
 import de.springboot.repository.RequestRepository;
 import de.springboot.repository.UserRepository;
+import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -58,6 +60,17 @@ public class MainPageService {
         userRepository.save(user);
     }
 
+    public void setPurchase(BigDecimal price, int requestId){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByUsername(authentication.getName());
+        user.setBalance(user.getBalance().subtract(price));
+        userRepository.save(user);
+
+        RepairRequest request = requestRepository.findById(requestId);
+        request.setState(RequestState.PAID);
+        requestRepository.save(request);
+
+    }
 //    public List<RepairRequest> getRequestsByMaster(){
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        User user = userRepository.findByUsername(authentication.getName());

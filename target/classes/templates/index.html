@@ -79,10 +79,20 @@
                             <br>
                             <span>Price: </span>
                             <span th:text="${request.price}" th:value="${request.price}"></span>
-                            <form action="#" th:action="@{/main/payment}">
+                            <br>
+                            <span>Status: </span>
+                            <span th:text="${request.state}" th:value="${request.state}">dd</span>
+
+                            <form action="#" th:action="@{/main/payment}" method="post" th:field="${paid}">
+                                <label>
+                                    <input name="requestPrice" th:value="${request.price}" hidden/>
+                                    <input name="requestId" th:value="${request.id}" hidden/>
+                                </label>
+                                <div th:if="${balance &gt; request.price}" th:unless="${request.state == paid}">
                                 <button type="submit" class="btn btn-primary">
                                     Pay
                                 </button>
+                                </div>
                             </form>
                         </li>
                     </ul>
@@ -110,7 +120,8 @@
             <form action="#" th:action="@{/main/edit}" method="post" style="margin-top: 30px">
                 <div class="form-group">
                     <label id="priceLabel" for="priceElement" th:text="#{req.display.price}">Price</label>
-                    <input type="text"
+                    <input type="number"
+                           min="0"
                            class="form-control"
                            id="priceElement"
                            name="price"

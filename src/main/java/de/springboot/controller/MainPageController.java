@@ -1,5 +1,6 @@
 package de.springboot.controller;
 
+import de.springboot.dto.PaymentDTO;
 import de.springboot.dto.RequestMasterDTO;
 import de.springboot.model.RepairRequest;
 import de.springboot.model.RequestState;
@@ -12,12 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Log4j2
 @Controller
-//@RequestMapping("/main")
+
 public class MainPageController {
 
     private final MainPageService mainPageService;
@@ -33,34 +34,32 @@ public class MainPageController {
     @GetMapping("/main")
     public String showMain(Model model){
 
-//        if(mainPageService.getUserBalance() != null)
-        model.addAttribute("balance", mainPageService.getUserBalance());
-
-        List<RepairRequest> requests = mainPageService.getRequestsByUser();
-        List<String> desc = new ArrayList<>();
-        requests.forEach(el -> desc.add(el.getDescription()));
-
-
         String master_request = "";
+        List<RepairRequest> requests = mainPageService.getRequestsByUser();
+//        List<String> desc = new ArrayList<>();
+//        requests.forEach(el -> desc.add(el.getDescription()));
 
-        if(mainPageService.hasMasterRequest())
+        if(mainPageService.hasMasterRequest()) {
             master_request = mainPageService.getRequestByMaster().getDescription();
+        }
 
+        model.addAttribute("balance", mainPageService.getUserBalance());
         model.addAttribute("master_request", master_request);
+        model.addAttribute("user_requests", requests);
+        model.addAttribute("paid", RequestState.PAID);
 
 //        List<RepairRequest> masterRequests = mainPageService.getRequestsByMaster();
 //        model.addAttribute("user_requests", desc);
-        model.addAttribute("user_requests", requests);
-
 
         return "index";
     }
 
-//    @PostMapping("main/payment")
-//    public String payForRequest(Model model){
-//
-//
-//    }
+    @PostMapping("main/payment")
+    public String payForRequest(PaymentDTO dto){
+        System.out.println(dto.getRequestPrice());
+        mainPageService.setPurchase(dto.getRequestPrice(), dto.getRequestId());
+        return "redirect:/main";
+    }
 
     @PostMapping("/main/edit")
     public String acceptRequest(RequestMasterDTO dto){
