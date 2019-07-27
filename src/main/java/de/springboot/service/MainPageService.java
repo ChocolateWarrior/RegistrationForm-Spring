@@ -71,6 +71,12 @@ public class MainPageService {
         requestRepository.save(request);
 
     }
+
+    public void setRequestComment(String comment, int requestId){
+        RepairRequest request = requestRepository.findById(requestId);
+        request.setComment(comment);
+        requestRepository.save(request);
+    }
 //    public List<RepairRequest> getRequestsByMaster(){
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        User user = userRepository.findByUsername(authentication.getName());

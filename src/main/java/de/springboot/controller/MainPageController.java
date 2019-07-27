@@ -1,5 +1,6 @@
 package de.springboot.controller;
 
+import de.springboot.dto.CommentDTO;
 import de.springboot.dto.PaymentDTO;
 import de.springboot.dto.RequestMasterDTO;
 import de.springboot.model.RepairRequest;
@@ -47,6 +48,7 @@ public class MainPageController {
         model.addAttribute("master_request", master_request);
         model.addAttribute("user_requests", requests);
         model.addAttribute("paid", RequestState.PAID);
+        model.addAttribute("completed", RequestState.COMPLETED);
 
 //        List<RepairRequest> masterRequests = mainPageService.getRequestsByMaster();
 //        model.addAttribute("user_requests", desc);
@@ -56,8 +58,13 @@ public class MainPageController {
 
     @PostMapping("main/payment")
     public String payForRequest(PaymentDTO dto){
-        System.out.println(dto.getRequestPrice());
         mainPageService.setPurchase(dto.getRequestPrice(), dto.getRequestId());
+        return "redirect:/main";
+    }
+
+    @PostMapping("main/comment")
+    public String leaveComment(CommentDTO dto){
+        mainPageService.setRequestComment(dto.getComment(), dto.getRequestId());
         return "redirect:/main";
     }
 
