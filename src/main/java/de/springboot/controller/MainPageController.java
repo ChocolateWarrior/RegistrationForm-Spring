@@ -32,6 +32,10 @@ public class MainPageController {
 
     @GetMapping("/main")
     public String showMain(Model model){
+
+//        if(mainPageService.getUserBalance() != null)
+        model.addAttribute("balance", mainPageService.getUserBalance());
+
         List<RepairRequest> requests = mainPageService.getRequestsByUser();
         List<String> desc = new ArrayList<>();
         requests.forEach(el -> desc.add(el.getDescription()));
@@ -45,10 +49,18 @@ public class MainPageController {
         model.addAttribute("master_request", master_request);
 
 //        List<RepairRequest> masterRequests = mainPageService.getRequestsByMaster();
-        model.addAttribute("user_requests", desc);
+//        model.addAttribute("user_requests", desc);
+        model.addAttribute("user_requests", requests);
+
 
         return "index";
     }
+
+//    @PostMapping("main/payment")
+//    public String payForRequest(Model model){
+//
+//
+//    }
 
     @PostMapping("/main/edit")
     public String acceptRequest(RequestMasterDTO dto){

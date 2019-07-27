@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" >
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="container" style="margin-top: 60px">
+
+    <div class = "balance_replenish" style="margin-top: 30px">
+        <h3 th:text="#{index.replenish}"> Balance replenish </h3>
+        <span th:text="#{balance}"></span>
+        <ul class="list-group" th:field="${balance}">
+            <li class="list-group-item "
+                th:text="${balance.doubleValue()}"
+                th:value="${balance.doubleValue()}">
+            </li>
+        </ul>
+
+        <form action="#" th:action="@{/balance}" method="post" style="margin-top: 30px">
+            <div class="form-group">
+                <label id="balanceLabel" for="balanceElement" th:text="#{balance}">Balance</label>
+                <input type="number"
+                       min="10"
+                       class="form-control"
+                       id="balanceElement"
+                       name="balance"
+                       th:placeholder="#{balance.replenish}">
+            </div>
+
+            <button type="submit" class="btn btn-success" th:text="#{balance.replenish}">
+                Submit
+            </button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

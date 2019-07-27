@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,6 +38,9 @@ public class User implements UserDetails {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name= "balance")
+    private BigDecimal balance;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

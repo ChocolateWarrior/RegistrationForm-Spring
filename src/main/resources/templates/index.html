@@ -47,20 +47,53 @@
 
 
     <div class="jumbotron">
+
+        <div class="user_balance" th:field="${balance}">
+            <span>BALANCE: </span>
+            <span th:text="${balance != null} ? ${balance} : '0'">some balance</span>
+            <span th:text="#{index.replenish}">Replenish</span>
+            <a href="/balance" th:text="#{index.here}">here.</a>
+        </div>
+
         <div class="user_requests">
             <h3 th:text="#{index.my_requests}">My requests</h3>
-            <ul class="list-group" th:field="${user_requests}">
-                <li class="list-group-item "
-                    th:each="request : ${user_requests} "
-                    th:text="${request}"
-                    th:value="${request}"></li>
+<!--            <ul class="list-group" th:field="${user_requests}">-->
+<!--                <li class="list-group-item "-->
+<!--                    th:each="request : ${user_requests} "-->
+<!--                    th:text="${request.description}"-->
+<!--                    th:value="${request.description}">-->
+<!--                    <span> Price: </span>-->
+<!--                    <span th:text="${request.price}"></span>-->
+<!--                </li>-->
+<!--            </ul>-->
+
+            <div class="UserRequestsInfo" th:field="${user_requests}">
+                <div th:each="request: ${user_requests}">
+                    <ul>
+                        <li>
+                            <span>Type:</span>
+                            <span th:text="${request.specification}" th:value="${request.specification}"></span>
+                            <br>
+                            <span>Description: </span>
+                            <span th:text="${request.description}" th:value="${request.description}"></span>
+                            <br>
+                            <span>Price: </span>
+                            <span th:text="${request.price}" th:value="${request.price}"></span>
+                            <form action="#" th:action="@{/main/payment}">
+                                <button type="submit" class="btn btn-primary">
+                                    Pay
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
 
                 <div th:if="${ #lists.isEmpty(user_requests)}">
                     <span th:text="#{index.no_requests}">No requests yet. Leave request</span>
                     <a href="/request" th:text="#{index.here}">here.</a>
                 </div>
+            </div>
 
-            </ul>
         </div>
 
         <div class = "master_request" sec:authorize="hasAuthority('MASTER')" style="margin-top: 30px">
@@ -77,7 +110,8 @@
             <form action="#" th:action="@{/main/edit}" method="post" style="margin-top: 30px">
                 <div class="form-group">
                     <label id="priceLabel" for="priceElement" th:text="#{req.display.price}">Price</label>
-                    <input type="text"
+                    <input type="number"
+                           min="0"
                            class="form-control"
                            id="priceElement"
                            name="price"

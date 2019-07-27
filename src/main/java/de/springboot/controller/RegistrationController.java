@@ -40,11 +40,11 @@ public class RegistrationController  {
 
 
         if(!dto.getSpecifications().isEmpty()){
-            System.out.println("MASTER");
+
             registrationService.createMaster(dto);
         }
         else {
-            System.out.println("USER");
+
             registrationService.createUser(dto);
         }
     }

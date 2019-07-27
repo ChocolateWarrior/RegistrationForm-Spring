@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -39,6 +40,22 @@ public class MainPageService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(authentication.getName());
         return requestRepository.findById(user.getMasterRequest().getId());
+    }
+
+    public BigDecimal getUserBalance(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByUsername(authentication.getName());
+        return user.getBalance();
+    }
+
+    public void addToUserBalance(BigDecimal value){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByUsername(authentication.getName());
+        if(user.getBalance() != null)
+            user.setBalance(user.getBalance().add(value));
+        else
+            user.setBalance(value);
+        userRepository.save(user);
     }
 
 //    public List<RepairRequest> getRequestsByMaster(){
