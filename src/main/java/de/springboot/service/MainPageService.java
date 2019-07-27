@@ -5,7 +5,6 @@ import de.springboot.model.RequestState;
 import de.springboot.model.User;
 import de.springboot.repository.RequestRepository;
 import de.springboot.repository.UserRepository;
-import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,23 +31,11 @@ public class MainPageService {
         return requestRepository.findByUser(user);
     }
 
-//    public boolean hasMasterRequest(){
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        User user = userRepository.findByUsername(authentication.getName());
-//        return user.getMasterRequest() != null;
-//    }
-
     public boolean hasMasterRequests(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(authentication.getName());
         return user.getMasterRequests() != null;
     }
-
-//    public RepairRequest getRequestByMaster(){
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        User user = userRepository.findByUsername(authentication.getName());
-//        return requestRepository.findById(user.getMasterRequest().getId());
-//    }
 
     public List<RepairRequest> getRequestsByMaster(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -89,12 +76,5 @@ public class MainPageService {
         request.setComment(comment);
         requestRepository.save(request);
     }
-//    public List<RepairRequest> getRequestsByMaster(){
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        User user = userRepository.findByUsername(authentication.getName());
-//        Set<RepairRequest> masterRequests= new HashSet<>()
-//
-//        return requestRepository.findById(user.getMasterRequests());
-//    }
 
 }

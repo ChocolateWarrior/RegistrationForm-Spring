@@ -57,15 +57,6 @@
 
         <div class="user_requests">
             <h3 th:text="#{index.my_requests}">My requests</h3>
-<!--            <ul class="list-group" th:field="${user_requests}">-->
-<!--                <li class="list-group-item "-->
-<!--                    th:each="request : ${user_requests} "-->
-<!--                    th:text="${request.description}"-->
-<!--                    th:value="${request.description}">-->
-<!--                    <span> Price: </span>-->
-<!--                    <span th:text="${request.price}"></span>-->
-<!--                </li>-->
-<!--            </ul>-->
 
             <div class="UserRequestsInfo" th:field="${user_requests}">
                 <div th:each="request: ${user_requests}">
@@ -88,7 +79,6 @@
                                     <input name="requestPrice" th:value="${request.price}" hidden/>
                                     <input name="requestId" th:value="${request.id}" hidden/>
                                 </label>
-                                <!--                               TODO fix th: unless request.state == completed-->
                                 <div th:if="${balance &gt; request.price}" th:unless="${request.state == paid || request.state == completed}">
                                 <button type="submit" class="btn btn-primary" th:text="#{global.pay}">
                                     Pay
@@ -124,7 +114,7 @@
 
         <div class = "master_request" sec:authorize="hasAuthority('MASTER')" style="margin-top: 30px" th:field="${master_requests}">
             <h3 th:text="#{index.my_requests.master}"> My request (Master) </h3>
-            <div th:each="request: ${master_requests}">
+            <div th:each="request: ${master_requests}" style="margin-top: 20px">
                 <ul class="list-group">
                     <li class="list-group-item "
                         th:text="${request.description}"
@@ -160,6 +150,7 @@
                     <button type="submit" class="btn btn-success" th:text="#{global.submit}">
                         Submit
                     </button>
+                    <hr>
                 </form>
             </div>
         </div>

@@ -18,8 +18,8 @@
         <span th:text="#{balance}"></span>
         <ul class="list-group" th:field="${balance}">
             <li class="list-group-item "
-                th:text="${balance.doubleValue()}"
-                th:value="${balance.doubleValue()}">
+                th:text="${balance != null ? balance.doubleValue() : 'balance is empty'}"
+                th:value="${balance != null ? balance.doubleValue() : 'balance is empty'}">
             </li>
         </ul>
 

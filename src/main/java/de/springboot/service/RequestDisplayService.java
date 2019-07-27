@@ -38,11 +38,6 @@ public class RequestDisplayService {
         return requestRepository.findById(requestId);
     }
 
-//    public void setRequestMaster(int requestId, User master){
-//        RepairRequest request = getRequestById(requestId);
-//        request.setMaster(master);
-//        requestRepository.save(request);
-//    }
 
     public void addRequestMaster(int requestId, User master){
         RepairRequest request = getRequestById(requestId);

@@ -33,11 +33,6 @@ public class RepairRequest {
     @JoinColumn(name = "user_id")
     private User user;
 
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
-//    @OneToOne(mappedBy = "masterRequest", fetch = FetchType.LAZY)
-//    private User master;
-
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "masterRequests")

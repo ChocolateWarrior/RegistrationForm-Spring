@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,21 +35,14 @@ public class MainPageController {
     @GetMapping("/main")
     public String showMain(Model model){
 
-        List<String> master_request_descriptions = new ArrayList<>();
         List<RepairRequest> master_requests = mainPageService.getRequestsByMaster();
         List<RepairRequest> requests = mainPageService.getRequestsByUser();
-        if(mainPageService.hasMasterRequests()) {
-            master_requests.forEach(m-> master_request_descriptions.add(m.getDescription()));
-        }
 
         model.addAttribute("balance", mainPageService.getUserBalance());
         model.addAttribute("master_requests", master_requests);
         model.addAttribute("user_requests", requests);
         model.addAttribute("paid", RequestState.PAID);
         model.addAttribute("completed", RequestState.COMPLETED);
-
-//        List<RepairRequest> masterRequests = mainPageService.getRequestsByMaster();
-//        model.addAttribute("user_requests", desc);
 
         return "index";
     }
@@ -69,7 +61,6 @@ public class MainPageController {
 
     @PostMapping("/main/edit")
     public String acceptRequest(RequestMasterDTO dto){
-//        int requestId = mainPageService.getRequestByMaster().getId();
         if(dto.getState().equals(RequestState.ACCEPTED.name()))
             requestDisplayService.setRequestAccepted(dto.getRequestId());
         if(dto.getPrice() != null)

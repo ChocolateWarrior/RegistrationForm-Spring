@@ -63,12 +63,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Specification> specifications;
 
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "request_id")
-//    private RepairRequest masterRequest;
-
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(cascade = {CascadeType.ALL})

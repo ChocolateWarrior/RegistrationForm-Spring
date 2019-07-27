@@ -3,9 +3,9 @@ package de.springboot.service;
 import de.springboot.model.RepairRequest;
 import de.springboot.model.User;
 import de.springboot.repository.UserRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,16 +57,10 @@ public class UserDisplayService {
         userRepository.save(user);
     }
 
-
     public void removeUser(int userId){
         User user = getUserById(userId);
         userRepository.delete(user);
     }
-
-//    public void setMasterRequest(User master, RepairRequest request){
-//        master.setMasterRequest(request);
-//        userRepository.save(master);
-//    }
 
     public void addMasterRequest(User master, RepairRequest request){
         master.addMasterRequest(request);
