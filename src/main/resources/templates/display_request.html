@@ -33,7 +33,7 @@
                             <th th:text="#{req.display.price}">price</th>
                             <th th:text="#{req.display.status}">status</th>
                             <th th:text="#{display.rejection}">Rejection</th>
-                            <th th:text="#{display.edit}">Edit</th>
+                            <th th:text="#{req.display.add_master}">Edit</th>
 
                         </tr>
                         </thead>
@@ -65,8 +65,11 @@
                                 th:value="${r.state}"></td>
                             <td >
                                 <form th:action="@{/request-display/reject/{id}(id=${r.id})}" method="post">
-                                    <label for="rejectionMessageElement"></label>
-                                    <input type="text" id="rejectionMessageElement" name="rejectionMessage">
+<!--                                    <label for="rejectionMessageElement"></label>-->
+                                    <input type="text" id="rejectionMessageElement"
+                                           name="rejectionMessage"
+                                           style="margin-bottom: 10px"
+                                           th:placeholder="#{display.rejection_type}">
                                     <button style="margin-top: 10px" type="submit"
                                             class="btn btn-sm btn-secondary"
                                             th:text="#{display.reject}">Reject</button>

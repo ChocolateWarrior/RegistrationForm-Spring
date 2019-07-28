@@ -5,6 +5,7 @@ h1, h2, h3 {
     /*font-weight: bolder;*/
 }
 
+
 body{
 
     font-family: 'Oswald', sans-serif;
@@ -18,7 +19,16 @@ body{
 
 table{
 
+    text-align: center;
     background-color: aliceblue;
+}
+
+hr{
+    border: 1px solid #292929;
+}
+
+.master_request_heading{
+    text-align: center;
 }
 
 .container {
@@ -27,11 +37,17 @@ table{
 
 }
 
-/*.form-group{*/
-/*    color: aliceblue;*/
-/*}*/
+.card-body{
+    color: #292929;
+}
+
+.form-group{
+    color: aliceblue;
+}
 
 .aboutLanguage{
+    margin-top: 15px;
+    margin-bottom: 30px;
     color: aliceblue;
 }
 
@@ -51,4 +67,13 @@ table{
 
 .userInfo {
     color: aliceblue;
+}
+
+.balance_replenish{
+    color: aliceblue;
+}
+
+
+.master_request {
+    color: #292929;
 }

@@ -15,17 +15,17 @@
 
     <div class = "balance_replenish" style="margin-top: 30px">
         <h3 th:text="#{index.replenish}"> Balance replenish </h3>
-        <span th:text="#{balance}"></span>
-        <ul class="list-group" th:field="${balance}">
-            <li class="list-group-item "
+        <h4 th:text="#{balance}"></h4>
+        <div class="balance" th:field="${balance}">
+            <span
                 th:text="${balance != null ? balance.doubleValue() : 'balance is empty'}"
                 th:value="${balance != null ? balance.doubleValue() : 'balance is empty'}">
-            </li>
-        </ul>
+            </span>
+        </div>
 
         <form action="#" th:action="@{/balance}" method="post" style="margin-top: 30px">
             <div class="form-group">
-                <label id="balanceLabel" for="balanceElement" th:text="#{balance}">Balance</label>
+                <label id="balanceLabel" for="balanceElement" th:text="#{balance.replenishment}">Balance</label>
                 <input type="number"
                        min="10"
                        class="form-control"
@@ -38,6 +38,13 @@
                 Submit
             </button>
         </form>
+    </div>
+
+    <div class = "aboutLanguage" style="margin-top: 20px">
+        <span th:text="#{lang.change}"></span>:
+        <a href="?lang=en" th:text="#{lang.en}">english</a>
+        /
+        <a href="?lang=uk" th:text="#{lang.uk}">ukrainian</a>
     </div>
 
 </div>

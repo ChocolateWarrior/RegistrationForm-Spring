@@ -45,12 +45,11 @@
     </div>
 
 
-
     <div class="jumbotron">
-
         <div class="user_balance" th:field="${balance}">
-            <span>BALANCE: </span>
+            <span th:text="#{balance.user}">BALANCE: </span>
             <span th:text="${balance != null} ? ${balance} : '0'">some balance</span>
+            <br>
             <span th:text="#{index.replenish}">Replenish</span>
             <a href="/balance" th:text="#{index.here}">here.</a>
         </div>
@@ -62,16 +61,16 @@
                 <div th:each="request: ${user_requests}">
                     <ul>
                         <li>
-                            <span>Type:</span>
+                            <span th:text="#{index.type}">Type:</span>
                             <span th:text="${request.specification}" th:value="${request.specification}"></span>
                             <br>
-                            <span>Description: </span>
+                            <span th:text="#{index.description}">Description: </span>
                             <span th:text="${request.description}" th:value="${request.description}"></span>
                             <br>
-                            <span>Price: </span>
+                            <span th:text="#{index.price}">Price: </span>
                             <span th:text="${request.price}" th:value="${request.price}"></span>
                             <br>
-                            <span>Status: </span>
+                            <span th:text="#{index.status}">Status: </span>
                             <span th:text="${request.state}" th:value="${request.state}">dd</span>
 
                             <form action="#" th:action="@{/main/payment}" method="post" th:field="${paid}" >
@@ -115,41 +114,49 @@
         <div class = "master_request" sec:authorize="hasAuthority('MASTER')" style="margin-top: 30px" th:field="${master_requests}">
             <h3 th:text="#{index.my_requests.master}"> My request (Master) </h3>
             <div th:each="request: ${master_requests}" style="margin-top: 20px">
-                <ul class="list-group">
-                    <li class="list-group-item "
-                        th:text="${request.description}"
-                        th:value="${request.description}">
-                    </li>
-                </ul>
+                <div class="master_request_heading">
+                    <ul class="list-group">
+                        <li class="list-group-item "
+                            th:text="${request.description}"
+                            th:value="${request.description}">
+                        </li>
+                    </ul>
+                </div>
 
                 <form action="#" th:action="@{/main/edit}" method="post" style="margin-top: 30px">
-                    <label>
-                        <input name="requestId" th:value="${request.id}" hidden/>
-                    </label>
-                    <div class="form-group">
-                        <label id="priceLabel" for="priceElement" th:text="#{req.display.price}">Price</label>
-                        <input type="number"
-                               min="0"
-                               class="form-control"
-                               id="priceElement"
-                               name="price"
-                               placeholder="Set price">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input name="requestId" th:value="${request.id}" hidden/>
+                            <span class="form-heading" th:text="#{req.display.price}">price</span>
+                            <div class="form-group">
+                                <label id="priceLabel" for="priceElement"></label>
+                                <input type="number"
+                                       min="0"
+                                       class="form-control"
+                                       id="priceElement"
+                                       name="price"
+                                       th:placeholder="#{index.set_price}">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <span class="form-heading" th:text="#{index.select_state}">Select state</span>
+                            <div class="form-group">
+                                <label id="SecondTypeLabel" for="state" class="col-form-label"></label>
+                                <select class="form-control" id="state" name="state" required>
+                                    <option value="ACCEPTED" th:text="#{state.accepted}">Accepted</option>
+                                    <option value="COMPLETED" th:text="#{state.completed}">Completed</option>
+                                    <option value="REJECTED" th:text="#{state.rejected}">Rejected</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <button type="submit" class="btn btn-success" th:text="#{global.submit}">
+                                Submit
+                            </button>
+                        </div>
                     </div>
-
-
-                    <div class="form-group">
-
-                        <label id="SecondTypeLabel" for="state" class="col-form-label" th:text="#{index.select_state}">Select state</label>
-                        <select class="form-control" id="state" name="state" required>
-                            <option value="ACCEPTED" th:text="#{state.accepted}">Accepted</option>
-                            <option value="COMPLETED" th:text="#{state.completed}">Completed</option>
-                            <option value="REJECTED" th:text="#{state.rejected}">Rejected</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="btn btn-success" th:text="#{global.submit}">
-                        Submit
-                    </button>
                     <hr>
                 </form>
             </div>
@@ -165,7 +172,7 @@
 
     </div>
 
-    <div class = "footer" style="margin-top: 20px">
+    <div class = "aboutLanguage" style="margin-top: 20px">
         <span th:text="#{lang.change}"></span>:
         <a href="?lang=en" th:text="#{lang.en}">english</a>
         /

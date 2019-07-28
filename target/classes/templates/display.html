@@ -18,7 +18,7 @@
         <div class = "row">
             <div class = "col-md-12">
                 <div class = "panel panel-default">
-                    <div class = "panel-heading" th:text="#{display.users}">Users</div>
+                    <h3 class = "panel-heading" th:text="#{display.users}">Users</h3>
                     <div class = "panel-body">
                         <form action="#" th:action="@{/user-display}" method="get">
 
@@ -58,51 +58,6 @@
                                                 th:text="#{display.edit}">Edit</button>
                                     </form>
                                 </td>
-<!--                                <td><form th:action="@{/user-display/edit/{id}(id=${u.id})}" th:object="${user_dto}" method="post">-->
-<!--                                    <div class="form-group">-->
-<!--                                        <label id="firsNameInputLabel" for="firstNameExampleElement" th:text="#{reg.first_name}">first name</label>-->
-<!--                                        <input type="text"-->
-<!--                                               class="form-control"-->
-<!--                                               id="firstNameExampleElement"-->
-<!--                                               th:placeholder="#{reg.enter.first_name}">-->
-<!--&lt;!&ndash;                                               th:field="*{firstName}">&ndash;&gt;-->
-<!--&lt;!&ndash;                                               required>&ndash;&gt;-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group">-->
-<!--                                        <label id="lastNameInputLabel" for="lastNameExampleElement" th:text="#{reg.last_name}">last name</label>-->
-<!--                                        <input type="text"-->
-<!--                                               class="form-control"-->
-<!--                                               id="lastNameExampleElement"-->
-<!--                                               th:placeholder="#{reg.enter.last_name}">-->
-<!--&lt;!&ndash;                                               th:field="*{lastName}"&ndash;&gt;-->
-<!--&lt;!&ndash;                                               required>&ndash;&gt;-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group">-->
-<!--                                        <label id="loginInputLabel" for="loginExampleElement" th:text="#{reg.login}">login</label>-->
-<!--                                        <input type="text"-->
-<!--                                               class="form-control"-->
-<!--                                               id="loginExampleElement"-->
-<!--                                               th:placeholder="#{reg.enter.login}">-->
-<!--&lt;!&ndash;                                               th:field="*{login}"&ndash;&gt;-->
-<!--&lt;!&ndash;                                               required>&ndash;&gt;-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group">-->
-<!--                                        <label id="passwordInputLabel" for="passwordExampleElement" th:text="#{reg.password}">password</label>-->
-<!--                                        <input type="text"-->
-<!--                                               class="form-control"-->
-<!--                                               id="passwordExampleElement"-->
-<!--                                               th:placeholder="#{reg.enter.password}">-->
-<!--&lt;!&ndash;                                               th:field="*{password}"&ndash;&gt;-->
-<!--&lt;!&ndash;                                               required>&ndash;&gt;-->
-<!--                                    </div>-->
-<!--                                    <button type="submit" class="btn btn-success" style="margin-top:30px" th:text="#{reg.register}">-->
-<!--                                        register-->
-<!--                                    </button>-->
-<!--&lt;!&ndash;                                    <div class="modal-footer">&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <button type="submit" class="btn btn-primary">Edit</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
-<!--                                </form></td>-->
                             </tr>
                             </tbody>
 
@@ -114,6 +69,17 @@
                     </div>
 
                 </div>
+            </div>
+        </div>
+        <div class = "footer" style="margin-top: 20px">
+            <div class="aboutLanguage">
+                <span th:text="#{lang.change}"></span>:
+                <a href="?lang=en" th:text="#{lang.en}">english</a>
+                /
+                <a href="?lang=uk" th:text="#{lang.uk}">ukrainian</a>
+            </div>
+            <div class="footer_bar">
+                <a href="/main" th:text="#{main.return}">main</a>
             </div>
         </div>
     </div>
