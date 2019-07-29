@@ -40,9 +40,11 @@ public class RegistrationController
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public String executeRegistration(RegistrationDTO dto, Model model) throws LoginNotUniqueException {
+        model.addAttribute("all_specifications", Specification.values());
         model.addAttribute("message", messageSource.getMessage("reg.success",
                 null,
                 LocaleContextHolder.getLocale()));
+
 
         if(!(dto.getSpecifications()==null)){
             registrationService.createMaster(dto);

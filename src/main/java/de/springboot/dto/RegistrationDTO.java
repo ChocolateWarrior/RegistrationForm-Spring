@@ -18,10 +18,4 @@ public class RegistrationDTO {
     private String password;
     private Set<Specification> specifications;
 
-    public RegistrationDTO(String firstName, String lastName, String login, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.login = login;
-        this.password = password;
-    }
 }
