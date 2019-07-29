@@ -19,8 +19,9 @@
         <div class="col-md-8 col-md-offset-2">
             <h2 class="page-header" th:text="#{reg.header}">Registration Form</h2>
 
-            <h5 class="text-success" th:text="${message}"></h5>
-            <form style="margin-bottom: 30px" action="#" th:action="@{/registration}" name="form" autocomplete="off" th:object="${master}" method="post">
+            <form style="margin-bottom: 30px" action="#" th:action="@{/registration}" name="form" autocomplete="off" method="post">
+                <h5 class="text-success" th:text="${message}"></h5>
+                <h5 class="text-danger" th:text="${error_message}"></h5>
                 <div class="form-group">
                     <label id="firsNameInputLabel" for="firstNameExampleElement" th:text="#{reg.first_name}">
                         first name
@@ -28,7 +29,7 @@
                     <input type="text"
                            class="form-control"
                            id="firstNameExampleElement"
-                           th:field="*{firstName}"
+                           name="firstName"
                            th:placeholder="#{reg.enter.first_name}"
                            required>
                 </div>
@@ -39,7 +40,7 @@
                     <input type="text"
                            class="form-control"
                            id="lastNameExampleElement"
-                           th:field="*{lastName}"
+                           name="lastName"
                            th:placeholder="#{reg.enter.last_name}"
                            required>
                 </div>
@@ -50,7 +51,7 @@
                     <input type="text"
                            class="form-control"
                            id="loginExampleElement"
-                           th:field="*{login}"
+                           name="login"
                            th:placeholder="#{reg.enter.login}"
                            required>
                 </div>
@@ -62,7 +63,7 @@
                     <input type="text"
                            class="form-control"
                            id="passwordExampleElement"
-                           th:field="*{password}"
+                           name="password"
                            th:placeholder="#{reg.enter.password}"
                            required>
                 </div>
@@ -71,7 +72,7 @@
 
                     <label id="SecondTypeLabel" for="specification"
                            class="col-form-label" th:text="#{reg.select.specification}">Select specification</label>
-                    <select multiple class="form-control" id="specification" th:field="*{specifications}">
+                    <select multiple class="form-control" id="specification" name="specifications">
                         <option value="" th:each="specifications : ${all_specifications} "
                                 th:text="${specifications}"
                                 th:value="${specifications}">

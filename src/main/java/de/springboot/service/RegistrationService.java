@@ -2,6 +2,7 @@ package de.springboot.service;
 
 import de.springboot.dto.RegistrationDTO;
 import de.springboot.exceptions.LoginMismatchException;
+import de.springboot.exceptions.LoginNotUniqueException;
 import de.springboot.model.Role;
 import de.springboot.model.User;
 import de.springboot.repository.UserRepository;
@@ -37,9 +38,9 @@ public class RegistrationService implements UserDetailsService{
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void createUser(RegistrationDTO dto){
+    public void createUser(RegistrationDTO dto) throws LoginNotUniqueException {
 
-        try {
+        try{
             User userToAdd = User.builder()
                     .firstName(dto.getFirstName())
                     .lastName(dto.getLastName())
@@ -52,16 +53,16 @@ public class RegistrationService implements UserDetailsService{
             userRepository.save(userToAdd);
             log.info("User saved successfully!");
 
-        } catch(DataIntegrityViolationException e){
-            log.error("Login not unique: " + dto.getLogin());
-            throw new LoginMismatchException(messageSource.getMessage(
-                    "users.registration.login.not_unique",
+        }catch(DataIntegrityViolationException exception){
+            log.warn("Login not unique: " + dto.getLogin());
+            throw new LoginNotUniqueException(messageSource.getMessage(
+                    "reg.login_not_unique",
                     null,
-                    LocaleContextHolder.getLocale()) + dto.getLogin(), e);
+                    LocaleContextHolder.getLocale()) + dto.getLogin(), exception);
         }
     }
 
-    public void createMaster(RegistrationDTO dto){
+    public void createMaster(RegistrationDTO dto) throws LoginNotUniqueException {
 
         Set<Role> roles = new HashSet<>();
         roles.add(Role.MASTER);
@@ -82,8 +83,8 @@ public class RegistrationService implements UserDetailsService{
 
         } catch(DataIntegrityViolationException e){
             log.error("Login not unique: " + dto.getLogin());
-            throw new LoginMismatchException(messageSource.getMessage(
-                    "users.registration.login.not_unique",
+            throw new LoginNotUniqueException(messageSource.getMessage(
+                    "reg.login_not_unique",
                     null,
                     LocaleContextHolder.getLocale()) + dto.getLogin(), e);
         }

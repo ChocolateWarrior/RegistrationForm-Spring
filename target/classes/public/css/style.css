@@ -11,8 +11,6 @@ body{
     font-family: 'Oswald', sans-serif;
     font-size: 22px;
 
-    /*font-weight: lighter;*/
-
     background-size: cover;
     background-image: url('../img/tools3.jpg');
 }
@@ -57,7 +55,6 @@ hr{
 
 .jumbotron {
     margin-top: 30px;
-    /*color: #292929;*/
 }
 
 
@@ -78,4 +75,6 @@ hr{
     color: #292929;
 }
 
-.form-group.
+.error-body. {
+    color: indianred;
+}

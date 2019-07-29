@@ -1,10 +1,12 @@
 package de.springboot;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@Log4j2
 @Controller
 @SpringBootApplication
 public class Application {
@@ -13,12 +15,15 @@ public class Application {
     }
 
     @GetMapping("/")
-    public String showDefault(){return "index";}
+    public String showDefault(){return "redirect:/main";}
 
-    @GetMapping("/display")
-    public String showUsers() {
-        return "display";
+    @GetMapping("/error")
+    public String handleError() {
+        //do something like logging
+        log.warn("Error occurred");
+        return "error";
     }
 
-
 }
+
+
