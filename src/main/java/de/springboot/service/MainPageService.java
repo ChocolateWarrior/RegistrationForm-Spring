@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -49,6 +50,7 @@ public class MainPageService {
         return user.getBalance();
     }
 
+    @Transactional
     public void addToUserBalance(BigDecimal value){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(authentication.getName());
@@ -59,6 +61,7 @@ public class MainPageService {
         userRepository.save(user);
     }
 
+    @Transactional
     public void setPurchase(BigDecimal price, int requestId){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(authentication.getName());

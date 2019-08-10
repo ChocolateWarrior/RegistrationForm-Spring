@@ -78,7 +78,8 @@
                                     <input name="requestPrice" th:value="${request.price}" hidden/>
                                     <input name="requestId" th:value="${request.id}" hidden/>
                                 </label>
-                                <div th:if="${balance &gt; request.price}" th:unless="${request.state == paid || request.state == completed}">
+                                <div th:if="${balance &gt; request.price}" th:unless="${request.state == paid ||
+                                 request.state == completed || request.price == null}">
                                 <button type="submit" class="btn btn-primary" th:text="#{global.pay}">
                                     Pay
                                 </button>

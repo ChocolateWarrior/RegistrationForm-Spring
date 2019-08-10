@@ -12,7 +12,10 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @Log4j2
@@ -32,19 +35,20 @@ public class RegistrationController
     }
 
     @GetMapping
-    public String getRegistrationForm(Model model){
+    public String getRegistrationForm(@ModelAttribute("user") RegistrationDTO dto, Model model){
         model.addAttribute("all_specifications", Specification.values());
         return "registration";
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public String executeRegistration(RegistrationDTO dto, Model model) throws LoginNotUniqueException {
-        model.addAttribute("all_specifications", Specification.values());
-        model.addAttribute("message", messageSource.getMessage("reg.success",
-                null,
-                LocaleContextHolder.getLocale()));
+    public String executeRegistration(@ModelAttribute("user") @Valid RegistrationDTO dto,
+                                      BindingResult bindingResult, Model model) throws LoginNotUniqueException {
 
+        model.addAttribute("all_specifications", Specification.values());
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
 
         if(!(dto.getSpecifications()==null)){
             registrationService.createMaster(dto);
@@ -54,6 +58,10 @@ public class RegistrationController
             registrationService.createUser(dto);
             log.info("Created user");
         }
+
+        model.addAttribute("message", messageSource.getMessage("reg.success",
+                null,
+                LocaleContextHolder.getLocale()));
 
         return "registration";
     }
@@ -65,7 +73,6 @@ public class RegistrationController
 
         return "registration";
     }
-
 
 
     @Override
