@@ -121,45 +121,18 @@
                             th:text="${request.description}"
                             th:value="${request.description}">
                         </li>
+                        <li class="list-group-item "
+                            th:text="${request.state}"
+                            th:value="${request.state}">
+                        </li>
                     </ul>
+
+                    <form th:action="@{/main/complete}" method="post">
+                        <input name="requestId" th:value="${request.id}" hidden/>
+                        <button class="btn-success" th:text="#{global.comlete}"></button>
+                    </form>
+
                 </div>
-
-                <form action="#" th:action="@{/main/edit}" method="post" style="margin-top: 30px">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <input name="requestId" th:value="${request.id}" hidden/>
-                            <span class="form-heading" th:text="#{req.display.price}">price</span>
-                            <div class="form-group">
-                                <label id="priceLabel" for="priceElement"></label>
-                                <input type="number"
-                                       min="0"
-                                       class="form-control"
-                                       id="priceElement"
-                                       name="price"
-                                       th:placeholder="#{index.set_price}">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <span class="form-heading" th:text="#{index.select_state}">Select state</span>
-                            <div class="form-group">
-                                <label id="SecondTypeLabel" for="state" class="col-form-label"></label>
-                                <select class="form-control" id="state" name="state" required>
-                                    <option value="ACCEPTED" th:text="#{state.accepted}">Accepted</option>
-                                    <option value="COMPLETED" th:text="#{state.completed}">Completed</option>
-                                    <option value="REJECTED" th:text="#{state.rejected}">Rejected</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <button type="submit" class="btn btn-success" th:text="#{global.submit}">
-                                Submit
-                            </button>
-                        </div>
-                    </div>
-                    <hr>
-                </form>
             </div>
         </div>
     </div>

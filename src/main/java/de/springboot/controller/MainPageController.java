@@ -58,15 +58,9 @@ public class MainPageController {
         return "redirect:/main";
     }
 
-    @PostMapping("/main/edit")
-    public String acceptRequest(RequestMasterDTO dto){
-        if(dto.getState().equals(RequestState.ACCEPTED.name()))
-            requestDisplayService.setRequestAccepted(dto.getRequestId());
-        if(dto.getPrice() != null)
-            requestDisplayService.setRequestPrice(dto.getRequestId(), dto.getPrice());
-        if(dto.getState().equals(RequestState.COMPLETED.name()))
-            requestDisplayService.setRequestFinished(dto.getRequestId());
-
+    @PostMapping("/main/complete")
+    public String completeRequest(RequestMasterDTO dto){
+        requestDisplayService.setRequestComplete(dto.getRequestId());
         return "index";
     }
 }

@@ -20,71 +20,80 @@
                 <div class = "panel-body">
                     <form action="#" th:action="@{/request-display}" method="get">
 
-                    <table class = "table table-bordered table-hover table-responsive" th:field="${all_requests}" style="text-align: center">
-                        <thead class ="thead-dark">
-                        <tr>
-                            <th th:text="#{req.display.id}">id</th>
-                            <th th:text="#{req.display.type}">type</th>
-                            <th th:text="#{req.display.description}">desc</th>
-                            <th th:text="#{req.display.req_time}">request time</th>
-                            <th th:text="#{req.display.user_id}">user id</th>
-                            <th th:text="#{req.display.master_id}">master id</th>
-                            <th th:text="#{req.display.finish_time}">finish time</th>
-                            <th th:text="#{req.display.price}">price</th>
-                            <th th:text="#{req.display.status}">status</th>
-                            <th th:text="#{display.rejection}">Rejection</th>
-                            <th th:text="#{req.display.add_master}">Edit</th>
+                        <ul class ="list-group" th:field="${all_requests}" style="text-align: left">
+                            <li class="list-group-item" th:each="r : ${all_requests}">
 
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="r : ${all_requests}">
-                            <td th:text="${r.id}"
-                                th:value="${r.id}"></td>
-                            <td th:text="${r.specification}"
-                                th:value="${r.specification}"></td>
-                            <td th:text="${r.description}"
-                                th:value="${r.description}"></td>
-                            <td th:text="${r.requestTime}"
-                                th:value="${r.requestTime}"></td>
-                            <td th:text="${r.user.getId()}"
-                                th:value="${r.user.getId()}"></td>
+                                <span th:text="#{req.display.id}">id</span>
+                                <span th:text="${r.id}"
+                                      th:value="${r.id}"></span>
+                                <br>
 
-                            <td>
-                                <div th:each="m : ${r.masters}">
-                                    <p th:text="${m.username}"
-                                       th:value="${m.username}">
-                                    </p>
+                                <span th:text="#{req.display.type}">type</span>
+                                <span th:text="${r.specification}"
+                                      th:value="${r.specification}"></span>
+                                <br>
+
+                                <span th:text="#{req.display.description}">desc</span>
+                                <span th:text="${r.description}"
+                                      th:value="${r.description}"></span>
+                                <br>
+
+                                <span th:text="#{req.display.req_time}">request time</span>
+                                <span th:text="${r.requestTime}"
+                                      th:value="${r.requestTime}"></span>
+                                <br>
+
+                                <span th:text="#{req.display.user_id}">user id</span>
+                                <span th:text="${r.user.getId()}"
+                                      th:value="${r.user.getId()}"></span>
+                                <br>
+
+                                <span th:text="#{req.display.master_id}">master uname</span>
+                                <span>
+                                    <div th:each="m : ${r.masters}">
+                                        <p th:text="${m.username}"
+                                           th:value="${m.username}">
+                                        </p>
+                                    </div>
+                                </span>
+                                <br>
+
+                                <span th:text="#{req.display.finish_time}">finish time</span>
+                                <span th:text="${r.finishTime}"
+                                      th:value="${r.finishTime}"></span>
+                                <br>
+
+                                <span th:text="#{req.display.price}">price</span>
+                                <span th:text="${r.price}"
+                                      th:value="${r.price}"></span>
+                                <br>
+
+                                <span th:text="#{req.display.status}">status</span>
+                                <span th:text="${r.state}"
+                                      th:value="${r.state}"></span>
+                                <br>
+
+                                <div >
+                                    <form th:action="@{/request-display/reject/{id}(id=${r.id})}" method="post">
+                                        <input type="text" id="rejectionMessageElement"
+                                               name="rejectionMessage"
+                                               style="margin-bottom: 10px"
+                                               th:placeholder="#{display.rejection_type}">
+                                        <button type="submit"
+                                                class="btn btn-sm btn-secondary"
+                                                th:text="#{display.reject}">Reject</button>
+                                    </form>
                                 </div>
-                            </td>
-                            <td th:text="${r.finishTime}"
-                                th:value="${r.finishTime}"></td>
-                            <td th:text="${r.price}"
-                                th:value="${r.price}"></td>
-                            <td th:text="${r.state}"
-                                th:value="${r.state}"></td>
-                            <td >
-                                <form th:action="@{/request-display/reject/{id}(id=${r.id})}" method="post">
-<!--                                    <label for="rejectionMessageElement"></label>-->
-                                    <input type="text" id="rejectionMessageElement"
-                                           name="rejectionMessage"
-                                           style="margin-bottom: 10px"
-                                           th:placeholder="#{display.rejection_type}">
-                                    <button style="margin-top: 10px" type="submit"
-                                            class="btn btn-sm btn-secondary"
-                                            th:text="#{display.reject}">Reject</button>
-                                </form>
-                            </td>
 
-                            <td>
-                                <form th:action="@{/request-display/edit/{id}(id=${r.id})}" method="get">
-                                    <button type="submit" class="btn btn-sm btn-info"
-                                            th:text="#{display.edit}">Edit</button>
-                                </form>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                                <div>
+                                    <form th:action="@{/request-display/edit/{id}(id=${r.id})}" method="get">
+                                        <button type="submit" class="btn btn-sm btn-info"
+                                                th:text="#{display.edit}">Edit</button>
+                                    </form>
+                                </div>
+
+                            </li>
+                        </ul>
                     </form>
                 </div>
             </div>

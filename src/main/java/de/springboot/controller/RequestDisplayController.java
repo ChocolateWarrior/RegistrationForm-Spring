@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Objects;
 
 @Log4j2
 @Controller
@@ -48,13 +49,18 @@ public class RequestDisplayController {
     @PostMapping("/request-display/edit/{id}")
     public String editRequest(@PathVariable("id") int requestId, RequestEditDTO dto) {
 
-        userDisplayService.addMasterRequest(userDisplayService.getUserById(dto.getMasterId()), requestDisplayService.getRequestById(requestId));
+        userDisplayService.addMasterRequest(userDisplayService.getUserById(dto.getMasterId()),
+                requestDisplayService.getRequestById(requestId));
+        if(Objects.nonNull(dto.getPrice()))
+            requestDisplayService.setRequestPrice(requestId, dto.getPrice());
+
         if(dto.getMasterId() != 0)
             requestDisplayService.addRequestMaster(requestId, userDisplayService.getUserById(dto.getMasterId()));
 
 
         return "redirect:/request-display";
     }
+
 
     @GetMapping("/request-display/edit/{id}")
     public String getEditPage(@PathVariable("id") int requestId, Model model){
