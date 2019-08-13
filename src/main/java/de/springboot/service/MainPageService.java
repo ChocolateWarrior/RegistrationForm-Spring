@@ -32,12 +32,6 @@ public class MainPageService {
         return requestRepository.findByUser(user);
     }
 
-    public boolean hasMasterRequests(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByUsername(authentication.getName());
-        return user.getMasterRequests() != null;
-    }
-
     public List<RepairRequest> getRequestsByMaster(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(authentication.getName());

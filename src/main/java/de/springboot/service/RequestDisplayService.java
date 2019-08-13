@@ -30,10 +30,6 @@ public class RequestDisplayService {
         return res;
     }
 
-    public void removeRequest(RepairRequest request){
-        requestRepository.delete(request);
-    }
-
     public RepairRequest getRequestById(int requestId){
         return requestRepository.findById(requestId);
     }
@@ -61,19 +57,6 @@ public class RequestDisplayService {
         RepairRequest request = getRequestById(requestId);
         request.setState(RequestState.REJECTED);
         request.setRejectionMessage(message);
-        requestRepository.save(request);
-    }
-
-    public void setRequestAccepted(int requestId){
-        RepairRequest request = getRequestById(requestId);
-        request.setState(RequestState.ACCEPTED);
-        requestRepository.save(request);
-    }
-
-    public void setRequestFinished(int requestId){
-        RepairRequest request = getRequestById(requestId);
-        request.setFinishTime(LocalDateTime.now());
-        request.setState(RequestState.COMPLETED);
         requestRepository.save(request);
     }
 

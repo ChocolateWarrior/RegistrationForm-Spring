@@ -28,19 +28,6 @@ public class RequestService {
         this.userRepository=userRepository;
     }
 
-    public List<RepairRequest> getAll(){
-        List<RepairRequest> requests = new ArrayList<>();
-        requestRepository.findAll().forEach(requests::add);
-        return requests;
-    }
-
-    public void removeRequest(RepairRequest request){
-        requestRepository.delete(request);
-    }
-
-    public RepairRequest getRequestById(int id){
-        return requestRepository.findById(id);
-    }
 
     public void pushRequest(RequestDTO dto){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -1,7 +1,6 @@
 package de.springboot.service;
 
 import de.springboot.dto.RegistrationDTO;
-import de.springboot.exceptions.LoginMismatchException;
 import de.springboot.exceptions.LoginNotUniqueException;
 import de.springboot.model.Role;
 import de.springboot.model.User;
@@ -38,7 +37,7 @@ public class RegistrationService implements UserDetailsService{
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void createUser(RegistrationDTO dto) throws LoginNotUniqueException {
+    public void createUser(RegistrationDTO dto) {
 
         try{
             User userToAdd = User.builder()
@@ -90,12 +89,8 @@ public class RegistrationService implements UserDetailsService{
         }
     }
 
-    public void deleteUser(User userToDelete) {
-        userRepository.delete(userToDelete);
-    }
-
-    public void updateUser(User user) {
-        userRepository.save(user);
+    public boolean isDuplicate(String username){
+        return userRepository.findByUsername(username) != null;
     }
 
     @Override

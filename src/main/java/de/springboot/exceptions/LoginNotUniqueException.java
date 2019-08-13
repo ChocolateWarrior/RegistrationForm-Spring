@@ -1,6 +1,6 @@
 package de.springboot.exceptions;
 
-public class LoginNotUniqueException extends Exception{
+public class LoginNotUniqueException extends RuntimeException{
 
     public LoginNotUniqueException() {
     }

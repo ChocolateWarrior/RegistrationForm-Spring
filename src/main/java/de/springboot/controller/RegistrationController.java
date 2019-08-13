@@ -43,7 +43,15 @@ public class RegistrationController
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public String executeRegistration(@ModelAttribute("user") @Valid RegistrationDTO dto,
-                                      BindingResult bindingResult, Model model) throws LoginNotUniqueException {
+                                      BindingResult bindingResult, Model model){
+
+        if(registrationService.isDuplicate(dto.getLogin())){
+            model.addAttribute("error_message", messageSource.getMessage("reg.login_not_unique",
+                    null,
+                    LocaleContextHolder.getLocale()) + dto.getLogin());
+            model.addAttribute("all_specifications", Specification.values());
+            return "registration";
+        }
 
         model.addAttribute("all_specifications", Specification.values());
         if (bindingResult.hasErrors()) {
@@ -62,14 +70,6 @@ public class RegistrationController
         model.addAttribute("message", messageSource.getMessage("reg.success",
                 null,
                 LocaleContextHolder.getLocale()));
-
-        return "registration";
-    }
-
-    @ExceptionHandler(LoginNotUniqueException.class)
-    public String handleRuntimeException(Model model, LoginNotUniqueException exception) {
-        model.addAttribute("error_message", exception.getMessage());
-        model.addAttribute("all_specifications", Specification.values());
 
         return "registration";
     }
