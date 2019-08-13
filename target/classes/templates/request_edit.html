@@ -17,15 +17,17 @@
         <div class="col-md-8 col-md-offset-2">
             <h2 class="page-header" th:text="#{req.edit}">Request Edit</h2>
 
-            <form th:action="@{/request-display/edit/{id}(id=${requestId})}" method="post">
+            <form th:action="@{/request-display/edit/{id}(id=${requestId})}"
+                  th:field ="${masters}" method="post">
 
                 <div class="form-group">
-                    <label id="masterLabel" for="masterElement" th:text="#{req.edit.master}">Master</label>
-                    <input type="text"
-                           class="form-control"
-                           id="masterElement"
-                           name="masterId"
-                           th:placeholder="#{req.edit.set.master}">
+                    <h3 th:text="#{req.edit.master}">Master</h3>
+                    <select class="form-control" name="masterUsername" >
+                        <option value="" th:each="master : ${masters} "
+                                th:text="${master.username}"
+                                th:value="${master.username}">
+                        </option>
+                    </select>
                 </div>
 
                 <div class="form-group">

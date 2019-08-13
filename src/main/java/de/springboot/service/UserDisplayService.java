@@ -1,6 +1,7 @@
 package de.springboot.service;
 
 import de.springboot.model.RepairRequest;
+import de.springboot.model.Specification;
 import de.springboot.model.User;
 import de.springboot.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
@@ -29,6 +30,14 @@ public class UserDisplayService {
 
     public User getUserById(int id){
         return userRepository.findById(id);
+    }
+
+    public User getByUsername(String username){
+        return userRepository.findByUsername(username);
+    }
+
+    public List<User> getMastersBySpecification(Specification specification){
+        return userRepository.findAllBySpecifications(specification);
     }
 
     public void setUserFirstName(int userId, String firstName){

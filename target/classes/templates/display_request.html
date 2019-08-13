@@ -49,14 +49,14 @@
                                 <br>
 
                                 <span th:text="#{req.display.master_id}">master uname</span>
-                                <span>
-                                    <div th:each="m : ${r.masters}">
-                                        <p th:text="${m.username}"
-                                           th:value="${m.username}">
-                                        </p>
-                                    </div>
+
+                                <span th:each="m : ${r.masters}">
+                                    [<span th:text="${m.username}"
+                                          th:value="${m.username}">
+                                    </span>]
                                 </span>
                                 <br>
+
 
                                 <span th:text="#{req.display.finish_time}">finish time</span>
                                 <span th:text="${r.finishTime}"
@@ -73,7 +73,7 @@
                                       th:value="${r.state}"></span>
                                 <br>
 
-                                <div >
+                                <div th:unless="${r.state==completed}">
                                     <form th:action="@{/request-display/reject/{id}(id=${r.id})}" method="post">
                                         <input type="text" id="rejectionMessageElement"
                                                name="rejectionMessage"
@@ -85,7 +85,7 @@
                                     </form>
                                 </div>
 
-                                <div>
+                                <div th:if="${r.state != paid && r.state != completed}">
                                     <form th:action="@{/request-display/edit/{id}(id=${r.id})}" method="get">
                                         <button type="submit" class="btn btn-sm btn-info"
                                                 th:text="#{display.edit}">Edit</button>

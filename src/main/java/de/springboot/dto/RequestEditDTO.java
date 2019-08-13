@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestEditDTO {
-    private int masterId;
+    private String masterUsername;
     private BigDecimal price;
 
 }

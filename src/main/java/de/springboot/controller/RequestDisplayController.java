@@ -3,6 +3,8 @@ package de.springboot.controller;
 import de.springboot.dto.RejectionDTO;
 import de.springboot.dto.RequestEditDTO;
 import de.springboot.model.RepairRequest;
+import de.springboot.model.RequestState;
+import de.springboot.model.Specification;
 import de.springboot.service.RequestDisplayService;
 import de.springboot.service.UserDisplayService;
 import lombok.extern.log4j.Log4j2;
@@ -34,6 +36,10 @@ public class RequestDisplayController {
         List<RepairRequest> requests = requestDisplayService.getAllRequests();
         model.addAttribute("all_requests", requests);
         model.addAttribute("request", new RepairRequest());
+        model.addAttribute("completed", RequestState.COMPLETED);
+        model.addAttribute("paid", RequestState.PAID);
+        model.addAttribute("accepted", RequestState.ACCEPTED);
+        model.addAttribute("rejected", RequestState.REJECTED);
         return "display_request";
     }
 
@@ -49,14 +55,13 @@ public class RequestDisplayController {
     @PostMapping("/request-display/edit/{id}")
     public String editRequest(@PathVariable("id") int requestId, RequestEditDTO dto) {
 
-        userDisplayService.addMasterRequest(userDisplayService.getUserById(dto.getMasterId()),
+        userDisplayService.addMasterRequest(userDisplayService.getByUsername(dto.getMasterUsername()),
                 requestDisplayService.getRequestById(requestId));
         if(Objects.nonNull(dto.getPrice()))
             requestDisplayService.setRequestPrice(requestId, dto.getPrice());
-
-        if(dto.getMasterId() != 0)
-            requestDisplayService.addRequestMaster(requestId, userDisplayService.getUserById(dto.getMasterId()));
-
+        if(Objects.nonNull(dto.getMasterUsername()))
+            requestDisplayService.addRequestMaster(requestId, userDisplayService.getByUsername(dto.getMasterUsername()));
+        else return "request_edit";
 
         return "redirect:/request-display";
     }
@@ -65,6 +70,12 @@ public class RequestDisplayController {
     @GetMapping("/request-display/edit/{id}")
     public String getEditPage(@PathVariable("id") int requestId, Model model){
         model.addAttribute("requestId", requestId);
+        RepairRequest request = requestDisplayService.getRequestById(requestId);
+        String spec = request.getSpecification().toUpperCase().replace(" ", "_");
+        System.out.println(spec);
+        model.addAttribute("masters", userDisplayService.getMastersBySpecification(
+                Specification.valueOf(spec)));
+
         return "request_edit";
     }
 
