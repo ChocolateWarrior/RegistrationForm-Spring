@@ -1,0 +1,87 @@
+
+
+<!DOCTYPE html>
+<html lang = "en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" >
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container" style="margin-top: 60px">
+    <div class = "row">
+        <div class = "col-md-12">
+            <div class = "panel panel-default">
+                <h3 class = "panel-heading" th:text="#{display.users}">Users</h3>
+                <div class = "panel-body">
+                    <form action="#" th:action="@{/user-display}" method="get">
+                        <ul class="list-group" th:field="${all_users}">
+                            <li class="list-group-item" th:each="u : ${all_users}">
+                                    
+                                <span th:text="#{display.id}">id</span>
+                                <span th:text="${u.id}"
+                                      th:value="${u.id}"></span>
+                                <br>
+
+                                <span th:text="#{display.first_name}">first name</span>
+                                <span th:text="${u.firstName}"
+                                      th:value="${u.firstName}"></span>
+                                <br>
+
+                                <span th:text="#{display.last_name}">last name</span>
+                                <span th:text="${u.lastName}"
+                                      th:value="${u.lastName}"></span>
+                                <br>
+
+                                <span th:text="#{display.login}">login</span>
+                                <span th:text="${u.username}"
+                                      th:value="${u.username}"></span>
+                                <br>
+
+                                <div class="row">
+                                <div class="col-sm-1">
+                                    <form th:action="@{/user-display/remove/{id}(id=${u.id})}" method="post">
+                                        <button type="submit" class="btn btn-sm btn-secondary"
+                                                th:text="#{display.remove}">Remove</button>
+                                    </form>
+                                </div>
+                                <div class="col-sm-1">
+                                    <form th:action="@{/user-display/edit/{id}(id=${u.id})}" method="get">
+                                        <button type="submit" class="btn btn-sm btn-info"
+                                                th:text="#{display.edit}">Edit</button>
+                                    </form>
+                                </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class = "footer" style="margin-top: 20px">
+        <div class="aboutLanguage">
+            <span th:text="#{lang.change}"></span>:
+            <a href="?lang=en" th:text="#{lang.en}">english</a>
+            /
+            <a href="?lang=uk" th:text="#{lang.uk}">ukrainian</a>
+        </div>
+        <div class="footer_bar">
+            <a href="/main" th:text="#{main.return}">main</a>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

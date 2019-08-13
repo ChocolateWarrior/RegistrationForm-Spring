@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" >
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="container" style="margin-top: 60px">
+
+    <div class = "balance_replenish" style="margin-top: 30px">
+        <h3 th:text="#{index.replenish}"> Balance replenish </h3>
+        <h4 th:text="#{balance}"></h4>
+        <div class="balance" th:field="${balance}">
+            <span
+                th:text="${balance != null ? balance.doubleValue() : 'balance is empty'}"
+                th:value="${balance != null ? balance.doubleValue() : 'balance is empty'}">
+            </span>
+        </div>
+
+        <form action="#" th:action="@{/balance}" method="post" style="margin-top: 30px">
+            <div class="form-group">
+                <label id="balanceLabel" for="balanceElement" th:text="#{balance.replenishment}">Balance</label>
+                <input type="number"
+                       min="10"
+                       class="form-control"
+                       id="balanceElement"
+                       name="balance"
+                       th:placeholder="#{balance.replenish}">
+            </div>
+
+            <button type="submit" class="btn btn-success" th:text="#{balance.replenish}">
+                Submit
+            </button>
+        </form>
+    </div>
+
+    <div class = "aboutLanguage" style="margin-top: 20px">
+        <span th:text="#{lang.change}"></span>:
+        <a href="?lang=en" th:text="#{lang.en}">english</a>
+        /
+        <a href="?lang=uk" th:text="#{lang.uk}">ukrainian</a>
+    </div>
+
+</div>
+
+</body>
+</html>

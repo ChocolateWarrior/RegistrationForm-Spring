@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang = "en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" >
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<div class = "container" style="margin-top: 60px">
+    <div class = "row">
+        <div class = "col-md-12">
+            <div class = "panel panel-default">
+                <div class = "panel-heading" th:text="#{req.display.heading}">requests</div>
+                <div class = "panel-body">
+                    <form action="#" th:action="@{/request-display}" method="get">
+
+                        <ul class ="list-group" th:field="${all_requests}" style="text-align: left">
+                            <li class="list-group-item" th:each="r : ${all_requests}">
+
+                                <span th:text="#{req.display.id}">id</span>
+                                <span th:text="${r.id}"
+                                      th:value="${r.id}"></span>
+                                <br>
+
+                                <span th:text="#{req.display.type}">type</span>
+                                <span th:text="${r.specification}"
+                                      th:value="${r.specification}"></span>
+                                <br>
+
+                                <span th:text="#{req.display.description}">desc</span>
+                                <span th:text="${r.description}"
+                                      th:value="${r.description}"></span>
+                                <br>
+
+                                <span th:text="#{req.display.req_time}">request time</span>
+                                <span th:text="${r.requestTime}"
+                                      th:value="${r.requestTime}"></span>
+                                <br>
+
+                                <span th:text="#{req.display.user_id}">user id</span>
+                                <span th:text="${r.user.getId()}"
+                                      th:value="${r.user.getId()}"></span>
+                                <br>
+
+                                <span th:text="#{req.display.master_id}">master uname</span>
+
+                                <span th:each="m : ${r.masters}">
+                                    [<span th:text="${m.username}"
+                                          th:value="${m.username}">
+                                    </span>]
+                                </span>
+                                <br>
+
+
+                                <span th:text="#{req.display.finish_time}">finish time</span>
+                                <span th:text="${r.finishTime}"
+                                      th:value="${r.finishTime}"></span>
+                                <br>
+
+                                <span th:text="#{req.display.price}">price</span>
+                                <span th:text="${r.price}"
+                                      th:value="${r.price}"></span>
+                                <br>
+
+                                <span th:text="#{req.display.status}">status</span>
+                                <span th:text="${r.state}"
+                                      th:value="${r.state}"></span>
+                                <br>
+
+                                <div th:unless="${r.state==completed}">
+                                    <form th:action="@{/request-display/reject/{id}(id=${r.id})}" method="post">
+                                        <input type="text" id="rejectionMessageElement"
+                                               name="rejectionMessage"
+                                               style="margin-bottom: 10px"
+                                               th:placeholder="#{display.rejection_type}">
+                                        <button type="submit"
+                                                class="btn btn-sm btn-secondary"
+                                                th:text="#{display.reject}">Reject</button>
+                                    </form>
+                                </div>
+
+                                <div th:if="${r.state != paid && r.state != completed}">
+                                    <form th:action="@{/request-display/edit/{id}(id=${r.id})}" method="get">
+                                        <button type="submit" class="btn btn-sm btn-info"
+                                                th:text="#{display.edit}">Edit</button>
+                                    </form>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "footer" style="margin-top: 20px">
+        <div class="aboutLanguage">
+            <span th:text="#{lang.change}"></span>:
+            <a href="?lang=en" th:text="#{lang.en}">english</a>
+            /
+            <a href="?lang=uk" th:text="#{lang.uk}">ukrainian</a>
+        </div>
+        <div class="footer_bar">
+            <a href="/main" th:text="#{main.return}">main</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

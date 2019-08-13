@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Request Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" >
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container" style="margin-top: 60px">
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2 class="page-header" th:text="#{req.edit}">Request Edit</h2>
+
+            <form th:action="@{/request-display/edit/{id}(id=${requestId})}"
+                  th:field ="${masters}" method="post">
+
+                <div class="form-group">
+                    <h3 th:text="#{req.edit.master}">Master</h3>
+                    <select class="form-control" name="masterUsername" >
+                        <option value="" th:each="master : ${masters} "
+                                th:text="${master.username}"
+                                th:value="${master.username}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label id="priceLabel" for="priceElement"></label>
+                    <input type="number"
+                           min="0"
+                           class="form-control"
+                           id="priceElement"
+                           name="price"
+                           th:placeholder="#{index.set_price}">
+                </div>
+
+                <button type="submit" class="btn btn-success" th:text="#{global.submit}">
+                    Submit
+                </button>
+            </form>
+
+            <div class="aboutLanguage">
+                <span th:text="#{lang.change}"></span>:
+                <a href="?lang=en" th:text="#{lang.en}">english</a>
+                /
+                <a href="?lang=uk" th:text="#{lang.uk}">ukrainian</a>
+            </div>
+            <div class="footer_bar">
+                <a href="/main" th:text="#{main.return}">main</a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
