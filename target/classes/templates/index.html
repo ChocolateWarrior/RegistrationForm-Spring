@@ -113,7 +113,9 @@
                 </div>
 
                 <div th:if="${ #lists.isEmpty(user_requests)}">
-                    <span th:text="#{index.no_requests}">No requests yet. Leave request</span>
+                    <span class="text-warning" th:text="#{index.no_requests}">
+                        No requests yet. Leave request
+                    </span>
                     <a href="/request" th:text="#{index.here}">here.</a>
                 </div>
             </div>
@@ -157,9 +159,12 @@
                             </div>
 
                         </li>
+                        <div th:if="${ #lists.isEmpty(master_requests)}">
+                        <span class="text-warning" th:text="#{index.no_master_requests}">
+                            No requests yet.
+                        </span>
+                        </div>
                     </ul>
-
-
 
                 </div>
             </div>

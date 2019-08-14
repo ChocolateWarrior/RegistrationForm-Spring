@@ -1,6 +1,6 @@
 package de.springboot.security.config;
 
-import de.springboot.service.RegistrationService;
+import de.springboot.service.UserService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,19 +12,19 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final RegistrationService registrationService;
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    public SecurityConfig(RegistrationService registrationService,
+    public SecurityConfig(UserService userService,
                           PasswordEncoder passwordEncoder){
-        this.registrationService=registrationService;
+        this.userService = userService;
         this.passwordEncoder=passwordEncoder;
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(registrationService)
+                .userDetailsService(userService)
                 .passwordEncoder(passwordEncoder);
     }
 

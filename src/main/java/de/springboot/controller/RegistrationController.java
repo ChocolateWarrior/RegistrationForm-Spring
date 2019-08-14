@@ -1,9 +1,8 @@
 package de.springboot.controller;
 
 import de.springboot.dto.RegistrationDTO;
-import de.springboot.exceptions.LoginNotUniqueException;
 import de.springboot.model.Specification;
-import de.springboot.service.RegistrationService;
+import de.springboot.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -25,13 +24,13 @@ public class RegistrationController
         implements ErrorController
 {
 
-    private RegistrationService registrationService;
+    private UserService userService;
     private MessageSource messageSource;
 
     @Autowired
-    public RegistrationController(RegistrationService registrationService, MessageSource messageSource) {
-        this.registrationService = registrationService;
-        this.messageSource=messageSource;
+    public RegistrationController(UserService userService, MessageSource messageSource) {
+        this.userService = userService;
+        this.messageSource = messageSource;
     }
 
     @GetMapping
@@ -45,7 +44,7 @@ public class RegistrationController
     public String executeRegistration(@ModelAttribute("user") @Valid RegistrationDTO dto,
                                       BindingResult bindingResult, Model model){
 
-        if(registrationService.isDuplicate(dto.getLogin())){
+        if(userService.isDuplicate(dto.getLogin())){
             model.addAttribute("error_message", messageSource.getMessage("reg.login_not_unique",
                     null,
                     LocaleContextHolder.getLocale()) + dto.getLogin());
@@ -59,11 +58,11 @@ public class RegistrationController
         }
 
         if(!(dto.getSpecifications()==null)){
-            registrationService.createMaster(dto);
+            userService.createMaster(dto);
             log.info("Created master");
         }
         else {
-            registrationService.createUser(dto);
+            userService.createUser(dto);
             log.info("Created user");
         }
 

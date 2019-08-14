@@ -2,7 +2,7 @@ package de.springboot.controller;
 
 import de.springboot.dto.RegistrationDTO;
 import de.springboot.model.User;
-import de.springboot.service.UserDisplayService;
+import de.springboot.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,16 +18,16 @@ import java.util.List;
 @Controller
 public class UserDisplayController {
 
-    private final UserDisplayService userDisplayService;
+    private final UserService userService;
 
     @Autowired
-    UserDisplayController(UserDisplayService userDisplayService){
-        this.userDisplayService=userDisplayService;
+    UserDisplayController(UserService userService){
+        this.userService=userService;
     }
 
     @GetMapping("/user-display")
     public String showUsers(Model model){
-        List<User> users = userDisplayService.getAllUsers();
+        List<User> users = userService.getAllUsers();
         model.addAttribute("all_users", users);
         model.addAttribute("user", new User());
         return "display";
@@ -35,7 +35,7 @@ public class UserDisplayController {
 
     @PostMapping("/user-display/remove/{id}")
     public String removeUser(@PathVariable("id") int userId) {
-        userDisplayService.removeUser(userId);
+        userService.removeUser(userId);
         return "redirect:/user-display";
     }
 
@@ -44,13 +44,13 @@ public class UserDisplayController {
                            RegistrationDTO dto) {
 
         if(!dto.getFirstName().equals(""))
-            userDisplayService.setUserFirstName(userId, dto.getFirstName());
+            userService.setUserFirstName(userId, dto.getFirstName());
         if(!dto.getLastName().equals(""))
-            userDisplayService.setUserLastName(userId, dto.getLastName());
+            userService.setUserLastName(userId, dto.getLastName());
         if(!dto.getLogin().equals(""))
-            userDisplayService.setUserLogin(userId, dto.getLogin());
+            userService.setUserLogin(userId, dto.getLogin());
         if(!dto.getPassword().equals(""))
-            userDisplayService.setUserPassword(userId, new BCryptPasswordEncoder().encode(dto.getPassword()));
+            userService.setUserPassword(userId, new BCryptPasswordEncoder().encode(dto.getPassword()));
         return "redirect:/user-display";
     }
 
