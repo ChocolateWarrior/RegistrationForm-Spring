@@ -27,9 +27,7 @@ public class UserDisplayController {
 
     @GetMapping("/user-display")
     public String showUsers(Model model){
-        List<User> users = userService.getAllUsers();
-        model.addAttribute("all_users", users);
-        model.addAttribute("user", new User());
+        model.addAttribute("all_users", userService.getAllUsers());
         return "display";
     }
 

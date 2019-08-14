@@ -19,7 +19,6 @@ public class Application {
 
     @GetMapping("/error")
     public String handleError() {
-        //do something like logging
         log.warn("Error occurred");
         return "error";
     }

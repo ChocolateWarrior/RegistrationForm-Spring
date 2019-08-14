@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -185,7 +187,6 @@ public class UserService implements UserDetailsService{
         return user.getBalance();
     }
 
-    @Transactional
     public void addToUserBalance(BigDecimal value){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(authentication.getName());
@@ -212,6 +213,5 @@ public class UserService implements UserDetailsService{
     public List<User> getAllUsers(){
         return new ArrayList<>(userRepository.findAll(Sort.by(Sort.Direction.ASC, "id")));
     }
-
 
 }
