@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -209,9 +210,7 @@ public class UserService implements UserDetailsService{
     }
 
     public List<User> getAllUsers(){
-        List <User> res = new ArrayList<>();
-        userRepository.findAll().forEach(res::add);
-        return res;
+        return new ArrayList<>(userRepository.findAll(Sort.by(Sort.Direction.ASC, "id")));
     }
 
 

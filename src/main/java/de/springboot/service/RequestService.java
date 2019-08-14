@@ -8,6 +8,7 @@ import de.springboot.repository.RequestRepository;
 import de.springboot.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -46,9 +47,7 @@ public class RequestService {
     }
 
     public List<RepairRequest> getAllRequests(){
-        List <RepairRequest> res = new ArrayList<>();
-        requestRepository.findAll().forEach(res::add);
-        return res;
+        return new ArrayList<>(requestRepository.findAll(Sort.by(Sort.Direction.ASC, "id")));
     }
 
     public RepairRequest getRequestById(int requestId){
