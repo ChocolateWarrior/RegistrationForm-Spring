@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -114,7 +112,6 @@ public class UserService implements UserDetailsService{
         return user;
     }
 
-
     public User getUser(LoginDTO dto) throws CredentialsException {
         User user = userRepository.findByUsernameAndPassword(dto.getLogin(), dto.getPassword());
 
@@ -132,7 +129,11 @@ public class UserService implements UserDetailsService{
         return user;
     }
 
-    public User getUserById(int id){
+    public List<User> getAllUsers(){
+        return new ArrayList<>(userRepository.findAll(Sort.by(Sort.Direction.ASC, "id")));
+    }
+
+    private User getUserById(int id){
         return userRepository.findById(id);
     }
 
@@ -150,13 +151,11 @@ public class UserService implements UserDetailsService{
         userRepository.save(user);
     }
 
-
     public void setUserLastName(int userId, String lastName){
         User user = getUserById(userId);
         user.setLastName(lastName);
         userRepository.save(user);
     }
-
 
     public void setUserLogin(int userId, String login){
         User user = getUserById(userId);
@@ -166,7 +165,7 @@ public class UserService implements UserDetailsService{
 
     public void setUserPassword(int userId, String password){
         User user = getUserById(userId);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
     }
 
@@ -180,7 +179,6 @@ public class UserService implements UserDetailsService{
         userRepository.save(master);
     }
 
-
     public BigDecimal getUserBalance(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(authentication.getName());
@@ -190,7 +188,7 @@ public class UserService implements UserDetailsService{
     public void addToUserBalance(BigDecimal value){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(authentication.getName());
-        if(user.getBalance() != null)
+        if(Objects.nonNull(user.getBalance()))
             user.setBalance(user.getBalance().add(value));
         else
             user.setBalance(value);
@@ -210,8 +208,5 @@ public class UserService implements UserDetailsService{
 
     }
 
-    public List<User> getAllUsers(){
-        return new ArrayList<>(userRepository.findAll(Sort.by(Sort.Direction.ASC, "id")));
-    }
 
 }

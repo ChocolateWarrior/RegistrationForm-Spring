@@ -2,6 +2,7 @@ package de.springboot.dto;
 
 import de.springboot.model.Specification;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class RegistrationDTO {
 
     @NotBlank(message = "{valid.not_blank.reg.not_empty}")
