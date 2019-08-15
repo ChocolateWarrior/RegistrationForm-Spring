@@ -57,7 +57,9 @@ public class RegistrationController
             return "registration";
         }
 
-        if(!(dto.getSpecifications()==null)){
+        System.out.println(dto.getSpecifications());
+
+        if(!dto.getSpecifications().isEmpty()){
             userService.createMaster(dto);
             log.info("Created master");
         }

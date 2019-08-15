@@ -151,6 +151,13 @@
                                 <br>
                             </div>
 
+                            <div th:if="${request.rejectionMessage != null}">
+                                <span th:text="#{index.rejection_message}"></span>
+                                <span th:text="${request.rejectionMessage}"
+                                      th:value="${request.rejectionMessage}"></span>
+                                <br>
+                            </div>
+
                             <div th:if="${request.state == paid}">
                             <form th:action="@{/main/complete}" method="post">
                                 <input name="requestId" th:value="${request.id}" hidden/>
