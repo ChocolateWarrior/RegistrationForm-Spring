@@ -8,7 +8,7 @@ import de.springboot.repository.RequestRepository;
 import de.springboot.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Log4j2
@@ -97,6 +98,27 @@ public class RequestService {
         RepairRequest request = requestRepository.findById(requestId);
         request.setComment(comment);
         requestRepository.save(request);
+    }
+
+    public Page<RepairRequest> findPaginated(Pageable pageable) {
+        List<RepairRequest> requests = getAllRequests();
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<RepairRequest> list;
+
+        if (requests.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, requests.size());
+            list = requests.subList(startItem, toIndex);
+        }
+
+        Page<RepairRequest> requestPage
+                = new PageImpl<>(list, PageRequest
+                .of(currentPage, pageSize), requests.size());
+
+        return requestPage;
     }
 
 
