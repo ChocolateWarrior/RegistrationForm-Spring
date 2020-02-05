@@ -58,20 +58,26 @@
                             <span th:text="#{index.type}">Type:</span>
                             <span th:text="${request.specification}" th:value="${request.specification}"></span>
                             <br>
+
                             <span th:text="#{index.description}">Description: </span>
                             <span th:text="${request.description}" th:value="${request.description}"></span>
                             <br>
-                            <span th:if="${request.price &gt; 0}" th:text="#{index.price}">Price: </span>
-                            <span th:if="${request.price &gt; 0}" th:text="${request.price}"
-                                  th:value="${request.price}">
 
-                            </span>
-                            <br>
-                            <span th:if="${request.state!=null}" th:text="#{index.status}">Status: </span>
-                            <span th:if="${request.state!=null}" th:text="${request.state}"
+                            <div class = "request-price-element" th:if="${request.price &gt; 0}">
+                                <span th:text="#{index.price}">Price: </span>
+                                <span th:text="${request.price}"
+                                      th:value="${request.price}">
+                                <br>
+                                </span>
+                            </div>
+
+                            <div class = "request-state-element" th:if="${request.state!=null}">
+                                <span  th:text="#{index.status}">Status: </span>
+                                <span th:text="${request.state}"
                                   th:value="${request.state}">dd
-                            </span>
-                            <br>
+                                <br>
+                                </span>
+                            </div>
 
                             <div th:if="${request.rejectionMessage!=null}">
                                 <span th:text="#{index.rejection_message}">Rej: </span>

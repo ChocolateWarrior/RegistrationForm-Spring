@@ -20,13 +20,15 @@
                 <div class = "panel-body">
                     <form action="#" th:action="@{/request-display}" method="get">
 
-                        <div th:if="${requestPage.totalPages > 0}" class="pagination"
-                             th:each="pageNumber : ${pageNumbers}">
-                            <a th:href="@{/request-display(size=${requestPage.size}, page=${pageNumber})}"
-                               th:text="${pageNumber}"
-                               th:class="${pageNumber==requestPage.number + 1} ? active">
-
-                            </a>
+                        <div class="pagination">
+                            <div class="pagination-element"
+                                th:if="${requestPage.totalPages > 1}"
+                                th:each="pageNumber : ${pageNumbers}">
+                                <a th:href="@{/request-display(size=${requestPage.size}, page=${pageNumber})}"
+                                   th:text="${pageNumber}"
+                                   th:class="${pageNumber==requestPage.number + 1} ? active">
+                                </a>
+                             </div>
                         </div>
                         <ul class ="list-group" style="text-align: left">
                             <li class="list-group-item" th:each="r : ${requestPage.content}">
@@ -83,7 +85,7 @@
 
                                 <div th:unless="${r.state==completed}">
                                     <form th:action="@{/request-display/reject/{id}(id=${r.id})}" method="post">
-                                        <input type="text" id="rejectionMessageElement"
+                                        <input class="rejection-input" type="text" id="rejectionMessageElement"
                                                name="rejectionMessage"
                                                style="margin-bottom: 10px"
                                                th:placeholder="#{display.rejection_type}">
@@ -102,83 +104,6 @@
 
                             </li>
                         </ul>
-
-
-
-<!--                        <ul class ="list-group" th:field="${all_requests}" style="text-align: left">-->
-<!--                            <li class="list-group-item" th:each="r : ${all_requests}">-->
-
-<!--                                <span th:text="#{req.display.id}">id</span>-->
-<!--                                <span th:text="${r.id}"-->
-<!--                                      th:value="${r.id}"></span>-->
-<!--                                <br>-->
-
-<!--                                <span th:text="#{req.display.type}">type</span>-->
-<!--                                <span th:text="${r.specification}"-->
-<!--                                      th:value="${r.specification}"></span>-->
-<!--                                <br>-->
-
-<!--                                <span th:text="#{req.display.description}">desc</span>-->
-<!--                                <span th:text="${r.description}"-->
-<!--                                      th:value="${r.description}"></span>-->
-<!--                                <br>-->
-
-<!--                                <span th:text="#{req.display.req_time}">request time</span>-->
-<!--                                <span th:text="${r.requestTime}"-->
-<!--                                      th:value="${r.requestTime}"></span>-->
-<!--                                <br>-->
-
-<!--                                <span th:text="#{req.display.user_id}">user id</span>-->
-<!--                                <span th:text="${r.user.getId()}"-->
-<!--                                      th:value="${r.user.getId()}"></span>-->
-<!--                                <br>-->
-
-<!--                                <span th:text="#{req.display.master_id}">master uname</span>-->
-
-<!--                                <span th:each="m : ${r.masters}">-->
-<!--                                    [<span th:text="${m.username}"-->
-<!--                                          th:value="${m.username}">-->
-<!--                                    </span>]-->
-<!--                                </span>-->
-<!--                                <br>-->
-
-
-<!--                                <span th:text="#{req.display.finish_time}">finish time</span>-->
-<!--                                <span th:text="${r.finishTime}"-->
-<!--                                      th:value="${r.finishTime}"></span>-->
-<!--                                <br>-->
-
-<!--                                <span th:text="#{req.display.price}">price</span>-->
-<!--                                <span th:text="${r.price}"-->
-<!--                                      th:value="${r.price}"></span>-->
-<!--                                <br>-->
-
-<!--                                <span th:text="#{req.display.status}">status</span>-->
-<!--                                <span th:text="${r.state}"-->
-<!--                                      th:value="${r.state}"></span>-->
-<!--                                <br>-->
-
-<!--                                <div th:unless="${r.state==completed}">-->
-<!--                                    <form th:action="@{/request-display/reject/{id}(id=${r.id})}" method="post">-->
-<!--                                        <input type="text" id="rejectionMessageElement"-->
-<!--                                               name="rejectionMessage"-->
-<!--                                               style="margin-bottom: 10px"-->
-<!--                                               th:placeholder="#{display.rejection_type}">-->
-<!--                                        <button type="submit"-->
-<!--                                                class="btn btn-sm btn-secondary"-->
-<!--                                                th:text="#{display.reject}">Reject</button>-->
-<!--                                    </form>-->
-<!--                                </div>-->
-
-<!--                                <div th:if="${r.state != paid && r.state != completed}">-->
-<!--                                    <form th:action="@{/request-display/edit/{id}(id=${r.id})}" method="get">-->
-<!--                                        <button type="submit" class="btn btn-sm btn-info"-->
-<!--                                                th:text="#{display.edit}">Edit</button>-->
-<!--                                    </form>-->
-<!--                                </div>-->
-
-<!--                            </li>-->
-<!--                        </ul>-->
                     </form>
                 </div>
             </div>

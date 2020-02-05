@@ -61,12 +61,14 @@ public class RequestService {
     public void setRequestComplete(int requestId){
         RepairRequest request = getRequestById(requestId);
         request.setState(RequestState.COMPLETED);
+        request.setFinishTime(LocalDateTime.now());
         requestRepository.save(request);
     }
 
     public void setRequestPrice(int requestId, BigDecimal price){
         RepairRequest request = getRequestById(requestId);
         request.setPrice(price);
+        request.setState(RequestState.ACCEPTED);
         requestRepository.save(request);
     }
 
