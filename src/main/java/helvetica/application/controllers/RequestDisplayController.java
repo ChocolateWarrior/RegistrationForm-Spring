@@ -15,9 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -46,6 +44,9 @@ public class RequestDisplayController {
         Page<RepairRequest> requestPage = requestService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("requestPage", requestPage);
+
+        List<Integer> sizesList = new ArrayList<>(Arrays.asList(5, 10, 15, 20));
+        model.addAttribute("pageSizes", sizesList);
 
         int totalPages = requestPage.getTotalPages();
         if (totalPages > 0) {
