@@ -13,7 +13,6 @@
 </head>
 <body>
 <div class="container" style="margin-top: 50px;">
-
     <div class = "navigation">
         <h1 class="h1">Repair It</h1>
         <h3 th:text="#{index.greeting}"></h3>
@@ -33,9 +32,7 @@
             <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                 <a class="nav-link" href="/request-display" th:text = "#{index.nav_bar.request_display}">display requests</a>
             </li>
-
         </ul>
-
     </div>
 
 
@@ -52,7 +49,38 @@
             <h3 th:text="#{index.my_requests}">My requests</h3>
 
             <div class="UserRequestsInfo" th:field="${user_requests}">
-                <div th:each="request: ${user_requests}">
+
+                <div class="page-navigation">
+                    <h5 th:text="#{req.display.select_page}">Select page</h5>
+                    <nav aria-label="PageNav">
+                        <ul class="pagination">
+                            <li class="page-item"
+                                th:if="${userRequestPage.totalPages > 0}"
+                                th:each="pageNumber : ${userPageNumbers}">
+                                <a class="page-link" href="#"
+                                   th:href="@{/main(size=${userRequestPage.size}, page=${pageNumber})}"
+                                   th:text="${pageNumber}"></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="size-navigation">
+                    <h5 th:text="#{req.display.select_size}">Select size</h5>
+                    <nav aria-label="SizeNav">
+                        <ul class="pagination">
+                            <li class="page-item"
+                                th:if="${userRequestPage.totalPages > 0}"
+                                th:each="pageSize : ${pageSizes}">
+                                <a class="page-link" href="#"
+                                   th:href="@{/main(size=${pageSize}, page=${userRequestPage.number + 1})}"
+                                   th:text="${pageSize}"></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div th:each="request: ${userRequestPage.content}">
                     <ul>
                         <li>
                             <span th:text="#{index.type}">Type:</span>
@@ -113,7 +141,6 @@
                                     </button>
                                 </div>
                             </form>
-
                         </li>
                     </ul>
                 </div>
@@ -125,13 +152,43 @@
                     <a href="/request" th:text="#{index.here}">here.</a>
                 </div>
             </div>
-
         </div>
 
         <div class = "master_request" sec:authorize="hasAuthority('MASTER')"
              style="margin-top: 30px; text-align: left" th:field="${master_requests}">
             <h3 th:text="#{index.my_requests.master}"> My request (Master) </h3>
-            <div th:each="request: ${master_requests}" style="margin-top: 20px">
+
+            <div class="page-navigation">
+                <h5 th:text="#{req.display.select_page}">Select page</h5>
+                <nav aria-label="PageNav">
+                    <ul class="pagination">
+                        <li class="page-item"
+                            th:if="${masterRequestPage.totalPages > 0}"
+                            th:each="pageNumber : ${masterPageNumbers}">
+                            <a class="page-link" href="#"
+                               th:href="@{/main(size=${masterRequestPage.size}, page=${pageNumber})}"
+                               th:text="${pageNumber}"></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="size-navigation">
+                <h5 th:text="#{req.display.select_size}">Select size</h5>
+                <nav aria-label="SizeNav">
+                    <ul class="pagination">
+                        <li class="page-item"
+                            th:if="${masterRequestPage.totalPages > 0}"
+                            th:each="pageSize : ${pageSizes}">
+                            <a class="page-link" href="#"
+                               th:href="@{/main(size=${pageSize}, page=${masterRequestPage.number + 1})}"
+                               th:text="${pageSize}"></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div th:each="request: ${masterRequestPage.content}" style="margin-top: 20px">
                 <div class="master_request_heading">
                     <ul class="list-group">
                         <li class="list-group-item ">
@@ -170,11 +227,8 @@
                                 <button class="btn-success" th:text="#{global.comlete}"></button>
                             </form>
                             </div>
-
                         </li>
-
                     </ul>
-
                 </div>
             </div>
         </div>

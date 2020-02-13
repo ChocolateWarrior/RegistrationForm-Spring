@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -205,6 +205,23 @@ public class UserService implements UserDetailsService{
         request.setState(RequestState.PAID);
         requestRepository.save(request);
 
+    }
+
+    public Page<User> findPaginated(Pageable pageable) {
+        List<User> requests = getAllUsers();
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<User> list;
+
+        if (requests.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, requests.size());
+            list = requests.subList(startItem, toIndex);
+        }
+        return new PageImpl<>(list,
+                PageRequest.of(currentPage, pageSize), requests.size());
     }
 
 }

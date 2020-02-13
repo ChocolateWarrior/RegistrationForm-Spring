@@ -4,7 +4,7 @@
 <html lang = "en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registration Form</title>
+    <title>User List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/style.css}" >
@@ -21,8 +21,39 @@
                 <h3 class = "panel-heading" th:text="#{display.users}">Users</h3>
                 <div class = "panel-body">
                     <form action="#" th:action="@{/user-display}" method="get">
-                        <ul class="list-group" th:field="${all_users}">
-                            <li class="list-group-item" th:each="u : ${all_users}">
+
+                        <div class="page-navigation">
+                            <h3 th:text="#{display.select_page}">Select page</h3>
+                            <nav aria-label="PageNav">
+                                <ul class="pagination">
+                                    <li class="page-item"
+                                        th:if="${userPage.totalPages > 0}"
+                                        th:each="pageNumber : ${pageNumbers}">
+                                        <a class="page-link" href="#"
+                                           th:href="@{/user-display(size=${userPage.size}, page=${pageNumber})}"
+                                           th:text="${pageNumber}"></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <div class="size-navigation">
+                            <h3 th:text="#{display.select_size}">Select size</h3>
+                            <nav aria-label="SizeNav">
+                                <ul class="pagination">
+                                    <li class="page-item"
+                                        th:if="${userPage.totalPages > 0}"
+                                        th:each="pageSize : ${pageSizes}">
+                                        <a class="page-link" href="#"
+                                           th:href="@{/user-display(size=${pageSize}, page=${userPage.number + 1})}"
+                                           th:text="${pageSize}"></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <ul class="list-group">
+                            <li class="list-group-item" th:each="u : ${userPage.content}">
                                     
                                 <span th:text="#{display.id}">id</span>
                                 <span th:text="${u.id}"

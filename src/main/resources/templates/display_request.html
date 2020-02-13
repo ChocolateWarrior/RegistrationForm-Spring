@@ -1,36 +1,56 @@
 <!DOCTYPE html>
-<html lang = "en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registration Form</title>
+    <title>Request List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" th:href="@{/css/style.css}" >
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
-<div class = "container" style="margin-top: 60px">
-    <div class = "row">
-        <div class = "col-md-12">
-            <div class = "panel panel-default">
-                <div class = "panel-heading" th:text="#{req.display.heading}">requests</div>
-                <div class = "panel-body">
+<div class="container" style="margin-top: 60px">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading" th:text="#{req.display.heading}">requests</div>
+                <div class="panel-body">
                     <form action="#" th:action="@{/request-display}" method="get">
 
-                        <div class="pagination">
-                            <div class="pagination-element"
-                                th:if="${requestPage.totalPages > 1}"
-                                th:each="pageNumber : ${pageNumbers}">
-                                <a th:href="@{/request-display(size=${requestPage.size}, page=${pageNumber})}"
-                                   th:text="${pageNumber}"
-                                   th:class="${pageNumber==requestPage.number + 1} ? active">
-                                </a>
-                             </div>
+                        <div class="page-navigation">
+                            <h3 th:text="#{req.display.select_page}">Select page</h3>
+                            <nav aria-label="PageNav">
+                                <ul class="pagination">
+                                    <li class="page-item"
+                                        th:if="${requestPage.totalPages > 0}"
+                                        th:each="pageNumber : ${pageNumbers}">
+                                        <a class="page-link" href="#"
+                                           th:href="@{/request-display(size=${requestPage.size}, page=${pageNumber})}"
+                                           th:text="${pageNumber}"></a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
-                        <ul class ="list-group" style="text-align: left">
+
+                        <div class="size-navigation">
+                            <h3 th:text="#{req.display.select_size}">Select size</h3>
+                            <nav aria-label="SizeNav">
+                                <ul class="pagination">
+                                    <li class="page-item"
+                                        th:if="${requestPage.totalPages > 0}"
+                                        th:each="pageSize : ${pageSizes}">
+                                        <a class="page-link" href="#"
+                                           th:href="@{/request-display(size=${pageSize}, page=${requestPage.number + 1})}"
+                                           th:text="${pageSize}"></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <ul class="list-group" style="text-align: left">
                             <li class="list-group-item" th:each="r : ${requestPage.content}">
 
                                 <span th:text="#{req.display.id}">id</span>
@@ -83,7 +103,7 @@
                                       th:value="${r.state}"></span>
                                 <br>
 
-                                <div th:unless="${r.state==completed}">
+                                <div th:unless="${r.state==completed}" class="reject-block">
                                     <form th:action="@{/request-display/reject/{id}(id=${r.id})}" method="post">
                                         <input class="rejection-input" type="text" id="rejectionMessageElement"
                                                name="rejectionMessage"
@@ -91,14 +111,18 @@
                                                th:placeholder="#{display.rejection_type}">
                                         <button type="submit"
                                                 class="btn btn-sm btn-secondary"
-                                                th:text="#{display.reject}">Reject</button>
+                                                th:text="#{display.reject}"
+                                                style="float: right; width: 20%; margin-top: 3px;">Reject
+                                        </button>
                                     </form>
                                 </div>
 
-                                <div th:if="${r.state != paid && r.state != completed}">
+                                <div th:if="${r.state != paid && r.state != completed}" class="edit-btn">
                                     <form th:action="@{/request-display/edit/{id}(id=${r.id})}" method="get">
                                         <button type="submit" class="btn btn-sm btn-info"
-                                                th:text="#{display.edit}">Edit</button>
+                                                th:text="#{display.edit}"
+                                                style="float: left; width: 60%; vertical-align: middle;">Edit
+                                        </button>
                                     </form>
                                 </div>
 
@@ -109,7 +133,7 @@
             </div>
         </div>
     </div>
-    <div class = "footer" style="margin-top: 20px">
+    <div class="footer" style="margin-top: 20px">
         <div class="aboutLanguage">
             <span th:text="#{lang.change}"></span>:
             <a href="?lang=en" th:text="#{lang.en}">english</a>
