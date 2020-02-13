@@ -40,20 +40,13 @@ public class UserDisplayController {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(5);
 
-        Page<User> userPage = userService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
-
-        model.addAttribute("userPage", userPage);
-
         List<Integer> sizesList = new ArrayList<>(Arrays.asList(5, 10, 15, 20));
         model.addAttribute("pageSizes", sizesList);
 
-        int totalPages = userPage.getTotalPages();
-        if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
-        }
+        Page<User> userPage = userService
+                .findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+        addPaginationToModel(model, userPage);
 
         model.addAttribute("all_users", userService.getAllUsers());
         return "display";
@@ -87,5 +80,16 @@ public class UserDisplayController {
         return "user_edit";
     }
 
+    private void addPaginationToModel(Model model,
+                                      Page<User> userPage) {
+        model.addAttribute("userPage", userPage);
 
+        int totalPages = userPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+    }
 }

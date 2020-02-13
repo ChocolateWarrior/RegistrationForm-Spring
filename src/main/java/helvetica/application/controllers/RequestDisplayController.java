@@ -38,23 +38,15 @@ public class RequestDisplayController {
                                @RequestParam("page")Optional<Integer> page,
                                @RequestParam("size")Optional<Integer> size){
 
-        int currentPage = page.orElse(1);
         int pageSize = size.orElse(5);
-
-        Page<RepairRequest> requestPage = requestService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
-
-        model.addAttribute("requestPage", requestPage);
-
+        int currentPage = page.orElse(1);
         List<Integer> sizesList = new ArrayList<>(Arrays.asList(5, 10, 15, 20));
-        model.addAttribute("pageSizes", sizesList);
 
-        int totalPages = requestPage.getTotalPages();
-        if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
-        }
+        model.addAttribute("pageSizes", sizesList);
+        Page<RepairRequest> requestPage = requestService
+                .findPaginated(PageRequest.of(currentPage - 1, pageSize));
+        addPaginationToModel(model, requestPage);
+
         List<RepairRequest> requests = requestService.getAllRequests();
         model.addAttribute("all_requests", requests);
         model.addAttribute("request", new RepairRequest());
@@ -98,4 +90,16 @@ public class RequestDisplayController {
         return "request_edit";
     }
 
+    private void addPaginationToModel(Model model,
+                                      Page<RepairRequest> requestPage) {
+        model.addAttribute("requestPage", requestPage);
+
+        int totalPages = requestPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+    }
 }

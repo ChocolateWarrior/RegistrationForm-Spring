@@ -99,6 +99,20 @@ public class RequestService {
 
     public Page<RepairRequest> findPaginated(Pageable pageable) {
         List<RepairRequest> requests = getAllRequests();
+        return getPaginatedRequests(pageable, requests);
+    }
+
+    public Page<RepairRequest> findPaginatedByUser(Pageable pageable) {
+        List<RepairRequest> requests = getRequestsByUser();
+        return getPaginatedRequests(pageable, requests);
+    }
+
+    public Page<RepairRequest> findPaginatedByMaster(Pageable pageable) {
+        List<RepairRequest> requests = getRequestsByMaster();
+        return getPaginatedRequests(pageable, requests);
+    }
+
+    private Page<RepairRequest> getPaginatedRequests(Pageable pageable, List<RepairRequest> requests) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
