@@ -32,11 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/locale", "/registration","request-display")
+                .antMatchers("/locale", "/registration", "request-display", "/")
                 .permitAll()
                 .antMatchers("/user-display", "/request-display", "/master-display")
                 .hasAuthority("ADMIN")
-                .antMatchers("/main", "/","/request")
+                .antMatchers("/main","/request")
                 .authenticated()
                 .and()
                 .formLogin()

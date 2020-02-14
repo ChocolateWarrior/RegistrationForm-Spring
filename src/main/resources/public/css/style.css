@@ -123,3 +123,7 @@ hr {
     display: inline-block;
     width: 12%;
 }
+
+.index-container {
+    color: aliceblue;
+}
