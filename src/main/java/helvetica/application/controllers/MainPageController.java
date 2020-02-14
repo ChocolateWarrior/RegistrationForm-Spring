@@ -67,7 +67,7 @@ public class MainPageController {
         model.addAttribute("completed", RequestState.COMPLETED);
         model.addAttribute("accepted", RequestState.ACCEPTED);
 
-        return "index";
+        return "home";
     }
 
     @PostMapping("/payment")
@@ -85,7 +85,7 @@ public class MainPageController {
     @PostMapping("/complete")
     public String completeRequest(RequestMasterDTO dto){
         requestService.setRequestComplete(dto.getRequestId());
-        return "index";
+        return "home";
     }
 
     private void addPaginationToModel(Model model,

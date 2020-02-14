@@ -10,7 +10,7 @@ public class FrontController {
 
     @GetMapping("/")
     public String showDefault() {
-        return "redirect:/main";
+        return "index";
     }
 
     @GetMapping("/error")
