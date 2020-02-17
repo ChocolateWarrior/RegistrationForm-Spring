@@ -1,10 +1,20 @@
+.heading-name {
+    color: #FFFF30;
+    font-family: 'Abril Fatface', cursive;
+    text-align: center;
+    font-size: 250px;
+}
+
 h1, h2, h3 {
     color: #FFFF30;
 }
 
 
 body {
-    font-family: 'Oswald', sans-serif;
+
+    font-family: 'Arsenal', sans-serif;
+    font-style: bold;
+
     font-size: 22px;
     background-size: cover;
     background-image: url('../img/tools3.jpg');
@@ -44,6 +54,7 @@ hr {
 
 .jumbotron {
     margin-top: 30px;
+    border-radius: 25px;
 }
 
 
@@ -126,4 +137,9 @@ hr {
 
 .index-container {
     color: aliceblue;
+}
+
+.user-request-content {
+    background-color: #ffffff;
+    border-radius: 15px;
 }
