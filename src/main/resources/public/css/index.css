@@ -1,0 +1,42 @@
+.heading-name{
+/*    font-family: 'Abril Fatface', cursive;
+*/
+    font-family: 'Anton', sans-serif;
+    display: inline-block;
+    font-size: 250px;
+}
+
+.greeting {
+/*    font-family: 'Abril Fatface', cursive;
+*/
+    font-family: 'Anton', sans-serif;
+
+    font-size: 80px;
+}
+
+body {
+/*
+
+    font-family: 'Anton', sans-serif;
+*/
+    font-family: 'Arsenal', sans-serif;
+    font-size: 30px;
+}
+
+.logo {
+    width: 22%;
+    float: right;
+    margin-top: 70px;
+/*
+    align-items:center;
+    vertical-align: center;
+    display: flex;
+    height: auto;
+    display: inline-block;
+    text-align: center;
+    */
+}
+
+.navigation {
+    width: 100%;
+}

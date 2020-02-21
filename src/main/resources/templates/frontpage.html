@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang = "en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Repair It - Welcome</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/index.css}" >
+
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arsenal&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+<div class="container">
+    <span class="heading-name">Repair It</span>
+    <img class="logo" src="/img/wrench.png" alt="No image">
+    <br>
+    <span class="greeting" th:text="#{index.greeting}"></span>
+
+    <div class = "navigation">
+        <ul class="nav nav-tabs nav-fill bg-dark" style="margin-top: 15px;">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/registration}" th:text="#{login.reg_here}">register here</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}" th:text="#{login.sign_in}">Sign in</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/main}" th:text="#{index.nav_bar.main}">Main</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="index-container" style="margin-top: 15px;">
+
+        <p>
+            <span>"Repair It"</span>
+            <span th:text="#{index.desc}">is a service</span>
+        </p>
+        <h3 th:text="#{index.how}">How do I get my stuff repaired?</h3>
+        <p th:text="#{index.follow}">Follow those simple steps:</p>
+        <ol>
+            <li>
+                <a href="/login" th:text="#{login.sign_in}">Sign in</a>
+                <span th:text="#{index.li1}">or Create Your own account</span>
+                <a href="/registration" th:text="#{index.here}">here</a>
+            </li>
+            <li th:text="#{index.li2}">Leave.</li>
+            <li th:text="#{index.li3}">Wait.</li>
+            <li th:text="#{index.li4}">Get.</li>
+            <li th:text="#{index.li5}">Leave!</li>
+            <li th:text="#{index.li6}">You</li>
+        </ol>
+    </div>
+
+    <div class = "aboutLanguage" style="margin-top: 20px">
+        <span th:text="#{lang.change}"></span>:
+        <a href="?lang=en" th:text="#{lang.en}">english</a>
+        /
+        <a href="?lang=uk" th:text="#{lang.uk}">ukrainian</a>
+    </div>
+</div>
+
+</body>
+</html>
