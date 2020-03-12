@@ -10,7 +10,17 @@ public class FrontController {
 
     @GetMapping("/")
     public String showDefault() {
-        return "frontpage";
+        return "index";
+    }
+
+    @GetMapping("/navbar")
+    public String showNavbar() {
+        return "responsive_navbar";
+    }
+
+    @GetMapping("/test")
+    public String showTest() {
+        return "test";
     }
 
     @GetMapping("/error")

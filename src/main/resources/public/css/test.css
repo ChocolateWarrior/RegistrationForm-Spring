@@ -1,0 +1,150 @@
+:root {
+    font-size: 16px;
+    font-family: 'Abril Fatface', cursive;
+    --text-primary: #000;
+    --text-secondary: #fff;
+    --bg-primary: #fff;
+    --bg-secondary: #000;
+    --transition-speed: 1s;
+}
+
+body {
+
+    color: black;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+
+}
+
+
+body::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--bg-secondary);
+}
+
+main {
+    font-family: Georgia, serif;
+    margin-top: 1rem;
+    margin-left: 5rem;
+    padding: 1rem;
+}
+
+.navbar {
+
+    top: 0;
+    width: 100vw;
+    height: 3.5rem;
+    position: fixed;
+    background-color: var(--bg-primary);
+    transition: width 200ms ease;
+}
+
+.navbar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    justify-content: center;
+}
+
+.nav-item {
+    height: 100%;
+}
+
+.nav-link {
+
+    display: flex;
+    align-items: flex-end;
+    height: 3rem;
+    width: 4rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    padding-bottom: 0.5rem;
+    justify-content: center;
+    transition: var(--transition-speed);
+}
+
+.link-text {
+    padding-top: 10rem;
+}
+
+
+.nav-link:hover {
+/*
+    filter: grayscale(0%) opacity(1);
+*/
+    height: 10rem;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+/*
+////////////////////////////////////////////////////////////////////////////
+    margin-left: -2.5rem;
+*/
+
+.order-list {
+    font-family: Georgia, serif;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: -6.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.order-item {
+    display: flex;
+    width: 100%;
+    height: 2rem;
+    max-height: 2rem;
+    background-color: var(--bg-primary);
+    transition: var(--transition-speed);
+    padding-left: 12.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.order-content {
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.order-id {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.order-desc {
+    color: var(--text-primary);
+    display: none;
+}
+
+.order-item:hover {
+    width: 90vw;
+    background-color: var(--bg-secondary);
+}
+
+.order-item:hover .order-desc {
+    display: inline;
+    transition: var(--transition-speed);
+    color: var(--text-secondary);
+}
+
+.order-item:hover .order-id {
+    transition: var(--transition-speed);
+    color: var(--text-secondary);
+}
